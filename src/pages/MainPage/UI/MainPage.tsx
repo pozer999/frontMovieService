@@ -1,4 +1,6 @@
-import { MainContainer } from '../../Components/UI/MainContainer/MainContainer';
+import { MainContainer } from "../../../widgets/MainContainer/UI/MainContainer";
+
+
 
 const MainPage = () => {
   return (

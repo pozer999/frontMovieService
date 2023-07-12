@@ -6,7 +6,7 @@ export const MainContainer = () => (
     <Layout.Content>
         <Row justify="center">
             <Col span={14} style={{ backgroundColor: 'gray', marginTop: 30, height: '400px', width: '1100px' }}>
-                <Row justify="start" align="middle">
+                <Row justify="start" align="middle" style={{marginTop: 10}}>
                     <Col span={16}>
                         <Button className={cls.buttonUpperLayout}>by date</Button>
                         <Button className={cls.buttonUpperLayout}>by alphabet</Button>
