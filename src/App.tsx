@@ -1,24 +1,17 @@
+import axios from 'axios';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+function App() { 
+
+     async function fetch() {
+      let response = await axios.get("http://localhost:8080/movies")
+      console.log(response.data);
+    }
+    fetch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        РАБОТАЕТ!
     </div>
   );
 }
