@@ -17,7 +17,7 @@ function App() {
       <Navbar />
       {/* <NavLink to="main">main</NavLink> */}
       <Routes>
-              <Route path="*" element={<MainPage />} />
+         <Route path="*" element={<MainPage />} />
       </Routes>
     </div>
   );
