@@ -1,8 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import { NavLink } from 'react-router-dom';
 import './styles/App.module.scss';
 import { Navbar } from "./widgets/Navbar/UI/Navbar";
-import MainPage from "./pages/MainPage/UI/MainPage";
+import { Layout, Row } from "antd";
+import Routing from "./Routing/Routing";
 
 
 function App() { 
@@ -15,11 +14,23 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar/>
+      <Layout.Header className="headerNavbar" style={{backgroundColor: "rgb(15, 15, 15)"}}>
+          <Row justify="start" align="middle">
+              <Navbar/>
+          </Row>
+      </Layout.Header>
+
+      <Layout.Content>
+         <Row justify="center">
+            <Routing/>
+         </Row>
+      </Layout.Content>
+
+      <Layout.Footer style={{textAlign: "center"}}>
+       FOOTER
+      </Layout.Footer>
       {/* <NavLink to="main">main</NavLink> */}
-      <Routes>
-         <Route path="*" element={<MainPage />} />
-      </Routes>
+     
     </div>
   );
 }

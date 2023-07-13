@@ -1,11 +1,11 @@
-import {Col, Layout, Row, Button, Input, Space} from 'antd';
+import {Col, Row, Button, Input, Space} from 'antd';
 import cls from './MainContainer.module.scss';
+import PostFilm from '../../../entities (бизнес-объекты(продукт, заказ))/postFilm/UI/PostFilm';
 
 
 export const MainContainer = () => (
-    <Layout.Content>
         <Row justify="center">
-            <Col span={14} style={{ backgroundColor: 'gray', marginTop: 30, height: '400px', width: '1100px' }}>
+            <Col span={20} style={{ backgroundColor: "#2e2e2e", marginTop: 30 }}>
                 <Row justify="start" align="middle" style={{marginTop: 10}}>
                     <Col span={16}>
                         <Button className={cls.buttonUpperLayout}>by date</Button>
@@ -22,11 +22,10 @@ export const MainContainer = () => (
                 <Row gutter={[16, 24]} style={{ marginTop: '25px' }}>
                     {new Array(20).fill(null).map((_, index) => (
                         <Col className="gutter-row" span={6} key={index}>
-                            <div style={{ textAlign: 'center' }}>col-6</div>
+                            <PostFilm/>
                         </Col>
                     ))}
                 </Row>
             </Col>
         </Row>
-    </Layout.Content>
 );
