@@ -1,0 +1,7 @@
+.headerNavbar{
+  padding-top: 10px;
+  background-color: rgb(15, 15, 15);
+  .buttonNavbar:not(:first-child){
+    margin-left: 5px;
+  }
+}
