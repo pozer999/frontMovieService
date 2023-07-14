@@ -4,11 +4,9 @@ import cls from './Navbar.module.scss';
 
 
 export const Navbar = () => (
-    <Layout.Header className={cls.headerNavbar}>
-        <Row justify="start" align="middle">
-             {/* <NavLink to="/main" /> */}
-            <Button className={cls.buttonNavbar}>Register</Button>
-            <Button className={cls.buttonNavbar}>Login</Button>
-        </Row>
-    </Layout.Header>
+    <div className={cls.headerNavbar}>
+        <img src='../image/movie.png' alt="" style={{height: "40px"}}/>
+        <Button className={cls.buttonNavbar} type='primary'>Register</Button>
+        <Button className={cls.buttonNavbar} type='primary'>Login</Button>
+    </div>
 );

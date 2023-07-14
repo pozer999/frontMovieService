@@ -5,7 +5,7 @@ import PostFilm from '../../../entities (бизнес-объекты(проду�
 
 export const MainContainer = () => (
         <Row justify="center">
-            <Col span={20} style={{ backgroundColor: "#2e2e2e", marginTop: 30 }}>
+            <Col span={20} style={{ backgroundColor: "#2e2e2e", marginTop: 30, borderRadius: 15 }}>
                 <Row justify="start" align="middle" style={{marginTop: 10}}>
                     <Col span={16}>
                         <Button className={cls.buttonUpperLayout}>by date</Button>
