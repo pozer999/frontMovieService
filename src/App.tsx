@@ -1,6 +1,6 @@
 import './styles/App.module.scss';
 import { Navbar } from "./widgets/Navbar/UI/Navbar";
-import { ConfigProvider, Layout, Row, theme } from "antd";
+import { Layout, Row } from "antd";
 import Routing from "./Routing/Routing";
 
 
@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div className="App">
-      <ConfigProvider theme={{ algorithm: theme.defaultAlgorithm, }}>
       <Layout.Header className="headerNavbar" style={{backgroundColor: "rgb(15, 15, 15)"}}>
           <Row justify="start" align="middle">
               <Navbar/>
@@ -31,7 +30,7 @@ function App() {
        FOOTER
       </Layout.Footer>
       {/* <NavLink to="main">main</NavLink> */}
-     </ConfigProvider>
+     
     </div>
   );
 }
