@@ -18,7 +18,7 @@ const primary: ThemeData = {
 const lime: ThemeData = {
   borderRadius: 12,
   colorPrimary: 'rgb(0, 255, 0)',
-
+  
 };
 
 function App() { 
@@ -45,22 +45,16 @@ function App() {
             </NavLink>
               <Navbar />
           </Row>
-          <Switch defaultChecked onChange={onChange}/>
+          <Switch defaultChecked onChange={onChange} style={{background: "rgb(41, 41, 41)"}}/>
       </Layout.Header>
 
 
 
       <Layout.Content>
-         <Row justify="center">
+         <Row justify="center" style={{marginBottom: 30}}>
             <Routing/>
          </Row>
-      </Layout.Content>
-
-      <Layout.Footer style={{textAlign: "center"}}>
-       FOOTER
-      </Layout.Footer>
-      {/* <NavLink to="main">main</NavLink> */}
-     
+      </Layout.Content>     
     </div>
     </ConfigProvider>
   );

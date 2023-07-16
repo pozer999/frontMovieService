@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { Routes, Route } from "react-router-dom";
 import MainPage from '../pages/MainPage/UI/MainPage';
-import LoginPage from '../pages/LoginPage/ui/LoginPage';
+import Loader from '../widgets/Loader/Loader';
 
 export const RoutePath = {
   MAIN: "/",
@@ -9,11 +9,16 @@ export const RoutePath = {
 }
 
 const Routing = () => {
+  const LoginPage = React.lazy(() => import('../pages/LoginPage/ui/LoginPage'));
+
   return (
-    <Routes>
-        <Route path={RoutePath.MAIN} element={<MainPage />} />
-        <Route path={RoutePath.LOGIN} element={<LoginPage />} />
-    </Routes>
+    <Suspense fallback={<Loader/>}>
+       <Routes>
+          <Route path={RoutePath.MAIN} element={<MainPage />} />
+          <Route path={RoutePath.LOGIN} element={<LoginPage />}/>
+      </Routes>
+    </Suspense>
+    
   );
 };
 
