@@ -1,19 +1,39 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { Routes, Route } from "react-router-dom";
-import MainPage from '../pages/MainPage/UI/MainPage';
-import LoginPage from '../pages/LoginPage/ui/LoginPage';
+import Loader from '../widgets/Loader/Loader';
+import { Pages } from './Pages';
 
-export const RoutePath = {
-  MAIN: "/",
-  LOGIN: "/login"
-}
+// export const RoutePath = {
+//   MAIN: "/",
+//   LOGIN: "/login"
+// }
+
+// export const Pages = [
+//   {
+//     name: "LoginPage",
+//     path: RoutePath.LOGIN,
+//     elem: <LoginPageLazy/>
+//   }, 
+//   {
+//     name: "MainPage",
+//     path: RoutePath.MAIN,
+//     elem: <MainPage/>
+//   }
+// ];
+
 
 const Routing = () => {
+
   return (
-    <Routes>
-        <Route path={RoutePath.MAIN} element={<MainPage />} />
-        <Route path={RoutePath.LOGIN} element={<LoginPage />} />
-    </Routes>
+    <Suspense fallback={<Loader/>}>
+       <Routes>
+        {Pages.map((route) => 
+            <Route path={route.path} element={route.elem}/>
+          )
+        }
+      </Routes>
+    </Suspense>
+    
   );
 };
 
