@@ -4,6 +4,7 @@ import { ConfigProvider, Layout, Row, Switch, theme } from "antd";
 import Routing from "./Routing/Routing";
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { RoutePath } from './Routing/Pages';
 
 
 type ThemeData = {
@@ -40,7 +41,7 @@ function App() {
     <div className="App">
       <Layout.Header className="headerNavbar" style={{backgroundColor: "rgb(15, 15, 15)"}}>
           <Row justify="space-between" align="middle" style={{height: "50px"}}>
-            <NavLink to="/" style={{height: "50px"}}>
+            <NavLink to={RoutePath.MAIN} style={{height: "50px"}}>
               <img src='../image/movie.png' alt="" style={{height: "100%"}}/>
             </NavLink>
               <Navbar />
