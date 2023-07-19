@@ -1,40 +1,18 @@
-import React, {Suspense} from 'react';
-import { Routes, Route } from "react-router-dom";
+import React, { Suspense, memo } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Loader from '../widgets/Loader/Loader';
-import { Pages } from './Pages';
-
-// export const RoutePath = {
-//   MAIN: "/",
-//   LOGIN: "/login"
-// }
-
-// export const Pages = [
-//   {
-//     name: "LoginPage",
-//     path: RoutePath.LOGIN,
-//     elem: <LoginPageLazy/>
-//   }, 
-//   {
-//     name: "MainPage",
-//     path: RoutePath.MAIN,
-//     elem: <MainPage/>
-//   }
-// ];
-
+import { routeConfig } from '../shared/config/routeConfig';
 
 const Routing = () => {
-
   return (
-    <Suspense fallback={<Loader/>}>
-       <Routes>
-        {Pages.map((route) => 
-            <Route path={route.path} element={route.elem} key={route.name}/>
-          )
-        }
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        {routeConfig.map((route) => (
+          <Route path={route.path} element={route.elem} key={route.name} />
+        ))}
       </Routes>
     </Suspense>
-    
   );
 };
 
-export default Routing;
+export default memo(Routing);

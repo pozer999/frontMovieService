@@ -1,11 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import FilmsReducer from './FilmsSlice';
-import SortedSlice from "./SortedSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { filmsReducer } from './FilmsSlice';
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
-    films: FilmsReducer,
-    sorted: SortedSlice,
-  }
+    films: filmsReducer,
+  },
 });
-
+export type AppDispatch = typeof store.dispatch;
