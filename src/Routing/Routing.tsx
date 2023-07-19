@@ -28,7 +28,7 @@ const Routing = () => {
     <Suspense fallback={<Loader/>}>
        <Routes>
         {Pages.map((route) => 
-            <Route path={route.path} element={route.elem}/>
+            <Route path={route.path} element={route.elem} key={route.name}/>
           )
         }
       </Routes>
