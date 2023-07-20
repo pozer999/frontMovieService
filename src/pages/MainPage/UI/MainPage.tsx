@@ -5,9 +5,8 @@ const MainPage = () => {
   const filters = useSelector((state: any) => state.films.filter);
 
   useEffect(() => {
-    console.log(filters);
-    console.log('MAIN');
-  }, []);
+    console.log("filters: ", filters);
+  }, [filters]);
   return (
     <div>
       <MainContainer />

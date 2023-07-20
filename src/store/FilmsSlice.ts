@@ -13,6 +13,7 @@ const initialState: filmsStateSchema = {
   isLoading: false,
   error: undefined,
 };
+
 // createAsyncThunk надо нормально типизировать а не использовать any
 export const fetchFilms = createAsyncThunk<Array<any>, string>(
   'films/fetchFilms',

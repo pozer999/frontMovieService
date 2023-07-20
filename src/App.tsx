@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { RoutePath } from './shared/config/routeConfig';
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8080/';
+axios.defaults.baseURL = 'http://localhost:8080/'; 
 
 type ThemeData = {
   borderRadius: number;
