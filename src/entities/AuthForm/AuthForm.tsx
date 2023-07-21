@@ -1,30 +1,30 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Modal } from 'antd';
-import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import {useCallback, memo} from 'react';
 
-interface ILoginForm {
-  open: boolean,
-  loading: boolean,
-  handleOk: () => void,
-  handleCancel: () => void,
-  onFinish: (values: any) => void,
-}
+const LoginForm = () => {
+  const modalIsAuth = useSelector((state: RootState) => state.openModal.modalIsAuth);
+  const loadingAuth = useSelector((state: RootState) => state.openModal.loadingAuth);
+  const dispatch = useDispatch();
 
+  const handleOkAuthDispatch = useCallback(() => {dispatch({type: 'modal/handleOkAuth'})}, [dispatch])
+  const handleCancelAuthDispatch = useCallback(() => {dispatch({type: 'modal/handleCancelAuth'})}, [dispatch])
+  const handleRegisterAuth = useCallback(() => {dispatch({type: 'modal/handleRegisterAuth'})}, [dispatch])
 
-const LoginForm = ({open, loading, handleOk, handleCancel, onFinish}: ILoginForm) => {
   return (
       <Modal
-        open={open}
+        open={modalIsAuth}
         title="Log in"
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onCancel={handleCancelAuthDispatch}
         footer={[]}
       >
- <Form
+      <Form
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      onFinish={(value) => console.log(value)}
     >
       <Form.Item
         name="username"
@@ -58,10 +58,10 @@ const LoginForm = ({open, loading, handleOk, handleCancel, onFinish}: ILoginForm
 
       <Form.Item>
         <div style={{display: "flex", alignItems: "center"}}>
-        <Button type="primary" htmlType="submit" className="login-form-button" key="submit" loading={loading} onClick={handleOk}>
+        <Button type="primary" htmlType="submit" className="login-form-button" key="submit" loading={loadingAuth} onClick={handleOkAuthDispatch}>
           Log in
         </Button>
-        <div style={{marginLeft: 10}}>Or <a href="">register now!</a></div>
+        <Button type='link' onClick={handleRegisterAuth}>Or register now!</Button>
         </div>
       </Form.Item>
     </Form>
@@ -69,4 +69,4 @@ const LoginForm = ({open, loading, handleOk, handleCancel, onFinish}: ILoginForm
   );
 };
 
-export default LoginForm;
+export default memo(LoginForm);

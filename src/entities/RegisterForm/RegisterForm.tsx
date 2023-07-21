@@ -1,31 +1,32 @@
 import { CheckCircleOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, Modal, Select } from 'antd';
+import { Button, Form, Input, Modal, Select } from 'antd';
 import { Option } from 'antd/es/mentions';
-import React from 'react';
-
-interface IRegisterForm {
-  open: boolean,
-  loading: boolean,
-  handleOk: () => void,
-  handleCancel: () => void,
-  onFinish: (values: any) => void,
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { useCallback, memo } from 'react';
 
 
-const RegisterForm = ({open, loading, handleOk, handleCancel, onFinish}: IRegisterForm) => {
+const RegisterForm = () => {
+  const modalIsRegister = useSelector((state: RootState) => state.openModal.modalIsRegister);
+  const loadingRegister = useSelector((state: RootState) => state.openModal.loadingRegister);
+  const dispatch = useDispatch();
+
+  const handleOkRegisterDispatch = useCallback(() => {dispatch({type: 'modal/handleOkRegister'})}, [dispatch])
+  const handleCancelRegisterDispatch = useCallback(() => {dispatch({type: 'modal/handleCancelRegister'})}, [dispatch])
+  const handleAuthRegister = useCallback(() => {dispatch({type: 'modal/handleAuthRegister'})}, [dispatch])
+
   return (
       <Modal
-        open={open}
+        open={modalIsRegister}
         title="Register"
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onCancel={handleCancelRegisterDispatch}
         footer={[]}
       >
  <Form
       name="normal_register"
       className="register-form"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      onFinish={(value) => console.log(value)}
     >
       <Form.Item
         name="username"
@@ -79,9 +80,10 @@ const RegisterForm = ({open, loading, handleOk, handleCancel, onFinish}: IRegist
       </Form.Item>
       <Form.Item>
         <div style={{display: "flex", alignItems: "center"}}>
-        <Button type="primary" htmlType="submit" className="register-form-button" key="submit" loading={loading} onClick={handleOk}>
+        <Button type="primary" htmlType="submit" className="register-form-button" key="submit" loading={loadingRegister} onClick={handleOkRegisterDispatch}>
             Register
         </Button>
+        <Button type='link' onClick={handleAuthRegister}>Already registered?</Button>
         </div>
       </Form.Item>
     </Form>
@@ -89,4 +91,4 @@ const RegisterForm = ({open, loading, handleOk, handleCancel, onFinish}: IRegist
   );
 };
 
-export default RegisterForm;
+export default memo(RegisterForm);
