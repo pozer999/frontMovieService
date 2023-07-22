@@ -47,6 +47,7 @@ export const modalReducer = createReducer(initialState, (builder) => {
 		.addCase(switchRegistrationToAuth, (state, action) => {
 			state.isVisibleAuth = false;
 			state.isVisibleRegister = true;
+			state.isLoadingTheAuthButton = false;
 		})
 
 		.addCase(openModalRegister, (state, action) => {
@@ -62,6 +63,7 @@ export const modalReducer = createReducer(initialState, (builder) => {
 		.addCase(switchAuthToRegistration, (state, action) => {
 			state.isVisibleAuth = true;
 			state.isVisibleRegister = false;
+			state.isLoadingTheRegisterButton = false;
 		})
 
 		.addCase(changeUserNameAuth, (state, action) => {
