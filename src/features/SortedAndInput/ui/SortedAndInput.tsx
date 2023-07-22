@@ -24,7 +24,7 @@ const SortesAndInput = () => {
       </Col>
       <Col span={10}>
         <Space.Compact style={{ width: '100%' }}>
-          <Input />
+          <Input placeholder='Enter the name of the movie'/>
           <Button type="primary">Search</Button>
         </Space.Compact>
       </Col>
