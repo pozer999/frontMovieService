@@ -1,9 +1,9 @@
 import { CheckCircleOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Modal, Select } from 'antd';
 import { Option } from 'antd/es/mentions';
+import { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { useCallback, memo } from 'react';
 import { closeModalRegister, okRegister, switchAuthToRegistration } from '../../store/modalReducer';
 
 const RegisterForm = () => {

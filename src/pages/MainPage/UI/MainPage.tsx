@@ -7,7 +7,9 @@ const MainPage = () => {
   useEffect(() => {
     console.log("filters: ", filters);
   }, [filters]);
+
   return (
+    
     <div>
       <MainContainer />
     </div>

@@ -7,3 +7,18 @@
   margin: 0 auto;
   border-radius: 10px;
 }
+.carousel{
+  margin: 50px 0 auto;
+  width: 80vw;
+  height: 300px;
+  z-index: 2;
+  border-radius: 5px;
+}
+.imageCarousel{
+  height: 300px;
+  width: 80vw;
+  border-radius: 5px;
+}
+li{
+  background-color: white;
+}
