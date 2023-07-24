@@ -1,6 +1,8 @@
+@import "../../../styles/App.module.scss";
+
 .headerNavbar{
   padding-top: 10px;
-  background-color: rgb(15, 15, 15);
+  background-color: $bodyBackgroundColor;
   .buttonNavbar:not(:first-child){
     margin-left: 5px;
     color: rgb(41, 41, 41);
