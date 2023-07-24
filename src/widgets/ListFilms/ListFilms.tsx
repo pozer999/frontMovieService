@@ -1,6 +1,6 @@
 import { Col, Row, Spin } from 'antd';
 
-import PostFilm from '../../entities/postFilm/UI/PostFilm';
+import PostFilm from '../../entities/postFilm/ui/PostFilm';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFilms, filmsActions } from '../../store/FilmsSlice';
@@ -19,7 +19,7 @@ const ListFilms = () => {
 			{films.length !== 0 ?
 			<Row
 				gutter={[16, 24]}
-				style={{ margin: 10, marginTop: 35}}>
+				style={{ margin: 10, marginTop: 45}}>
 				{films.map((film: any, i: number) => (
 					<Col
 						className='gutter-row'
