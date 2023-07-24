@@ -21,28 +21,27 @@ const PostFilm = ({ film }: any) => {
 		//     {film.genre}
 		//   </Row>
 		// </Row>
-		<Badge.Ribbon
-			text={<Rate disabled allowHalf defaultValue={4.5} character={<HeartTwoTone twoToneColor="#eb2f96"/>}/>}
-      color='gray'
-      style={{border: "2px solid darkgrey"}}
-      >
-      <div style={{border: "1px solid grey", borderRadius: 8}}>
-			<Card
-				loading={false}
-				hoverable
-				cover={
-					<img
-						alt='example'
-						src='../image/mstiteli-voyna-beskonechnosti-2160x3840-mstiteli-voyna-beskonechnosti-17937.jpg'
+		<Badge
+			count={film.rating}
+			color='green'>
+			<div style={{ border: '1px solid grey', borderRadius: 8 }}>
+				<Card
+					loading={false}
+					hoverable
+					cover={
+						<img
+							alt='example'
+							src='../image/mstiteli-voyna-beskonechnosti-2160x3840-mstiteli-voyna-beskonechnosti-17937.jpg'
+						/>
+					}>
+					<Meta
+						title={[film.title, ' · ', film.release_year]}
+						description={film.genre}
 					/>
-				}>
-				<Meta
-					title={[film.title, " · ", film.release_year]}
-					description={film.genre}
-				/>
-				<Meta description={film.actors} />
-			</Card></div>
-		</Badge.Ribbon >
+					<Meta description={film.actors} />
+				</Card>
+			</div>
+		</Badge>
 	);
 };
 

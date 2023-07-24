@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import cls from './Navbar.module.scss';
-import AuthForm from '../../../entities/AuthForm/AuthForm';
-import RegisterForm from '../../../entities/RegisterForm/RegisterForm';
+import AuthForm from '../../../features/AuthForm/AuthForm';
+import RegisterForm from '../../../features/RegisterForm/RegisterForm';
 import { useDispatch } from 'react-redux';
 import { openModalAuth, openModalRegister } from '../../../store/modalReducer';
 import { useCallback } from 'react';

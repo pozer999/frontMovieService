@@ -1,3 +1,5 @@
+$bodyBackgroundColor: rgb(15, 15, 15);
+
 *{
   margin: 0;
   padding: 0;
@@ -6,6 +8,7 @@
 .headerNavbar{
   padding-top: 10px;
 }
+
 body{
-  background-color: rgb(15, 15, 15);
+  background-color: $bodyBackgroundColor;
 }

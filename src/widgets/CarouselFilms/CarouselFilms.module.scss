@@ -1,0 +1,25 @@
+.carousel {
+  margin: 50px 0 auto;
+  width: 80vw;
+  height: 304px;
+  z-index: 2;
+  border-radius: 5px;
+  border: 2px solid darkgrey;
+}
+
+.imageCarousel {
+  height: 300px;
+  width: 100%;
+}
+
+li {
+  background-color: white;
+}
+
+.lentaImage {
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
