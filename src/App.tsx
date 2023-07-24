@@ -55,6 +55,14 @@ function App() {
 								style={{ height: '100%' }}
 							/>
 						</NavLink>
+						<NavLink
+							to={RoutePath.CURRENTFILM}>
+Current film
+							</NavLink>
+						<NavLink
+							to={RoutePath.USERACCOUNT}>
+User Account
+							</NavLink>
 						<Navbar />
 					</Row>
 					<Switch
