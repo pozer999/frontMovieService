@@ -44,7 +44,7 @@ function App() {
 					<Row
 						justify='space-between'
 						align='middle'
-            className='RowHeaderNavbar'
+						className='RowHeaderNavbar'
 						style={{ height: '50px' }}>
 						<NavLink
 							to={RoutePath.MAIN}
@@ -55,21 +55,15 @@ function App() {
 								style={{ height: '100%' }}
 							/>
 						</NavLink>
-						<NavLink
-							to={RoutePath.CURRENTFILM}>
-Current film
-							</NavLink>
-						<NavLink
-							to={RoutePath.USERACCOUNT}>
-User Account
-							</NavLink>
+						<NavLink to={RoutePath.CURRENTFILM}>Current film</NavLink>
+						<NavLink to={RoutePath.USERACCOUNT}>User Account</NavLink>{' '}
+						<Switch
+							defaultChecked
+							onChange={onChange}
+							style={{ background: 'rgb(41, 41, 41)' }}
+						/>
 						<Navbar />
 					</Row>
-					<Switch
-						defaultChecked
-						onChange={onChange}
-						style={{ background: 'rgb(41, 41, 41)' }}
-					/>
 				</Layout.Header>
 
 				<Layout.Content>
