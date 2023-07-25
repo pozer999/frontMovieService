@@ -1,5 +1,5 @@
 import './styles/App.module.scss';
-import { Navbar } from './widgets/Navbar/UI/Navbar';
+import { Navbar } from './widgets/Navbar/ui/Navbar';
 import { ConfigProvider, Layout, Row, Switch, theme } from 'antd';
 import Routing from './Routing/Routing';
 import { useState } from 'react';

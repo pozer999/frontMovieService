@@ -34,33 +34,33 @@ const initialState: IinitialState = {
 
 export const modalReducer = createReducer(initialState, (builder) => {
 	builder
-		.addCase(openModalAuth, (state, action) => {
+		.addCase(openModalAuth, (state) => {
 			state.isVisibleAuth = true;
 		})
-		.addCase(okAuth, (state, action) => {
+		.addCase(okAuth, (state) => {
 			state.isLoadingTheAuthButton = true;
 		})
-		.addCase(closeModalAuth, (state, action) => {
+		.addCase(closeModalAuth, (state) => {
 			state.isVisibleAuth = false;
 			state.isLoadingTheAuthButton = false;
 		})
-		.addCase(switchRegistrationToAuth, (state, action) => {
+		.addCase(switchRegistrationToAuth, (state) => {
 			state.isVisibleAuth = false;
 			state.isVisibleRegister = true;
 			state.isLoadingTheAuthButton = false;
 		})
 
-		.addCase(openModalRegister, (state, action) => {
+		.addCase(openModalRegister, (state) => {
 			state.isVisibleRegister = true;
 		})
-		.addCase(okRegister, (state, action) => {
+		.addCase(okRegister, (state) => {
 			state.isLoadingTheRegisterButton = true;
 		})
-		.addCase(closeModalRegister, (state, action) => {
+		.addCase(closeModalRegister, (state) => {
 			state.isVisibleRegister = false;
 			state.isLoadingTheRegisterButton = false;
 		})
-		.addCase(switchAuthToRegistration, (state, action) => {
+		.addCase(switchAuthToRegistration, (state) => {
 			state.isVisibleAuth = true;
 			state.isVisibleRegister = false;
 			state.isLoadingTheRegisterButton = false;
