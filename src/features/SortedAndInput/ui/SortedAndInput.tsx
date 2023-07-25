@@ -3,7 +3,7 @@ import { Button, Col, Input, Row, Select, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { filmsActions } from '../../../store/FilmsSlice';
-import { Filters, filters } from '../../../shared/const/filters';
+import { filters } from '../../../shared/const/filters';
 
 const SortesAndInput = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,9 @@
 import { Col, Row, Spin } from 'antd';
-
+import React from 'react';
 import PostFilm from '../../entities/postFilm/ui/PostFilm';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFilms, filmsActions } from '../../store/FilmsSlice';
-import { filters } from '../../shared/const/filters';
+import { fetchFilms } from '../../store/FilmsSlice';
 import { AppDispatch } from '../../store';
 const ListFilms = () => {
 	const dispatch = useDispatch<AppDispatch>();
