@@ -32,7 +32,7 @@ const initialState: IinitialState = {
 	isLoadingTheRegisterButton: false,
 };
 
-export const modalReducer = createReducer(initialState, (builder) => {
+export const modalAuthAndRegisterReducer = createReducer(initialState, (builder) => {
 	builder
 		.addCase(openModalAuth, (state) => {
 			state.isVisibleAuth = true;

@@ -1,9 +1,6 @@
-import { Col, Divider, FloatButton, Layout, Row, Space } from 'antd';
-import cls from './UserAccount.module.scss';
-// import {Swiper as SwiperComponent, SwiperSlide} from 'swiper/react';
-import { Swiper, SwiperRef, SwiperClass, SwiperSlide } from 'swiper/react';
-import { EyeOutlined, HeartOutlined, SettingOutlined } from '@ant-design/icons';
-
+import { BackTop, FloatButton, Layout, Modal } from 'antd';
+import { SwiperRef, SwiperClass } from 'swiper/react';
+import { useCallback } from 'react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,13 +8,28 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import { useRef, useEffect, useState } from 'react';
-import { Navigation, Scrollbar } from 'swiper/modules';
 import CarouselHistoryFilms from '../../widgets/CarouselHistoryFilms/CarouselHistoryFilms';
-import SquareItems from '../../widgets/SquareItems/SquareItems';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { closeModalFavourites, closeModalSettings, closeModalWatchLater, openModalFavourites, openModalWatchLater } from '../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import FloatButtons from '../../shared/FloatButtons/FloatButtons';
 
 const UserAccount = () => {
-	// const style: React.CSSProperties = { background: '#0092ff', };
+	const isVisibleFavourites = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleFavourites);
+	const isVisibleWatchLater = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleWatchLater);
+	const isVisibleSettings = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleSettings);
+
+	const dispatch = useDispatch();
+	const handleCloseModalFavourites = useCallback(() => {
+		dispatch(closeModalFavourites());
+	}, [dispatch]);
+	const handleCloseModalWatchLater = useCallback(() => {
+		dispatch(closeModalWatchLater());
+	}, [dispatch]);
+	const handleCloseModalSetting = useCallback(() => {
+		dispatch(closeModalSettings());
+	}, [dispatch]);
+
 	const [instance, setInstance] = useState<SwiperClass | null>(null);
 	const swiperElRef = useRef<SwiperRef>(null);
 	const carouselItems: string[] = [
@@ -70,15 +82,41 @@ const UserAccount = () => {
 					title='History'
 					carouselItems={carouselItems}
 				/>
-				{/* <SquareItems /> */}
 			</Layout.Content>
-			<FloatButton.Group
-				shape='circle'
-				style={{ right: 24 }}>
-				<FloatButton style={{width: 50, height: 50}} icon={<HeartOutlined size={50} style={{width: 50, height: 50}}/>} />
-				<FloatButton style={{width: 50, height: 50}} icon={<EyeOutlined size={50} style={{width: 50, height: 50}}/>}/>
-				<FloatButton style={{width: 50, height: 50}} icon={<SettingOutlined size={50} style={{width: 50, height: 50}}/>} />
-			</FloatButton.Group>
+			<FloatButtons />
+			<Modal
+				title='Favourites'
+				footer={[]}
+				centered
+				open={isVisibleFavourites}
+				onCancel={handleCloseModalFavourites}
+				width={1000}>
+				<p>some contents...</p>
+				<p>some contents...</p>
+				<p>some contents...</p>
+			</Modal>
+			<Modal
+				title='WatchLater'
+				centered
+				footer={[]}
+				open={isVisibleWatchLater}
+				onCancel={handleCloseModalWatchLater}
+				width={1000}>
+				<p>some contents...</p>
+				<p>some contents...</p>
+				<p>some contents...</p>
+			</Modal>
+			<Modal
+				title='Setting'
+				centered
+				footer={[]}
+				open={isVisibleSettings}
+				onCancel={handleCloseModalSetting}
+				width={1000}>
+				<p>some contents...</p>
+				<p>some contents...</p>
+				<p>some contents...</p>
+			</Modal>
 		</>
 	);
 };

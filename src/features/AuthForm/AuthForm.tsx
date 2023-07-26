@@ -3,13 +3,13 @@ import { Button, Checkbox, Form, Input, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { useCallback, memo } from 'react';
-import { changePasswordAuth, changeUserNameAuth, closeModalAuth, okAuth, switchRegistrationToAuth } from '../../store/modalReducer';
+import { changePasswordAuth, changeUserNameAuth, closeModalAuth, okAuth, switchRegistrationToAuth } from '../../store/modalAuthAndRegisterReducer';
 
 const LoginForm = () => {
-	const isVisibleAuth = useSelector((state: RootState) => state.modal.isVisibleAuth);
-	const isLoadingTheAuthButton = useSelector((state: RootState) => state.modal.isLoadingTheAuthButton);
-  const valueUserNameAuth = String(useSelector((state: RootState) => state.modal.valueUserNameAuth)) ;
-  const valuePasswordAuth = String(useSelector((state: RootState) => state.modal.valuePasswordAuth)) ;
+	const isVisibleAuth = useSelector((state: RootState) => state.modalAuthAndRegisterReducer.isVisibleAuth);
+	const isLoadingTheAuthButton = useSelector((state: RootState) => state.modalAuthAndRegisterReducer.isLoadingTheAuthButton);
+	const valueUserNameAuth = String(useSelector((state: RootState) => state.modalAuthAndRegisterReducer.valueUserNameAuth));
+	const valuePasswordAuth = String(useSelector((state: RootState) => state.modalAuthAndRegisterReducer.valuePasswordAuth));
 	const dispatch = useDispatch<AppDispatch>();
 
 	const handleOkAuth = useCallback(() => {
@@ -21,8 +21,6 @@ const LoginForm = () => {
 	const handleSwitchRegistrationToAuth = useCallback(() => {
 		dispatch(switchRegistrationToAuth());
 	}, [dispatch]);
-
-
 
 	return (
 		<Modal
@@ -43,8 +41,8 @@ const LoginForm = () => {
 						prefix={<UserOutlined className='site-form-item-icon' />}
 						placeholder='Username'
 						allowClear
-            value = {valueUserNameAuth}
-            onChange={(e) => dispatch(changeUserNameAuth(e.target.value))}
+						value={valueUserNameAuth}
+						onChange={(e) => dispatch(changeUserNameAuth(e.target.value))}
 					/>
 				</Form.Item>
 				<Form.Item
@@ -56,8 +54,8 @@ const LoginForm = () => {
 						type='password'
 						placeholder='Password'
 						allowClear
-            value = {valuePasswordAuth}
-            onChange={(e) => dispatch(changePasswordAuth(e.target.value))}
+						value={valuePasswordAuth}
+						onChange={(e) => dispatch(changePasswordAuth(e.target.value))}
 					/>
 				</Form.Item>
 				<Form.Item>
