@@ -1,0 +1,16 @@
+.imageCarousel {
+  height: 100px;
+  width: 200px;
+  border: 2px solid gray;
+}
+ol, button{
+  display: none;
+}
+.carousel{
+  padding: 0;
+  margin: 0;
+  border: 2px solid gray;
+}
+.carousel:focus{
+  border: 2px solid gray;
+}

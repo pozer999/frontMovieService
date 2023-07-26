@@ -3,7 +3,7 @@ import cls from './Navbar.module.scss';
 import AuthForm from '../../../features/AuthForm/AuthForm';
 import RegisterForm from '../../../features/RegisterForm/RegisterForm';
 import { useDispatch } from 'react-redux';
-import { openModalAuth, openModalRegister } from '../../../store/modalReducer';
+import { openModalAuth, openModalRegister } from '../../../store/modalAuthAndRegisterReducer';
 import { useCallback } from 'react';
 
 export const Navbar = () => {

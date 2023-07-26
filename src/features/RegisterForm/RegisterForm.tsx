@@ -4,11 +4,11 @@ import { Option } from 'antd/es/mentions';
 import { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { closeModalRegister, okRegister, switchAuthToRegistration } from '../../store/modalReducer';
+import { closeModalRegister, okRegister, switchAuthToRegistration } from '../../store/modalAuthAndRegisterReducer';
 
 const RegisterForm = () => {
-	const isVisibleRegister = useSelector((state: RootState) => state.modal.isVisibleRegister);
-	const isLoadingTheRegisterButton = useSelector((state: RootState) => state.modal.isLoadingTheRegisterButton);
+	const isVisibleRegister = useSelector((state: RootState) => state.modalAuthAndRegisterReducer.isVisibleRegister);
+	const isLoadingTheRegisterButton = useSelector((state: RootState) => state.modalAuthAndRegisterReducer.isLoadingTheRegisterButton);
 	const dispatch = useDispatch<AppDispatch>();
 
 	const handleOkRegister = useCallback(() => {
