@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { RoutePath } from './shared/config/routeConfig';
 
 import axios from 'axios';
+import { UserOutlined } from '@ant-design/icons';
 axios.defaults.baseURL = 'http://localhost:8080/';
 
 type ThemeData = {
@@ -56,7 +57,9 @@ function App() {
 							/>
 						</NavLink>
 						<NavLink to={RoutePath.CURRENTFILM}>Current film</NavLink>
-						<NavLink to={RoutePath.USERACCOUNT}>User Account</NavLink>{' '}
+						<NavLink to={RoutePath.USERACCOUNT}>
+					<UserOutlined style={{ fontSize: 25, border: '1px solid blue', borderRadius: 5, color: 'blue' }} />
+				</NavLink>
 						<Switch
 							defaultChecked
 							onChange={onChange}

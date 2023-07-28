@@ -1,4 +1,4 @@
-import { BackTop, FloatButton, Layout, Modal } from 'antd';
+import { Layout } from 'antd';
 import { SwiperRef, SwiperClass } from 'swiper/react';
 import { memo, useCallback } from 'react';
 
@@ -8,12 +8,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import { useRef, useEffect, useState } from 'react';
-import { closeModalFavourites, closeModalSettings, closeModalWatchLater, openModalFavourites, openModalWatchLater } from '../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
+import { closeModalFavourites, closeModalSettings, closeModalWatchLater } from '../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import FloatButtons from '../../shared/FloatButtons/FloatButtons';
-import ModalFloatButtons from '../../widgets/ModalFloatButtons/ModalFloatButtons';
 import CarouselHistoryFilms from '../../widgets/CarouselHistoryFilms/ui/CarouselHistoryFilms';
+import ModalFavouritiesFilm from '../../widgets/Modals/ModalFavouritiesFilm/ModalFavouritiesFilm';
+import ModalWatchLaterFilm from '../../widgets/Modals/ModalWatchLaterFilm/ModalWatchLaterFilm';
+// import ModalFloatButtons from '../../widgets/Modals/ModalFavouritiesFilm/ModalFavouritiesFilm';
 
 const UserAccount = () => {
 	const isVisibleFavourites = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleFavourites);
@@ -71,6 +73,47 @@ const UserAccount = () => {
 		'../image/3.jpeg',
 		'../image/4.jpeg',
 	];
+	const favouritiesFilm: string[] = [
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+		'../image/avatar.jpg',
+	];
+	const watchLaterFilm: string[] = [
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',
+			'../image/mars.jpg',		
+	];
+
 	useEffect(() => {
 		instance?.slideTo(2);
 		// ref usage
@@ -85,21 +128,24 @@ const UserAccount = () => {
 				/>
 			</Layout.Content>
 			<FloatButtons />
-			<ModalFloatButtons
+			<ModalFavouritiesFilm
 				title='Favourities'
+				items={favouritiesFilm}
 				isVisible={isVisibleFavourites}
 				handleCloseModal={handleCloseModalFavourites}
 			/>
-			<ModalFloatButtons
+			<ModalWatchLaterFilm
 				title='Watch Later'
+				items={watchLaterFilm}
 				isVisible={isVisibleWatchLater}
 				handleCloseModal={handleCloseModalWatchLater}
 			/>
-			<ModalFloatButtons
+			{/* <ModalFloatButtons
 				title='Settings'
+				items={carouselItems}
 				isVisible={isVisibleSettings}
 				handleCloseModal={handleCloseModalSetting}
-			/>
+			/>  */}
 		</>
 	);
 };

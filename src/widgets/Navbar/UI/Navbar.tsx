@@ -5,6 +5,9 @@ import RegisterForm from '../../../features/RegisterForm/RegisterForm';
 import { useDispatch } from 'react-redux';
 import { openModalAuth, openModalRegister } from '../../../store/modalAuthAndRegisterReducer';
 import { useCallback } from 'react';
+import { NavLink } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
+import { RoutePath } from '../../../shared/config/routeConfig';
 
 export const Navbar = () => {
 	const dispatch = useDispatch();
