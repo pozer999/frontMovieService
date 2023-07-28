@@ -1,6 +1,6 @@
 import cls from './CarouselFilms.module.scss';
 import { Carousel } from 'antd';
-
+import { memo } from 'react';
 
 const CarouselFilms = () => {
   const onChange = (currentSlide: number) => {
@@ -30,4 +30,4 @@ const CarouselFilms = () => {
   );
 };
 
-export default CarouselFilms;
+export default memo(CarouselFilms);

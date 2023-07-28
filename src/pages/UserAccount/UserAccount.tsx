@@ -1,6 +1,6 @@
 import { BackTop, FloatButton, Layout, Modal } from 'antd';
 import { SwiperRef, SwiperClass } from 'swiper/react';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -8,11 +8,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import { useRef, useEffect, useState } from 'react';
-import CarouselHistoryFilms from '../../widgets/CarouselHistoryFilms/CarouselHistoryFilms';
 import { closeModalFavourites, closeModalSettings, closeModalWatchLater, openModalFavourites, openModalWatchLater } from '../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import FloatButtons from '../../shared/FloatButtons/FloatButtons';
+import ModalFloatButtons from '../../widgets/ModalFloatButtons/ModalFloatButtons';
+import CarouselHistoryFilms from '../../widgets/CarouselHistoryFilms/ui/CarouselHistoryFilms';
 
 const UserAccount = () => {
 	const isVisibleFavourites = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleFavourites);
@@ -84,41 +85,23 @@ const UserAccount = () => {
 				/>
 			</Layout.Content>
 			<FloatButtons />
-			<Modal
-				title='Favourites'
-				footer={[]}
-				centered
-				open={isVisibleFavourites}
-				onCancel={handleCloseModalFavourites}
-				width={1000}>
-				<p>some contents...</p>
-				<p>some contents...</p>
-				<p>some contents...</p>
-			</Modal>
-			<Modal
-				title='WatchLater'
-				centered
-				footer={[]}
-				open={isVisibleWatchLater}
-				onCancel={handleCloseModalWatchLater}
-				width={1000}>
-				<p>some contents...</p>
-				<p>some contents...</p>
-				<p>some contents...</p>
-			</Modal>
-			<Modal
-				title='Setting'
-				centered
-				footer={[]}
-				open={isVisibleSettings}
-				onCancel={handleCloseModalSetting}
-				width={1000}>
-				<p>some contents...</p>
-				<p>some contents...</p>
-				<p>some contents...</p>
-			</Modal>
+			<ModalFloatButtons
+				title='Favourities'
+				isVisible={isVisibleFavourites}
+				handleCloseModal={handleCloseModalFavourites}
+			/>
+			<ModalFloatButtons
+				title='Watch Later'
+				isVisible={isVisibleWatchLater}
+				handleCloseModal={handleCloseModalWatchLater}
+			/>
+			<ModalFloatButtons
+				title='Settings'
+				isVisible={isVisibleSettings}
+				handleCloseModal={handleCloseModalSetting}
+			/>
 		</>
 	);
 };
 
-export default UserAccount;
+export default memo(UserAccount);
