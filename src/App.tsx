@@ -56,15 +56,15 @@ function App() {
 								style={{ height: '100%' }}
 							/>
 						</NavLink>
-						<NavLink to={RoutePath.CURRENTFILM}>Current film</NavLink>
+						{/* <NavLink to={RoutePath.CURRENTFILM}>Current film</NavLink> */}
 						<NavLink to={RoutePath.USERACCOUNT}>
 					<UserOutlined style={{ fontSize: 25, border: '1px solid blue', borderRadius: 5, color: 'blue' }} />
 				</NavLink>
-						<Switch
+						{/* <Switch
 							defaultChecked
 							onChange={onChange}
 							style={{ background: 'rgb(41, 41, 41)' }}
-						/>
+						/> */}
 						<Navbar />
 					</Row>
 				</Layout.Header>

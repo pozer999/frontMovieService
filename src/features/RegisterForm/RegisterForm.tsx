@@ -5,6 +5,7 @@ import { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { closeModalRegister, okRegister, switchAuthToRegistration } from '../../store/modalAuthAndRegisterReducer';
+import axios from 'axios';
 
 const RegisterForm = () => {
 	const isVisibleRegister = useSelector((state: RootState) => state.modalAuthAndRegisterReducer.isVisibleRegister);
@@ -97,7 +98,7 @@ const RegisterForm = () => {
 							className='register-form-button'
 							key='submit'
 							loading={isLoadingTheRegisterButton}
-							onClick={handleOkRegister}>
+							onClick={handleSubmit}>
 							Register
 						</Button>
 						<Button
