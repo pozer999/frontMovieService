@@ -1,8 +1,9 @@
-import { Divider, Progress } from 'antd';
-import React from 'react';
+import { Divider } from 'antd';
+import { memo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper/modules';
-
+import './CarouselHisroryFilms.module.scss';
+import ItemHistoryFilmsCarousel from '../../../entities/ItemHistoryFilmsCarousel/ItemHistoryFilmsCarousel';
 interface ICarouselHistoryFilms {
 	title: any;
 	carouselItems: string[];
@@ -38,18 +39,7 @@ const CarouselHistoryFilms = ({ title, carouselItems }: ICarouselHistoryFilms) =
 			>
 				{carouselItems.map((item, index) => (
 					<SwiperSlide key={index}>
-						<>
-						<img
-							style={{ height: '95%', borderRadius: 5, width: 400, zIndex: 1, position: "relative" }}
-							src={item}
-							alt=''
-						/>
-						<Progress
-							style={{ zIndex: 2, width: 400, position: "absolute", bottom: 0, left: 0, height: 4 }}
-							percent={Math.random()* (90 - 30) + 30}
-							showInfo={false}
-						/>
-						</>
+						<ItemHistoryFilmsCarousel item={item}/>
 					</SwiperSlide>
 				))}
 			</Swiper>
@@ -58,4 +48,4 @@ const CarouselHistoryFilms = ({ title, carouselItems }: ICarouselHistoryFilms) =
 	);
 };
 
-export default CarouselHistoryFilms;
+export default memo(CarouselHistoryFilms);
