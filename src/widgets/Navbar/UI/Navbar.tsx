@@ -3,19 +3,19 @@ import cls from './Navbar.module.scss';
 import AuthForm from '../../../features/AuthForm/AuthForm';
 import RegisterForm from '../../../features/RegisterForm/RegisterForm';
 import { useDispatch } from 'react-redux';
-import { openModalAuth, openModalRegister } from '../../../store/modalAuthAndRegisterReducer';
 import { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { RoutePath } from '../../../shared/config/routeConfig';
+import { AuthActions } from '../../../store/modalAuthAndRegisterReducer';
 
 export const Navbar = () => {
 	const dispatch = useDispatch();
 	const handleOpenModalRegister = useCallback(() => {
-		dispatch(openModalRegister());
+		dispatch(AuthActions.openModalRegister());
 	}, [dispatch]);
 	const handleOpenModalAuth = useCallback(() => {
-		dispatch(openModalAuth());
+		dispatch(AuthActions.openModalAuth());
 	}, [dispatch]);
 
 	return (

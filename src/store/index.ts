@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { filmsReducer } from './FilmsSlice';
 import { modalFavouritesAndWatchLaterAndSettingsReducer } from './modalFavouritesAndWatchLaterAndSettingsReducer';
-import { modalAuthAndRegisterReducer } from './modalAuthAndRegisterReducer';
+import { AuthReducer } from './modalAuthAndRegisterReducer';
 
 export const store = configureStore({
 	reducer: {
 		films: filmsReducer,
-		modalAuthAndRegisterReducer: modalAuthAndRegisterReducer,
+		modalAuthAndRegisterReducer: AuthReducer,
 		modalFavouritesAndWatchLaterAndSettingsReducer: modalFavouritesAndWatchLaterAndSettingsReducer,
 	},
 });
