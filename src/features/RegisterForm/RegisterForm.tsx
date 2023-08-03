@@ -8,13 +8,6 @@ import { memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { AuthActions, register } from "../../store/modalAuthAndRegisterReducer";
-// import {
-// 	changePasswordRegister,
-// 	changeUserNameRegister,
-//     closeModalRegister,
-//     okRegister,
-//     switchAuthToRegistration,
-// } from "../../store/modalAuthAndRegisterReducer";
 
 const RegisterForm = () => {
     const valueUserNameRegister = String(
@@ -40,8 +33,11 @@ const RegisterForm = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const handleOkRegister = useCallback(() => {
-        dispatch(register());
-    }, [dispatch]);
+        const valueRegister = { valueUserNameRegister, valuePasswordRegister };
+        dispatch(register(valueRegister));
+        console.log(valueRegister);
+    }, [dispatch, valueUserNameRegister, valuePasswordRegister]);
+
     const handleCloseModalRegister = useCallback(() => {
         dispatch(AuthActions.closeModalRegister());
     }, [dispatch]);
@@ -49,13 +45,12 @@ const RegisterForm = () => {
         dispatch(AuthActions.switchAuthToRegistration());
     }, [dispatch]);
 
-
     const options = [
-        { value: 'fanesi', label: 'Fanesi' },
-        { value: 'horrors', label: 'Horrors' },
-        { value: 'fighters', label: 'Fighters' },
-      ];
-      
+        { value: "fanesi", label: "Fanesi" },
+        { value: "horrors", label: "Horrors" },
+        { value: "fighters", label: "Fighters" },
+    ];
+
     return (
         <Modal
             open={isVisibleRegister}
@@ -90,8 +85,12 @@ const RegisterForm = () => {
                         }
                         placeholder="Username"
                         allowClear
-						onChange={(e) =>
-                            dispatch(AuthActions.changeUserNameRegister(e.target.value))
+                        onChange={(e) =>
+                            dispatch(
+                                AuthActions.changeUserNameRegister(
+                                    e.target.value
+                                )
+                            )
                         }
                     />
                 </Form.Item>
@@ -112,8 +111,12 @@ const RegisterForm = () => {
                         type="password"
                         placeholder="Password"
                         allowClear
-						onChange={(e) =>
-                            dispatch(AuthActions.changePasswordRegister(e.target.value))
+                        onChange={(e) =>
+                            dispatch(
+                                AuthActions.changePasswordRegister(
+                                    e.target.value
+                                )
+                            )
                         }
                     />
                 </Form.Item>
@@ -157,8 +160,7 @@ const RegisterForm = () => {
                         mode="multiple"
                         showArrow
                         options={options}
-                    >
-                    </Select>
+                    ></Select>
                 </Form.Item>
                 <Form.Item>
                     <div style={{ display: "flex", alignItems: "center" }}>

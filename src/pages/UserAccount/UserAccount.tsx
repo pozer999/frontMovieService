@@ -15,7 +15,6 @@ import FloatButtons from '../../shared/FloatButtons/FloatButtons';
 import CarouselHistoryFilms from '../../widgets/CarouselHistoryFilms/ui/CarouselHistoryFilms';
 import ModalFavouritiesFilm from '../../widgets/Modals/ModalFavouritiesFilm/ModalFavouritiesFilm';
 import ModalWatchLaterFilm from '../../widgets/Modals/ModalWatchLaterFilm/ModalWatchLaterFilm';
-// import ModalFloatButtons from '../../widgets/Modals/ModalFavouritiesFilm/ModalFavouritiesFilm';
 
 const UserAccount = () => {
 	const isVisibleFavourites = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleFavourites);
@@ -118,7 +117,7 @@ const UserAccount = () => {
 		instance?.slideTo(2);
 		// ref usage
 		console.log(swiperElRef.current?.swiper.activeIndex);
-	}, []);
+	}, [instance]);
 	return (
 		<>
 			<Layout.Content style={{ paddingLeft: 50, paddingRight: 50, paddingBottom: 50, width: 500 }}>

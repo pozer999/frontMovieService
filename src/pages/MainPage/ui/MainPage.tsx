@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { MainContainer } from '../../../widgets/MainContainer/UI/MainContainer';
+import { MainContainer } from 'widgets/MainContainer';
+
+
 const MainPage = () => {
   const filters = useSelector((state: any) => state.films.filter);
 

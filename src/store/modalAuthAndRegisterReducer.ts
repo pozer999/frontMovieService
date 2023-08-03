@@ -1,11 +1,5 @@
-import {
-    createAction,
-    createAsyncThunk,
-    createReducer,
-    createSlice,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
-// import { AuthResponse } from "../models/response/AuthResponse";
 
 interface IinitialState {
     valueUserNameAuth: string | undefined;
@@ -17,30 +11,6 @@ interface IinitialState {
     isVisibleRegister: boolean;
     isLoadingTheRegisterButton: boolean;
 }
-
-// export const openModalAuth = createAction("modal/openModalAuth");
-// export const okAuth = createAction("modal/okAuth");
-// export const closeModalAuth = createAction("modal/closeModalAuth");
-// export const switchRegistrationToAuth = createAction(
-//     "modal/switchRegistrationToAuth"
-// );
-
-// export const openModalRegister = createAction("modal/openModalRegister");
-// export const okRegister = createAction("modal/okRegister");
-// export const closeModalRegister = createAction("modal/closeModalRegister");
-// export const switchAuthToRegistration = createAction(
-//     "modal/switchAuthToRegistration"
-// );
-
-// export const changeUserNameAuth = createAction<any>("modal/changeUserNameAuth");
-// export const changePasswordAuth = createAction<any>("modal/changePasswordAuth");
-
-// export const changeUserNameRegister = createAction<any>(
-//     "modal/changeUserNameRegister"
-// );
-// export const changePasswordRegister = createAction<any>(
-//     "modal/changePasswordRegister"
-// );
 
 const initialState: IinitialState = {
     valueUserNameAuth: "",
@@ -108,11 +78,23 @@ export const modalAuthAndRegisterReducer = createSlice({
     },
 });
 
+interface IRegister {
+    valueUserNameRegister: string;
+    valuePasswordRegister: string;
+}
+
 export const register = createAsyncThunk(
     "register/register",
-    async (data, thunkAPI) => {
+    async (valueRegister: IRegister) => {
+        console.log(valueRegister);
+
+        const { valueUserNameRegister, valuePasswordRegister } = valueRegister;
         try {
-            const response = await AuthService.registration("login1", "password2", 'username3');
+            const response = await AuthService.registration(
+                valueUserNameRegister,
+                valuePasswordRegister,
+                "username1234567" // убрать
+            );
 
             if (!response.data) {
                 throw new Error();

@@ -1,8 +1,9 @@
 import { Col, Row } from 'antd';
 import cls from './MainContainer.module.scss';
 import SortedAndInput from '../../../features/SortedAndInput/ui/SortedAndInput';
-import ListFilms from '../../ListFilms/ListFilms';
-import CarouselFilms from '../../CarouselFilms/CarouselFilms';
+import ListFilms from '../../ListFilms/ui/ListFilms';
+import CarouselFilms from '../../CarouselFilms/ui/CarouselFilms';
+
 
 
 export const MainContainer = () => {
