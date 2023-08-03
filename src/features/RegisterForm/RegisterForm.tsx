@@ -98,7 +98,7 @@ const RegisterForm = () => {
 							className='register-form-button'
 							key='submit'
 							loading={isLoadingTheRegisterButton}
-							onClick={handleSubmit}>
+						>
 							Register
 						</Button>
 						<Button
