@@ -9,6 +9,7 @@ import { Navbar } from "widgets/Navbar";
 import Routing from "Routing/Routing";
 import { RoutePath } from "shared/config/routeConfig";
 
+import logo from './image/movie.png';
 
 axios.defaults.baseURL = "http://localhost:8080/";
 
@@ -54,7 +55,7 @@ function App() {
                     >
                         <NavLink to={RoutePath.MAIN} style={{ height: "50px" }}>
                             <img
-                                src="../image/movie.png"
+                                src={logo}
                                 alt=""
                                 style={{ height: "100%" }}
                             />
