@@ -1,13 +1,15 @@
 import "./styles/App.module.scss";
 import { ConfigProvider, Layout, Row, Switch, theme } from "antd";
-import Routing from "./Routing/Routing";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { RoutePath } from "./shared/config/routeConfig";
 
 import axios from "axios";
 import { UserOutlined } from "@ant-design/icons";
-import { Navbar } from "./widgets/Navbar/UI/Navbar";
+import { Navbar } from "widgets/Navbar";
+import Routing from "Routing/Routing";
+import { RoutePath } from "shared/config/routeConfig";
+
+
 axios.defaults.baseURL = "http://localhost:8080/";
 
 type ThemeData = {
@@ -19,17 +21,17 @@ const primary: ThemeData = {
     borderRadius: 6,
     colorPrimary: "rgb(184, 178, 178)",
 };
-const lime: ThemeData = {
-    borderRadius: 12,
-    colorPrimary: "rgb(0, 255, 0)",
-};
+// const lime: ThemeData = {
+//     borderRadius: 12,
+//     colorPrimary: "rgb(0, 255, 0)",
+// };
 
 function App() {
     const [data, setData] = useState<ThemeData>(primary);
 
-    const onChange = (checked: boolean) => {
-        checked ? setData(() => primary) : setData(() => lime);
-    };
+    // const onChange = (checked: boolean) => {
+    //     checked ? setData(() => primary) : setData(() => lime);
+    // };
 
     return (
         <ConfigProvider

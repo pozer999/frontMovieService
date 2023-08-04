@@ -3,13 +3,13 @@ import { memo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper/modules';
 import './CarouselHisroryFilms.module.scss';
-import ItemHistoryFilmsCarousel from '../../../entities/ItemHistoryFilmsCarousel/ItemHistoryFilmsCarousel';
+import { ItemHistoryFilmsCarousel } from 'entities/ItemHistoryFilmsCarousel';
 interface ICarouselHistoryFilms {
 	title: any;
 	carouselItems: string[];
 }
 
-const CarouselHistoryFilms = ({ title, carouselItems }: ICarouselHistoryFilms) => {
+export const CarouselHistoryFilms = memo(({ title, carouselItems }: ICarouselHistoryFilms) => {
 	// const [instance, setInstance] = useState<SwiperClass | null>(null);
 	// const swiperElRef = useRef<SwiperRef>(null);
 
@@ -46,6 +46,5 @@ const CarouselHistoryFilms = ({ title, carouselItems }: ICarouselHistoryFilms) =
 			<Divider orientation='left' />
 		</>
 	);
-};
+});
 
-export default memo(CarouselHistoryFilms);

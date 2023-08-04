@@ -1,6 +1,6 @@
-import CurrentFilm from "../../pages/CurrentFilm/ui/CurrentFilm";
-import { MainPageLazy } from "../../pages/MainPage/MainPageLazy";
-import UserAccount from "../../pages/UserAccount/UserAccount";
+import { UserAccount } from "pages/UserAccount";
+import { CurrentFilm } from "pages/CurrentFilm";
+import { MainPageLazy } from "pages/MainPage/MainPageLazy";
 
 export const RoutePath = {
 	MAIN: "/",

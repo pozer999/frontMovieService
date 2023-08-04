@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Loader from '../widgets/Loader/Loader';
 import { routeConfig } from '../shared/config/routeConfig';
 
-const Routing = () => {
+const Routing = memo(() => {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -13,6 +13,6 @@ const Routing = () => {
       </Routes>
     </Suspense>
   );
-};
+});
 
 export default memo(Routing);
