@@ -2,9 +2,9 @@ import { FloatButton } from 'antd';
 import { EyeOutlined, HeartOutlined, SettingOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { memo, useCallback } from 'react';
-import { openModalFavourites, openModalSettings, openModalWatchLater } from '../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
+import { openModalFavourites, openModalSettings, openModalWatchLater } from '../../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
 
-const FloatButtons = () => {
+export const FloatButtons = memo(() => {
 	const dispatch = useDispatch();
 	const handleOpenModalFavourites = useCallback(() => {
 		dispatch(openModalFavourites());
@@ -36,6 +36,4 @@ const FloatButtons = () => {
 			/>
 		</FloatButton.Group>
 	);
-};
-
-export default memo(FloatButtons);
+});

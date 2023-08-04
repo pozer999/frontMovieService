@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filmsActions } from '../../../store/FilmsSlice';
 import { filters } from '../../../shared/const/filters';
 
-const SortesAndInput = () => {
+export const SortedAndInput = () => {
   const dispatch = useDispatch();
   const currentFilter = useSelector((state: any) => state.films.filters);
   const handleChange = (value: string) => {
@@ -32,4 +32,3 @@ const SortesAndInput = () => {
   );
 };
 
-export default SortesAndInput;

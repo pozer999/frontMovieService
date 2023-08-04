@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import { EyeTwoTone } from "@ant-design/icons";
+import { memo } from "react";
 
 interface IModalWatchLaterFilm {
     items: string[];
@@ -14,7 +15,7 @@ interface IModalWatchLaterFilm {
     handleCloseModal: any;
 }
 
-const ModalWatchLaterFilm = ({
+export const ModalWatchLaterFilm = memo(({
     items,
     title,
     isVisible,
@@ -84,6 +85,6 @@ const ModalWatchLaterFilm = ({
             </>
         </Modal>
     );
-};
+});
 
-export default ModalWatchLaterFilm;
+

@@ -1,9 +1,8 @@
 import cls from "./CarouselFilms.module.scss";
 import { Carousel } from "antd";
-import { memo } from "react";
+import { FC, memo } from "react";
 
-const CarouselFilms = () => {
-
+export const CarouselFilms: FC = memo(() => {
     const carouselItems: string[] = [
         "../image/kartinki-mstiteli-14.jpg",
         "../image/2.jpg",
@@ -25,6 +24,7 @@ const CarouselFilms = () => {
             </Carousel>
         </div>
     );
-};
+});
 
-export default memo(CarouselFilms);
+
+// export default memo(CarouselFilms);

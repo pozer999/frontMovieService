@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import { HeartTwoTone } from '@ant-design/icons';
+import { memo } from 'react';
 
 interface IModalFavouritiesFilm {
 	items: string[];
@@ -14,7 +15,7 @@ interface IModalFavouritiesFilm {
 	handleCloseModal: any;
 }
 
-const ModalFavouritiesFilm = ({ items, title, isVisible, handleCloseModal }: IModalFavouritiesFilm) => {
+export const ModalFavouritiesFilm = memo(({ items, title, isVisible, handleCloseModal }: IModalFavouritiesFilm) => {
 	return (
 		<Modal
 			title={title}
@@ -56,6 +57,4 @@ const ModalFavouritiesFilm = ({ items, title, isVisible, handleCloseModal }: IMo
 			</>
 		</Modal>
 	);
-};
-
-export default ModalFavouritiesFilm;
+});

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { MainContainer } from 'widgets/MainContainer';
 
 
-const MainPage = () => {
+const MainPage = memo(() => {
   const filters = useSelector((state: any) => state.films.filter);
 
   useEffect(() => {
@@ -16,6 +16,6 @@ const MainPage = () => {
       <MainContainer />
     </div>
   );
-};
+});
 
 export default MainPage;

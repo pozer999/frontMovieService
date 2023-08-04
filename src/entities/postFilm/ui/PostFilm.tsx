@@ -1,7 +1,8 @@
 import cls from './PostFilm.module.scss';
 import { Badge, Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
-const PostFilm = ({ film }: any) => {
+import { memo } from 'react';
+export const PostFilm = memo(({ film }: any) => {
 	console.log('film: ', film);
 	return (
 		<Badge
@@ -26,6 +27,5 @@ const PostFilm = ({ film }: any) => {
 			</div>
 		</Badge>
 	);
-};
+});
 
-export default PostFilm;

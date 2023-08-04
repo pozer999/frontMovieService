@@ -6,7 +6,7 @@ interface IitemHistoryFilmsCarousel {
 	item: string;
 }
 
-const ItemHistoryFilmsCarousel = ({ item }: IitemHistoryFilmsCarousel) => {
+export const ItemHistoryFilmsCarousel = memo(({ item }: IitemHistoryFilmsCarousel) => {
 	return (
 		<>
 			<img
@@ -21,6 +21,5 @@ const ItemHistoryFilmsCarousel = ({ item }: IitemHistoryFilmsCarousel) => {
 			/>
 		</>
 	);
-};
+});
 
-export default memo(ItemHistoryFilmsCarousel);

@@ -1,18 +1,11 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch, RootState } from "../../../store";
 import { useCallback, memo } from "react";
-import { AuthActions } from "../../store/modalAuthAndRegisterReducer";
-// import {
-//     changePasswordAuth,
-//     changeUserNameAuth,
-//     closeModalAuth,
-//     okAuth,
-//     switchRegistrationToAuth,
-// } from "../../store/modalAuthAndRegisterReducer";
+import { AuthActions, auth } from "../../../store/modalAuthAndRegisterReducer";
 
-const LoginForm = () => {
+export const AuthForm = memo(() => {
     const isVisibleAuth = useSelector(
         (state: RootState) => state.modalAuthAndRegisterReducer.isVisibleAuth
     );
@@ -35,8 +28,12 @@ const LoginForm = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const handleOkAuth = useCallback(() => {
-        dispatch(AuthActions.okAuth());
-    }, [dispatch]);
+        const valueAuth = {
+            valueUserNameAuth,
+            valuePasswordAuth,
+        };
+        dispatch(auth(valueAuth));
+    }, [dispatch, valueUserNameAuth, valuePasswordAuth]);
     const handleCloseModalAuth = useCallback(() => {
         dispatch(AuthActions.closeModalAuth());
     }, [dispatch]);
@@ -141,6 +138,4 @@ const LoginForm = () => {
             </Form>
         </Modal>
     );
-};
-
-export default memo(LoginForm);
+});

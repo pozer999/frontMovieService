@@ -74,6 +74,12 @@ export const modalAuthAndRegisterReducer = createSlice({
             })
             .addCase(register.fulfilled, (state) => {
                 state.isLoadingTheRegisterButton = false;
+            })
+            .addCase(auth.pending, (state) => {
+                state.isLoadingTheAuthButton = true;
+            })
+            .addCase(auth.fulfilled, (state) => {
+                state.isLoadingTheAuthButton = false;
             });
     },
 });
@@ -92,8 +98,36 @@ export const register = createAsyncThunk(
         try {
             const response = await AuthService.registration(
                 valueUserNameRegister,
-                valuePasswordRegister,
-                "username1234567" // убрать
+                valuePasswordRegister
+            );
+
+            if (!response.data) {
+                throw new Error();
+            }
+
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
+);
+
+interface IAuth {
+    valueUserNameAuth: string;
+    valuePasswordAuth: string;
+}
+
+export const auth = createAsyncThunk(
+    "auth/auth",
+    async (valueAuth: IAuth) => {
+        console.log(valueAuth);
+
+        const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
+        try {
+            const response = await AuthService.login(
+                valueUserNameAuth,
+                valuePasswordAuth
             );
 
             if (!response.data) {

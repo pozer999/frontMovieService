@@ -6,7 +6,7 @@ interface IFavouritiesFilm {
 	src: string;
 }
 
-const FavouritiesFilm = ({ src }: IFavouritiesFilm) => {
+export const FavouritiesFilm = memo(({ src }: IFavouritiesFilm) => {
 	return (
 		<div>
 			<img
@@ -37,6 +37,4 @@ const FavouritiesFilm = ({ src }: IFavouritiesFilm) => {
 			<HeartTwoTone style={{ position: 'absolute', top: 5, right: 5, fontSize: 25 }} />
 		</div>
 	);
-};
-
-export default memo(FavouritiesFilm);
+});

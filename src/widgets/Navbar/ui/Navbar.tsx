@@ -1,15 +1,13 @@
 import { Button } from 'antd';
 import cls from './Navbar.module.scss';
 import { useDispatch } from 'react-redux';
-import { useCallback } from 'react';
-import { NavLink } from 'react-router-dom';
-import { UserOutlined } from '@ant-design/icons';
-import { RoutePath } from '../../../shared/config/routeConfig';
+import { memo, useCallback } from 'react';
 import { AuthActions } from '../../../store/modalAuthAndRegisterReducer';
-import AuthForm from 'features/AuthForm/AuthForm';
-import RegisterForm from 'features/RegisterForm/RegisterForm';
+import { AuthForm } from 'features/AuthForm';
+import { RegisterForm } from 'features/RegisterForm';
 
-export const Navbar = () => {
+
+export const Navbar = memo(() => {
 	const dispatch = useDispatch();
 	const handleOpenModalRegister = useCallback(() => {
 		dispatch(AuthActions.openModalRegister());
@@ -38,4 +36,4 @@ export const Navbar = () => {
 			<RegisterForm />
 		</>
 	);
-};
+});

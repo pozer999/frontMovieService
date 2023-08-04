@@ -10,7 +10,7 @@ export const [FTName]: FC<[FTName]Props> = memo(( ) => {
 
 
    return (
-      <div c>
+      <div>
 
       </div>
    );

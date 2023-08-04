@@ -3,13 +3,16 @@ import {
     LockOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import { Button, Form, Input, Modal, Select } from "antd";
-import { memo, useCallback } from "react";
+import { Button, Form, Input, Modal, Select, Space, message } from "antd";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
-import { AuthActions, register } from "../../store/modalAuthAndRegisterReducer";
+import { AppDispatch, RootState } from "../../../store";
+import {
+    AuthActions,
+    register,
+} from "../../../store/modalAuthAndRegisterReducer";
 
-const RegisterForm = () => {
+export const RegisterForm = memo(() => {
     const valueUserNameRegister = String(
         useSelector(
             (state: RootState) =>
@@ -32,11 +35,37 @@ const RegisterForm = () => {
     );
     const dispatch = useDispatch<AppDispatch>();
 
+    const [statusInputLoginAndPassword, setStatusInputLoginAndPassword] = useState<"error" | "warning" | undefined>(undefined);
+
+    const [messageApi, contextHolder] = message.useMessage();
+    const error = useCallback(() => {
+        messageApi.open({
+            type: "error",
+            content: "Your username and password must contain at least 10 characters",
+        });
+        setStatusInputLoginAndPassword("error");
+    }, [messageApi]);
+
     const handleOkRegister = useCallback(() => {
-        const valueRegister = { valueUserNameRegister, valuePasswordRegister };
-        dispatch(register(valueRegister));
-        console.log(valueRegister);
-    }, [dispatch, valueUserNameRegister, valuePasswordRegister]);
+        if (valueUserNameRegister.length >= 10 && valuePasswordRegister.length >= 10) {
+            const valueRegister = {
+                valueUserNameRegister,
+                valuePasswordRegister,
+            };
+            setStatusInputLoginAndPassword(undefined);
+            dispatch(register(valueRegister));
+            console.log(valueRegister);
+        } else {
+            error();
+        }
+    }, [dispatch, valueUserNameRegister, valuePasswordRegister, error]);
+
+    useEffect(() => {
+        if(valueUserNameRegister.length >= 10 && valuePasswordRegister.length >= 10){
+            setStatusInputLoginAndPassword(undefined);
+        }
+        
+    }, [valueUserNameRegister, valuePasswordRegister])
 
     const handleCloseModalRegister = useCallback(() => {
         dispatch(AuthActions.closeModalRegister());
@@ -80,6 +109,7 @@ const RegisterForm = () => {
                     hasFeedback
                 >
                     <Input
+                        status={statusInputLoginAndPassword}
                         prefix={
                             <UserOutlined className="site-form-item-icon" />
                         }
@@ -94,6 +124,7 @@ const RegisterForm = () => {
                         }
                     />
                 </Form.Item>
+                <>{contextHolder}</>
                 <Form.Item
                     name="password"
                     rules={[
@@ -108,6 +139,7 @@ const RegisterForm = () => {
                         prefix={
                             <LockOutlined className="site-form-item-icon" />
                         }
+                        status={statusInputLoginAndPassword}
                         type="password"
                         placeholder="Password"
                         allowClear
@@ -185,6 +217,4 @@ const RegisterForm = () => {
             </Form>
         </Modal>
     );
-};
-
-export default memo(RegisterForm);
+});

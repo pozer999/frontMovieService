@@ -8,15 +8,15 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import { useRef, useEffect, useState } from 'react';
-import { closeModalFavourites, closeModalSettings, closeModalWatchLater } from '../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
+import { closeModalFavourites, closeModalSettings, closeModalWatchLater } from '../../../store/modalFavouritesAndWatchLaterAndSettingsReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import FloatButtons from '../../shared/FloatButtons/FloatButtons';
-import CarouselHistoryFilms from '../../widgets/CarouselHistoryFilms/ui/CarouselHistoryFilms';
-import ModalFavouritiesFilm from '../../widgets/Modals/ModalFavouritiesFilm/ModalFavouritiesFilm';
-import ModalWatchLaterFilm from '../../widgets/Modals/ModalWatchLaterFilm/ModalWatchLaterFilm';
+import { RootState } from '../../../store';
+import { CarouselHistoryFilms } from 'widgets/CarouselHistoryFilms';
+import { ModalFavouritiesFilm } from 'widgets/Modals/ModalFavouritiesFilm';
+import { ModalWatchLaterFilm } from 'widgets/Modals/ModalWatchLaterFilm';
+import { FloatButtons } from 'shared/FloatButtons';
 
-const UserAccount = () => {
+export const UserAccount = memo(() => {
 	const isVisibleFavourites = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleFavourites);
 	const isVisibleWatchLater = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleWatchLater);
 	const isVisibleSettings = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.isVisibleSettings);
@@ -147,6 +147,5 @@ const UserAccount = () => {
 			/>  */}
 		</>
 	);
-};
+});
 
-export default memo(UserAccount);

@@ -1,12 +1,13 @@
 import { Col, Row } from 'antd';
 import cls from './MainContainer.module.scss';
-import SortedAndInput from '../../../features/SortedAndInput/ui/SortedAndInput';
-import ListFilms from '../../ListFilms/ui/ListFilms';
-import CarouselFilms from '../../CarouselFilms/ui/CarouselFilms';
+import { ListFilms } from 'widgets/ListFilms';
+import { CarouselFilms } from 'widgets/CarouselFilms';
+import { SortedAndInput } from 'features/SortedAndInput';
+import { memo } from 'react';
 
 
 
-export const MainContainer = () => {
+export const MainContainer = memo(() => {
 
 	return (
 		<Row justify='center' style={{borderRadius: 40}}>
@@ -19,4 +20,4 @@ export const MainContainer = () => {
 			</Col>
 		</Row>
 	);
-};
+});
