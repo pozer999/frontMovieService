@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 interface IinitialState {
+    isRegister: boolean;
+    errorRegister: boolean;
     valueUserNameAuth: string | undefined;
     valuePasswordAuth: string | undefined;
     valueUserNameRegister: string | undefined;
@@ -13,6 +17,8 @@ interface IinitialState {
 }
 
 const initialState: IinitialState = {
+    isRegister: false,
+    errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
     valueUserNameRegister: "",
@@ -74,6 +80,13 @@ export const modalAuthAndRegisterReducer = createSlice({
             })
             .addCase(register.fulfilled, (state) => {
                 state.isLoadingTheRegisterButton = false;
+                state.isRegister = true;
+                state.errorRegister = false;
+            })
+            .addCase(register.rejected, (state) => {
+                state.isLoadingTheRegisterButton = false;
+                state.isRegister = false;
+                state.errorRegister = true;
             })
             .addCase(auth.pending, (state) => {
                 state.isLoadingTheAuthButton = true;
@@ -88,6 +101,7 @@ interface IRegister {
     valueUserNameRegister: string;
     valuePasswordRegister: string;
 }
+
 
 export const register = createAsyncThunk(
     "register/register",
