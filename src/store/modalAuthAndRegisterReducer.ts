@@ -79,6 +79,7 @@ export const modalAuthAndRegisterReducer = createSlice({
                 state.isLoadingTheRegisterButton = true;
             })
             .addCase(register.fulfilled, (state) => {
+                state.isVisibleRegister = false;
                 state.isLoadingTheRegisterButton = false;
                 state.isRegister = true;
                 state.errorRegister = false;

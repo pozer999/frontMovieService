@@ -13,6 +13,9 @@ import {
 } from "../../../store/modalAuthAndRegisterReducer";
 
 export const RegisterForm = memo(() => {
+
+    const dispatch = useDispatch<AppDispatch>();
+
     const valueUserNameRegister = String(
         useSelector(
             (state: RootState) =>
@@ -41,13 +44,13 @@ export const RegisterForm = memo(() => {
     const errorRegisterValue = useSelector(
         (state: RootState) => state.modalAuthAndRegisterReducer.errorRegister // ошибка при регистрации
     );
-    const dispatch = useDispatch<AppDispatch>();
 
     const [statusInputLoginAndPassword, setStatusInputLoginAndPassword] =
         useState<"error" | "warning" | undefined>(undefined);
 
     const [messageApi, contextHolder] = message.useMessage();
-    const error = useCallback(() => {
+
+    const insufficientCharactersError = useCallback(() => {
         messageApi.open({
             type: "error",
             content:
@@ -55,10 +58,11 @@ export const RegisterForm = memo(() => {
         });
         setStatusInputLoginAndPassword("error");
     }, [messageApi]);
+
     const errorRegister = useCallback(() => {
         messageApi.open({
             type: "error",
-            content: "Ошибка регистрации",
+            content: "Registration error",
         });
         setStatusInputLoginAndPassword("error");
     }, [messageApi]);
@@ -79,14 +83,14 @@ export const RegisterForm = memo(() => {
                 dispatch(register(valueRegister));
                 console.log(valueRegister);
             } else {
-                error();
+                insufficientCharactersError();
             }
         }
     }, [
         dispatch,
         valueUserNameRegister,
         valuePasswordRegister,
-        error,
+        insufficientCharactersError,
         errorRegister,
         errorRegisterValue,
     ]);
