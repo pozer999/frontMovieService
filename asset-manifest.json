@@ -1,19 +1,26 @@
 {
   "files": {
     "main.css": "/frontMovieService/static/css/main.1a761bea.css",
-    "main.js": "/frontMovieService/static/js/main.f4a24a27.js",
-    "static/css/112.754d9459.chunk.css": "/frontMovieService/static/css/112.754d9459.chunk.css",
-    "static/js/112.d0407195.chunk.js": "/frontMovieService/static/js/112.d0407195.chunk.js",
-    "static/js/876.f33d3e39.chunk.js": "/frontMovieService/static/js/876.f33d3e39.chunk.js",
+    "main.js": "/frontMovieService/static/js/main.db294fc3.js",
+    "static/css/772.59e67e4f.chunk.css": "/frontMovieService/static/css/772.59e67e4f.chunk.css",
+    "static/js/772.c12e8921.chunk.js": "/frontMovieService/static/js/772.c12e8921.chunk.js",
+    "static/js/686.6d9bd891.chunk.js": "/frontMovieService/static/js/686.6d9bd891.chunk.js",
+    "static/media/mars.jpg": "/frontMovieService/static/media/mars.5fcdf656a17678e8347f.jpg",
+    "static/media/2.jpg": "/frontMovieService/static/media/2.da9c59a7fd989f29ee95.jpg",
+    "static/media/kartinki-mstiteli-14.jpg": "/frontMovieService/static/media/kartinki-mstiteli-14.0477f43a47386ecfd956.jpg",
+    "static/media/4.jpeg": "/frontMovieService/static/media/4.d5f78a56facca3d8644b.jpeg",
+    "static/media/3.jpeg": "/frontMovieService/static/media/3.614e6d4c4d10918f2a09.jpeg",
+    "static/media/avatar.jpg": "/frontMovieService/static/media/avatar.432a6d43f39dd3b337b0.jpg",
+    "static/media/movie.png": "/frontMovieService/static/media/movie.99f0994632e53c901ae3.png",
     "index.html": "/frontMovieService/index.html",
     "main.1a761bea.css.map": "/frontMovieService/static/css/main.1a761bea.css.map",
-    "main.f4a24a27.js.map": "/frontMovieService/static/js/main.f4a24a27.js.map",
-    "112.754d9459.chunk.css.map": "/frontMovieService/static/css/112.754d9459.chunk.css.map",
-    "112.d0407195.chunk.js.map": "/frontMovieService/static/js/112.d0407195.chunk.js.map",
-    "876.f33d3e39.chunk.js.map": "/frontMovieService/static/js/876.f33d3e39.chunk.js.map"
+    "main.db294fc3.js.map": "/frontMovieService/static/js/main.db294fc3.js.map",
+    "772.59e67e4f.chunk.css.map": "/frontMovieService/static/css/772.59e67e4f.chunk.css.map",
+    "772.c12e8921.chunk.js.map": "/frontMovieService/static/js/772.c12e8921.chunk.js.map",
+    "686.6d9bd891.chunk.js.map": "/frontMovieService/static/js/686.6d9bd891.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1a761bea.css",
-    "static/js/main.f4a24a27.js"
+    "static/js/main.db294fc3.js"
   ]
 }
