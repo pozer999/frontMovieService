@@ -13,7 +13,6 @@ import {
 } from "../../../store/modalAuthAndRegisterReducer";
 
 export const RegisterForm = memo(() => {
-
     const dispatch = useDispatch<AppDispatch>();
 
     const valueUserNameRegister = String(
@@ -48,6 +47,7 @@ export const RegisterForm = memo(() => {
     const [statusInputLoginAndPassword, setStatusInputLoginAndPassword] =
         useState<"error" | "warning" | undefined>(undefined);
 
+    // -------------------------------messageApi ----------------------------------------
     const [messageApi, contextHolder] = message.useMessage();
 
     const insufficientCharactersError = useCallback(() => {
@@ -67,6 +67,14 @@ export const RegisterForm = memo(() => {
         setStatusInputLoginAndPassword("error");
     }, [messageApi]);
 
+    const success = useCallback(() => {
+        messageApi.open({
+            type: "success",
+            content: "You are registered",
+        });
+    }, [messageApi]);
+    // ----------------------------------------------------------------------------
+
     const handleOkRegister = useCallback(() => {
         if (errorRegisterValue) {
             errorRegister(); //ошибка при rejected
@@ -82,6 +90,7 @@ export const RegisterForm = memo(() => {
                 setStatusInputLoginAndPassword(undefined);
                 dispatch(register(valueRegister));
                 console.log(valueRegister);
+                success();
             } else {
                 insufficientCharactersError();
             }
@@ -93,6 +102,7 @@ export const RegisterForm = memo(() => {
         insufficientCharactersError,
         errorRegister,
         errorRegisterValue,
+        success,
     ]);
 
     useEffect(() => {

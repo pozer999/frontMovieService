@@ -27,9 +27,22 @@ const primary: ThemeData = {
 //     colorPrimary: "rgb(0, 255, 0)",
 // };
 
+
+
 function App() {
     const [data, setData] = useState<ThemeData>(primary);
 
+
+
+  async function f() {
+    const result = await axios(
+        'http://localhost:8080/movies',
+    );
+    console.log('movies: ', result);
+    }
+    useEffect(() => {
+    f();
+  });
     // const onChange = (checked: boolean) => {
     //     checked ? setData(() => primary) : setData(() => lime);
     // };
@@ -61,7 +74,7 @@ function App() {
                             />
                         </NavLink>
                         {/* <NavLink to={RoutePath.CURRENTFILM}>Current film</NavLink> */}
-                        <NavLink to={RoutePath.USERACCOUNT}>
+                        {/* <NavLink to={RoutePath.USERACCOUNT}>
                             <UserOutlined
                                 style={{
                                     fontSize: 25,
@@ -70,7 +83,7 @@ function App() {
                                     color: "blue",
                                 }}
                             />
-                        </NavLink>
+                        </NavLink> */}
                         {/* <Switch
 							defaultChecked
 							onChange={onChange}

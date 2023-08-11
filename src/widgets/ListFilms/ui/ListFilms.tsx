@@ -1,10 +1,11 @@
-import { Col, Row, Skeleton, Space, Spin } from "antd";
+import { Col, Grid, Row, Skeleton, Space, Spin } from "antd";
 import React, { memo } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFilms } from "../../../store/FilmsSlice";
 import { AppDispatch, RootState } from "../../../store";
 import { PostFilm } from "entities/postFilm";
+import SkeletonItem from "shared/SkeletonItem/SkeletonItem";
 
 export const ListFilms = memo(() => {
     const dispatch = useDispatch<AppDispatch>();
@@ -56,51 +57,10 @@ export const ListFilms = memo(() => {
                     ))}
                 </Row>
             ) : (
-                <>
-                    <Spin
-                        tip="Loading"
-                        size="large"
-                        style={{
-                            alignItems: "center",
-                            display: "flex",
-                            justifyContent: "center",
-                            marginTop: 30,
-                        }}
-                    ></Spin>
-                    <Space>
-                        <Skeleton.Button
-                            active={true}
-                            size="default"
-                            shape="default"
-                            block={false}
-                        />
-                        <Skeleton.Avatar
-                            active={true}
-                            size="default"
-                            shape="circle"
-                        />
-                        <Skeleton.Input active={true} size="default" />
-                    </Space>
-                    <br />
-                    <br />
-                    <Skeleton.Button
-                        active={true}
-                        size="default"
-                        shape="default"
-                        block={false}
-                    />
-                    <br />
-                    <br />
-                    <Skeleton.Input
-                        active={true}
-                        size="default"
-                        block={false}
-                    />
-                    <br />
-                    <br />
-                    <Space></Space>
-                    <Skeleton.Image active={true} />
-                </>
+                <Row gutter={[16, 24]} style={{ margin: 10, marginTop: 45 }}>
+                <SkeletonItem />
+                <SkeletonItem />
+                </Row>
             )}
         </div>
     );

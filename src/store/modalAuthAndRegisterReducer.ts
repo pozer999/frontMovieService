@@ -77,6 +77,8 @@ export const modalAuthAndRegisterReducer = createSlice({
         builder
             .addCase(register.pending, (state) => {
                 state.isLoadingTheRegisterButton = true;
+                state.errorRegister = false;
+                state.isRegister = false;
             })
             .addCase(register.fulfilled, (state) => {
                 state.isVisibleRegister = false;
@@ -107,7 +109,7 @@ interface IRegister {
 export const register = createAsyncThunk(
     "register/register",
     async (valueRegister: IRegister) => {
-        console.log(valueRegister);
+        console.log("valueRegister: ", valueRegister);
 
         const { valueUserNameRegister, valuePasswordRegister } = valueRegister;
         try {
@@ -122,7 +124,7 @@ export const register = createAsyncThunk(
 
             return response.data;
         } catch (e) {
-            console.log(e);
+            console.log("ошибка регистрации: ", e);
             throw e;
         }
     }
