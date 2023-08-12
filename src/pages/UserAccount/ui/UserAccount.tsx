@@ -97,7 +97,6 @@ export const UserAccount = memo(() => {
 
     useEffect(() => {
         instance?.slideTo(2);
-        // ref usage
         console.log(swiperElRef.current?.swiper.activeIndex);
     }, [instance]);
     return (

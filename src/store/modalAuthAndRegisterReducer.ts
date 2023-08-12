@@ -17,7 +17,7 @@ interface IinitialState {
 }
 
 const initialState: IinitialState = {
-    isRegister: true,
+    isRegister: false,
     errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
@@ -96,6 +96,8 @@ export const modalAuthAndRegisterReducer = createSlice({
             })
             .addCase(auth.fulfilled, (state) => {
                 state.isLoadingTheAuthButton = false;
+                state.isRegister = true;
+                state.isVisibleAuth = false;
             });
     },
 });
