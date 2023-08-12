@@ -17,7 +17,7 @@ interface IinitialState {
 }
 
 const initialState: IinitialState = {
-    isRegister: false,
+    isRegister: true,
     errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",

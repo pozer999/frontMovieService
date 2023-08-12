@@ -49,7 +49,7 @@ export const ListFilms = memo(() => {
                     </div>
                 )
             ) : films.length !== 0 ? (
-                <Row gutter={[16, 24]} style={{ margin: 10, marginTop: 45 }}>
+                <Row gutter={[16, 24]} style={{ margin: 10, marginTop: 50, marginBottom: 50 }}>
                     {films.map((film: any, i: number) => (
                         <Col className="gutter-row" span={6} key={i}>
                             <PostFilm film={film} />
@@ -57,9 +57,10 @@ export const ListFilms = memo(() => {
                     ))}
                 </Row>
             ) : (
-                <Row gutter={[16, 24]} style={{ margin: 10, marginTop: 45 }}>
-                <SkeletonItem />
-                <SkeletonItem />
+                <Row gutter={[16, 24]} style={{ margin: 10, marginTop: 50, marginBottom: 50 }}>
+                    {[1,2,3,4,5,6,7,8].map((item, index) => (
+                            <SkeletonItem key={index}/>
+                    ))}
                 </Row>
             )}
         </div>

@@ -10,7 +10,6 @@ import "swiper/css/scrollbar";
 import { useRef, useEffect, useState } from "react";
 import {
     closeModalFavourites,
-    closeModalSettings,
     closeModalWatchLater,
 } from "../../../store/modalFavouritesAndWatchLaterAndSettingsReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,21 +37,16 @@ export const UserAccount = memo(() => {
             state.modalFavouritesAndWatchLaterAndSettingsReducer
                 .isVisibleWatchLater
     );
-    const isVisibleSettings = useSelector(
+    const themeType = useSelector(
         (state: RootState) =>
-            state.modalFavouritesAndWatchLaterAndSettingsReducer
-                .isVisibleSettings
+            state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
     );
-
     const dispatch = useDispatch();
     const handleCloseModalFavourites = useCallback(() => {
         dispatch(closeModalFavourites());
     }, [dispatch]);
     const handleCloseModalWatchLater = useCallback(() => {
         dispatch(closeModalWatchLater());
-    }, [dispatch]);
-    const handleCloseModalSetting = useCallback(() => {
-        dispatch(closeModalSettings());
     }, [dispatch]);
 
     const [instance, setInstance] = useState<SwiperClass | null>(null);
@@ -134,12 +128,6 @@ export const UserAccount = memo(() => {
                 isVisible={isVisibleWatchLater}
                 handleCloseModal={handleCloseModalWatchLater}
             />
-            {/* <ModalFloatButtons
-				title='Settings'
-				items={carouselItems}
-				isVisible={isVisibleSettings}
-				handleCloseModal={handleCloseModalSetting}
-			/>  */}
         </>
     );
 });

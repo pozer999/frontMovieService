@@ -260,7 +260,6 @@ export const RegisterForm = memo(() => {
                         >
                             Already registered?
                         </Button>
-                        <h1>{isRegister}</h1>
                     </div>
                 </Form.Item>
             </Form>

@@ -19,6 +19,10 @@ export const Navbar = memo(() => {
         (state: RootState) =>
             state.modalAuthAndRegisterReducer.valueUserNameRegister
     );
+    const themeType = useSelector(
+        (state: RootState) =>
+            state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
+    );
     const handleOpenModalRegister = useCallback(() => {
         dispatch(AuthActions.openModalRegister());
     }, [dispatch]);
@@ -28,7 +32,13 @@ export const Navbar = memo(() => {
 
     return (
         <>
-            <div className={cls.headerNavbar}>
+            <div
+                className={cls.headerNavbar}
+                style={{
+                    backgroundColor:
+                        themeType === "dark" ? "rgb(15, 15, 15)" : "white",
+                }}
+            >
                 {isRegister ? (
                     <>
                         <NavLink
