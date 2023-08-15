@@ -47,7 +47,6 @@ export const RegisterForm = memo(() => {
     const [statusInputLoginAndPassword, setStatusInputLoginAndPassword] =
         useState<"error" | "warning" | undefined>(undefined);
 
-    // -------------------------------messageApi ----------------------------------------
     const [messageApi, contextHolder] = message.useMessage();
 
     const insufficientCharactersError = useCallback(() => {
@@ -73,7 +72,6 @@ export const RegisterForm = memo(() => {
             content: "You are registered",
         });
     }, [messageApi]);
-    // ----------------------------------------------------------------------------
 
     const handleOkRegister = useCallback(() => {
         if (errorRegisterValue) {
@@ -88,7 +86,7 @@ export const RegisterForm = memo(() => {
                     valuePasswordRegister,
                 };
                 setStatusInputLoginAndPassword(undefined);
-                dispatch(register(valueRegister));
+                dispatch(register(valueRegister, statusInputLoginAndPassword));
                 console.log(valueRegister);
                 success();
             } else {

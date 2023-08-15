@@ -3,6 +3,14 @@ import AuthService from "../services/AuthService";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 
+interface IvalueRegister {
+    valueUserNameRegister: string;
+    valuePasswordRegister: string;
+}
+const valueRegister = {
+    valueUserNameRegister: "",
+    valuePasswordRegister: "",
+};
 interface IinitialState {
     isRegister: boolean;
     errorRegister: boolean;
@@ -14,10 +22,12 @@ interface IinitialState {
     isLoadingTheAuthButton: boolean;
     isVisibleRegister: boolean;
     isLoadingTheRegisterButton: boolean;
+    statusInputLoginAndPassword: "error" | "warning" | undefined;
+    valueRegister: IvalueRegister;
 }
 
 const initialState: IinitialState = {
-    isRegister: false,
+    isRegister: true,
     errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
@@ -27,6 +37,8 @@ const initialState: IinitialState = {
     isLoadingTheAuthButton: false,
     isVisibleRegister: false,
     isLoadingTheRegisterButton: false,
+    statusInputLoginAndPassword: undefined,
+    valueRegister: valueRegister,
 };
 
 export const modalAuthAndRegisterReducer = createSlice({
@@ -72,6 +84,9 @@ export const modalAuthAndRegisterReducer = createSlice({
         changePasswordRegister(state, action) {
             state.valuePasswordRegister = action.payload;
         },
+        changeStatusInputLoginAndPassword(state, action) {
+            state.statusInputLoginAndPassword = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -102,19 +117,19 @@ export const modalAuthAndRegisterReducer = createSlice({
     },
 });
 
-interface IRegister {
-    valueUserNameRegister: string;
-    valuePasswordRegister: string;
-}
-
-
 export const register = createAsyncThunk(
     "register/register",
-    async (valueRegister: IRegister) => {
+    async ({ valueRegister, statusInputLoginAndPassword }: IinitialState) => {
         console.log("valueRegister: ", valueRegister);
 
         const { valueUserNameRegister, valuePasswordRegister } = valueRegister;
         try {
+            if (
+                valueUserNameRegister.length >= 10 &&
+                valuePasswordRegister.length >= 10
+            ) {
+                statusInputLoginAndPassword = undefined;
+            }
             const response = await AuthService.registration(
                 valueUserNameRegister,
                 valuePasswordRegister
@@ -137,29 +152,26 @@ interface IAuth {
     valuePasswordAuth: string;
 }
 
-export const auth = createAsyncThunk(
-    "auth/auth",
-    async (valueAuth: IAuth) => {
-        console.log(valueAuth);
+export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
+    console.log(valueAuth);
 
-        const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
-        try {
-            const response = await AuthService.login(
-                valueUserNameAuth,
-                valuePasswordAuth
-            );
+    const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
+    try {
+        const response = await AuthService.login(
+            valueUserNameAuth,
+            valuePasswordAuth
+        );
 
-            if (!response.data) {
-                throw new Error();
-            }
-
-            return response.data;
-        } catch (e) {
-            console.log(e);
-            throw e;
+        if (!response.data) {
+            throw new Error();
         }
+
+        return response.data;
+    } catch (e) {
+        console.log(e);
+        throw e;
     }
-);
+});
 
 export const { actions: AuthActions } = modalAuthAndRegisterReducer;
 export const { reducer: AuthReducer } = modalAuthAndRegisterReducer;
