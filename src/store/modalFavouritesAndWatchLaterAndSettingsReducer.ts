@@ -3,7 +3,7 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 interface IinitialState {
     isVisibleFavourites: boolean;
     isVisibleWatchLater: boolean;
-    isVisibleSettings: boolean;
+    themeType: "dark" | "light";
 }
 
 export const openModalFavourites = createAction("modal/openModalFavourites");
@@ -12,13 +12,13 @@ export const closeModalFavourites = createAction("modal/closeModalFavourites");
 export const openModalWatchLater = createAction("modal/openModalWatchLater");
 export const closeModalWatchLater = createAction("modal/closeModalWatchLater");
 
-export const openModalSettings = createAction("modal/openModalSettings");
-export const closeModalSettings = createAction("modal/closeModalSettings");
+export const changeTheme = createAction("modal/changeTheme");
+
 
 const initialState: IinitialState = {
     isVisibleFavourites: false,
-    isVisibleSettings: false,
     isVisibleWatchLater: false,
+    themeType: "dark",
 };
 
 export const modalFavouritesAndWatchLaterAndSettingsReducer = createReducer(
@@ -38,11 +38,8 @@ export const modalFavouritesAndWatchLaterAndSettingsReducer = createReducer(
             .addCase(closeModalWatchLater, (state) => {
                 state.isVisibleWatchLater = false;
             })
-            .addCase(openModalSettings, (state) => {
-                state.isVisibleSettings = true;
+            .addCase(changeTheme, (state) => {
+                state.themeType = state.themeType === "dark" ? "light" : "dark";
             })
-            .addCase(closeModalSettings, (state) => {
-                state.isVisibleSettings = false;
-            });
     }
 );

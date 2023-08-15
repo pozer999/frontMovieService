@@ -10,12 +10,12 @@ export const ItemHistoryFilmsCarousel = memo(({ item }: IitemHistoryFilmsCarouse
 	return (
 		<>
 			<img
-				style={{ height: '95%', borderRadius: 5, width: 400, zIndex: 1, position: 'relative', cursor: "pointer" }}
+				style={{ height: '95%', borderRadius: 5, width: 450, zIndex: 1, position: 'relative', cursor: "pointer" }}
 				src={item}
 				alt='film'
 			/>
 			<Progress
-				style={{ zIndex: 2, width: 400, position: 'absolute', bottom: 0, left: 0, height: 4 }}
+				style={{ zIndex: 2, width: 450, position: 'absolute', bottom: 0, left: 0, height: 4 }}
 				percent={Math.random() * (90 - 30) + 30}
 				showInfo={false}
 			/>

@@ -13,6 +13,8 @@ import {
 } from "../../../store/modalAuthAndRegisterReducer";
 
 export const RegisterForm = memo(() => {
+    const dispatch = useDispatch<AppDispatch>();
+
     const valueUserNameRegister = String(
         useSelector(
             (state: RootState) =>
@@ -33,39 +35,84 @@ export const RegisterForm = memo(() => {
         (state: RootState) =>
             state.modalAuthAndRegisterReducer.isLoadingTheRegisterButton
     );
-    const dispatch = useDispatch<AppDispatch>();
+    const isRegister = String(
+        useSelector(
+            (state: RootState) => state.modalAuthAndRegisterReducer.isRegister //зареган пользователь или нет
+        )
+    );
+    const errorRegisterValue = useSelector(
+        (state: RootState) => state.modalAuthAndRegisterReducer.errorRegister // ошибка при регистрации
+    );
 
-    const [statusInputLoginAndPassword, setStatusInputLoginAndPassword] = useState<"error" | "warning" | undefined>(undefined);
+    const [statusInputLoginAndPassword, setStatusInputLoginAndPassword] =
+        useState<"error" | "warning" | undefined>(undefined);
 
+    // -------------------------------messageApi ----------------------------------------
     const [messageApi, contextHolder] = message.useMessage();
-    const error = useCallback(() => {
+
+    const insufficientCharactersError = useCallback(() => {
         messageApi.open({
             type: "error",
-            content: "Your username and password must contain at least 10 characters",
+            content:
+                "Your username and password must contain at least 10 characters",
         });
         setStatusInputLoginAndPassword("error");
     }, [messageApi]);
 
+    const errorRegister = useCallback(() => {
+        messageApi.open({
+            type: "error",
+            content: "Registration error",
+        });
+        setStatusInputLoginAndPassword("error");
+    }, [messageApi]);
+
+    const success = useCallback(() => {
+        messageApi.open({
+            type: "success",
+            content: "You are registered",
+        });
+    }, [messageApi]);
+    // ----------------------------------------------------------------------------
+
     const handleOkRegister = useCallback(() => {
-        if (valueUserNameRegister.length >= 10 && valuePasswordRegister.length >= 10) {
-            const valueRegister = {
-                valueUserNameRegister,
-                valuePasswordRegister,
-            };
-            setStatusInputLoginAndPassword(undefined);
-            dispatch(register(valueRegister));
-            console.log(valueRegister);
+        if (errorRegisterValue) {
+            errorRegister(); //ошибка при rejected
         } else {
-            error();
+            if (
+                valueUserNameRegister.length >= 10 &&
+                valuePasswordRegister.length >= 10
+            ) {
+                const valueRegister = {
+                    valueUserNameRegister,
+                    valuePasswordRegister,
+                };
+                setStatusInputLoginAndPassword(undefined);
+                dispatch(register(valueRegister));
+                console.log(valueRegister);
+                success();
+            } else {
+                insufficientCharactersError();
+            }
         }
-    }, [dispatch, valueUserNameRegister, valuePasswordRegister, error]);
+    }, [
+        dispatch,
+        valueUserNameRegister,
+        valuePasswordRegister,
+        insufficientCharactersError,
+        errorRegister,
+        errorRegisterValue,
+        success,
+    ]);
 
     useEffect(() => {
-        if(valueUserNameRegister.length >= 10 && valuePasswordRegister.length >= 10){
+        if (
+            valueUserNameRegister.length >= 10 &&
+            valuePasswordRegister.length >= 10
+        ) {
             setStatusInputLoginAndPassword(undefined);
         }
-        
-    }, [valueUserNameRegister, valuePasswordRegister])
+    }, [valueUserNameRegister, valuePasswordRegister]);
 
     const handleCloseModalRegister = useCallback(() => {
         dispatch(AuthActions.closeModalRegister());
@@ -202,6 +249,7 @@ export const RegisterForm = memo(() => {
                             className="register-form-button"
                             key="submit"
                             loading={isLoadingTheRegisterButton}
+                            disabled={isLoadingTheRegisterButton}
                             onClick={handleOkRegister}
                         >
                             Register

@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 interface IinitialState {
+    isRegister: boolean;
+    errorRegister: boolean;
     valueUserNameAuth: string | undefined;
     valuePasswordAuth: string | undefined;
     valueUserNameRegister: string | undefined;
@@ -13,6 +17,8 @@ interface IinitialState {
 }
 
 const initialState: IinitialState = {
+    isRegister: false,
+    errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
     valueUserNameRegister: "",
@@ -71,15 +77,27 @@ export const modalAuthAndRegisterReducer = createSlice({
         builder
             .addCase(register.pending, (state) => {
                 state.isLoadingTheRegisterButton = true;
+                state.errorRegister = false;
+                state.isRegister = false;
             })
             .addCase(register.fulfilled, (state) => {
+                state.isVisibleRegister = false;
                 state.isLoadingTheRegisterButton = false;
+                state.isRegister = true;
+                state.errorRegister = false;
+            })
+            .addCase(register.rejected, (state) => {
+                state.isLoadingTheRegisterButton = false;
+                state.isRegister = false;
+                state.errorRegister = true;
             })
             .addCase(auth.pending, (state) => {
                 state.isLoadingTheAuthButton = true;
             })
             .addCase(auth.fulfilled, (state) => {
                 state.isLoadingTheAuthButton = false;
+                state.isRegister = true;
+                state.isVisibleAuth = false;
             });
     },
 });
@@ -89,10 +107,11 @@ interface IRegister {
     valuePasswordRegister: string;
 }
 
+
 export const register = createAsyncThunk(
     "register/register",
     async (valueRegister: IRegister) => {
-        console.log(valueRegister);
+        console.log("valueRegister: ", valueRegister);
 
         const { valueUserNameRegister, valuePasswordRegister } = valueRegister;
         try {
@@ -107,7 +126,7 @@ export const register = createAsyncThunk(
 
             return response.data;
         } catch (e) {
-            console.log(e);
+            console.log("ошибка регистрации: ", e);
             throw e;
         }
     }
