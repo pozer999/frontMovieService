@@ -14,10 +14,12 @@ interface IinitialState {
     isLoadingTheAuthButton: boolean;
     isVisibleRegister: boolean;
     isLoadingTheRegisterButton: boolean;
+    isVisibleUserAccount: boolean;
+    isVisibleCurrentFilm: boolean;
 }
 
 const initialState: IinitialState = {
-    isRegister: false,
+    isRegister: true,
     errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
@@ -27,6 +29,8 @@ const initialState: IinitialState = {
     isLoadingTheAuthButton: false,
     isVisibleRegister: false,
     isLoadingTheRegisterButton: false,
+    isVisibleUserAccount: false,
+    isVisibleCurrentFilm: false,
 };
 
 export const modalAuthAndRegisterReducer = createSlice({
@@ -59,6 +63,18 @@ export const modalAuthAndRegisterReducer = createSlice({
             state.isVisibleAuth = true;
             state.isVisibleRegister = false;
             state.isLoadingTheRegisterButton = false;
+        },
+        openUserAccount(state) {
+            state.isVisibleUserAccount = true;
+        },
+        closeUserAccount(state) {
+            state.isVisibleUserAccount = false;
+        },
+        openCurrentFilm(state) {
+            state.isVisibleCurrentFilm = true;
+        },
+        closeCurrentFilm(state) {
+            state.isVisibleCurrentFilm = false;
         },
         changePasswordAuth(state, action) {
             state.valuePasswordAuth = action.payload;

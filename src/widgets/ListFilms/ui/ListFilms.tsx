@@ -52,7 +52,7 @@ export const ListFilms = memo(() => {
                 <Row gutter={[16, 24]} style={{ margin: 10, marginTop: 50, marginBottom: 50 }}>
                     {films.map((film: any, i: number) => (
                         <Col className="gutter-row" span={6} key={i}>
-                            <PostFilm film={film} />
+                            <PostFilm film={film}/>
                         </Col>
                     ))}
                 </Row>

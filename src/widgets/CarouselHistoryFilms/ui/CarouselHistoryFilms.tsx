@@ -30,8 +30,8 @@ export const CarouselHistoryFilms = memo(
                 <Divider
                     orientation="left"
                     style={{
-                        color: themeType === "dark" ? "white" : "black",
-                        fontSize: 25,
+                        color: themeType === "dark" ? "white" : "rgb(15,15,15)",
+                        fontSize: 16,
                     }}
                 >
                     {title}
@@ -42,7 +42,7 @@ export const CarouselHistoryFilms = memo(
                         hide: true,
                     }}
                     modules={[Navigation, Scrollbar]}
-                    slidesPerView={3}
+                    slidesPerView={2.8}
                     style={{ borderRadius: 5, height: 200 }}
                 >
                     {carouselItems.map((item, index) => (
@@ -51,7 +51,6 @@ export const CarouselHistoryFilms = memo(
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                <Divider orientation="left" />
             </>
         );
     }

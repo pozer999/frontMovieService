@@ -105,8 +105,7 @@ export const UserAccount = memo(() => {
                 style={{
                     paddingLeft: 50,
                     paddingRight: 50,
-                    paddingBottom: 50,
-                    width: 500,
+                    width: 1400,
                 }}
             >
                 <CarouselHistoryFilms
