@@ -27,6 +27,7 @@ const primary: ThemeData = {
 const lime: ThemeData = {
     borderRadius: 12,
     colorPrimary: "rgb(0, 255, 0)",
+    
 };
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
     const bodyElement = document.body;
     useEffect(() => {
         bodyElement.style.backgroundColor =
-            themeType === "dark" ? "black" : "white";
+            themeType === "dark" ? "rgb(15,15,15)" : "white";
     }, [bodyElement.style, themeType]);
 
     //   async function f() {
@@ -69,7 +70,7 @@ function App() {
                     className="headerNavbar"
                     style={{
                         backgroundColor:
-                            themeType === "dark" ? "black" : "white",
+                            themeType === "dark" ? "rgb(15,15,15)" : "white",
                     }}
                 >
                     <Row
@@ -78,8 +79,8 @@ function App() {
                         className="RowHeaderNavbar"
                         style={{ height: "50px" }}
                     >
-                        <NavLink to={RoutePath.MAIN} style={{ height: "50px" }}>
-                            <img src={logo} alt="" style={{ height: "100%" }} />
+                        <NavLink to={RoutePath.MAIN} style={{ height: "50px", maxWidth: "20%"}}>
+                            <img src={logo} alt="" style={{ maxWidth: "100%" }} />
                         </NavLink>
                         <Navbar />
                     </Row>

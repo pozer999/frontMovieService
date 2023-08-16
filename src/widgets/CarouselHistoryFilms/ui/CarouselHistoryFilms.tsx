@@ -30,7 +30,7 @@ export const CarouselHistoryFilms = memo(
                 <Divider
                     orientation="left"
                     style={{
-                        color: themeType === "dark" ? "white" : "black",
+                        color: themeType === "dark" ? "white" : "rgb(15,15,15)",
                         fontSize: 25,
                     }}
                 >
