@@ -1,5 +1,14 @@
-import { Breadcrumb, Col, Collapse, Divider, Row, Space, Steps } from "antd";
-import { memo } from "react";
+import {
+    Breadcrumb,
+    Col,
+    Collapse,
+    Divider,
+    Row,
+    Space,
+    Steps,
+    Switch,
+} from "antd";
+import { memo, useState } from "react";
 import { Typography } from "antd";
 import "./CurrentFilm.module.scss";
 const { Text } = Typography;
@@ -18,11 +27,19 @@ export const CurrentFilm = memo(() => {
             state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
     );
     const countRate = 4;
-    const isLoadingCurrentPage = true;
+    const [isLoadingCurrentPage, setIsLoadingCurrentPage] =
+        useState<boolean>(false);
+    const onChange = (checked: boolean) => {
+        setIsLoadingCurrentPage(checked);
+    };
     return (
         <div style={{ width: 700 }}>
+            <p style={{color: "orange", fontSize: 12, padding: 8,}}>
+                loading? <Switch onChange={onChange} size="small"/>
+            </p>
+
             {isLoadingCurrentPage ? (
-                <SkeletonCurrentFilm/>
+                <SkeletonCurrentFilm />
             ) : (
                 <Space direction="vertical" size="small">
                     <Row gutter={[24, 8]}>
