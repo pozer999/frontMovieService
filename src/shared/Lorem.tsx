@@ -2,7 +2,7 @@ import React from "react";
 
 const Lorem = () => {
     return (
-        <p style={{ maxWidth: "50%" }}>
+        <p style={{ maxWidth: "90%" }}>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed
             reprehenderit, fugiat, modi, autem fuga beatae at inventore eveniet
             libero quo quibusdam soluta sapiente quidem neque sit voluptatem?

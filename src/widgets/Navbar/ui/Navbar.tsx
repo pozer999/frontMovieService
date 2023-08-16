@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Drawer, Tooltip } from "antd";
 import cls from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
@@ -7,8 +7,9 @@ import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { RootState } from "store";
 import { NavLink } from "react-router-dom";
-import { UserOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { RoutePath } from "shared/config/routeConfig";
+import { UserAccount } from "pages/UserAccount";
 
 export const Navbar = memo(() => {
     const dispatch = useDispatch();
@@ -23,11 +24,21 @@ export const Navbar = memo(() => {
         (state: RootState) =>
             state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
     );
+    const openUserAccount = useSelector(
+        (state: RootState) =>
+            state.modalAuthAndRegisterReducer.isVisibleUserAccount
+    );
     const handleOpenModalRegister = useCallback(() => {
         dispatch(AuthActions.openModalRegister());
     }, [dispatch]);
     const handleOpenModalAuth = useCallback(() => {
         dispatch(AuthActions.openModalAuth());
+    }, [dispatch]);
+    const handleOpenUserAccount = useCallback(() => {
+        dispatch(AuthActions.openUserAccount());
+    }, [dispatch]);
+    const handleCloseUserAccount = useCallback(() => {
+        dispatch(AuthActions.closeUserAccount());
     }, [dispatch]);
 
     return (
@@ -41,32 +52,35 @@ export const Navbar = memo(() => {
             >
                 {isRegister ? (
                     <>
-                        <NavLink
-                            to={RoutePath.USERACCOUNT}
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
-                        >
-                            <div
+                        <Tooltip placement="left" title={"Log in to your profile"} arrow>
+                            <Button
+                                onClick={handleOpenUserAccount}
+                                type="link"
                                 style={{
-                                    color: "gray",
-                                    fontSize: 18,
-                                    marginRight: 10,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
                                 }}
                             >
-                                {valueUserNameRegister}
-                            </div>
-                            <UserOutlined
-                                style={{
-                                    fontSize: 35,
-                                    border: "2px solid gray",
-                                    borderRadius: 5,
-                                    color: "gray",
-                                }}
-                            />
-                        </NavLink>
+                                <div
+                                    style={{
+                                        color: "gray",
+                                        fontSize: 18,
+                                        marginRight: 10,
+                                    }}
+                                >
+                                    {valueUserNameRegister}
+                                </div>
+                                <UserOutlined
+                                    style={{
+                                        fontSize: 35,
+                                        border: "2px solid gray",
+                                        borderRadius: 5,
+                                        color: "gray",
+                                    }}
+                                />
+                            </Button>
+                        </Tooltip>
                     </>
                 ) : (
                     <>
@@ -89,6 +103,23 @@ export const Navbar = memo(() => {
             </div>
             <AuthForm />
             <RegisterForm />
+            <Drawer
+                title={<p style={{ fontSize: 25 }}>Profile</p>}
+                placement="top"
+                size={"default"}
+                closable={false}
+                open={openUserAccount}
+                onClose={handleCloseUserAccount}
+                style={{ overflow: "hidden" }}
+                extra={
+                    <CloseOutlined
+                        onClick={handleCloseUserAccount}
+                        style={{ color: "grey" }}
+                    />
+                }
+            >
+                <UserAccount />
+            </Drawer>
         </>
     );
 });

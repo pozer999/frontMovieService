@@ -1,17 +1,32 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Drawer, Row, Skeleton } from "antd";
+import { Button, Card, Col, Divider, Drawer, Row, Skeleton } from "antd";
 import { CurrentFilm } from "pages/CurrentFilm";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "store";
+import { AuthActions } from "store/modalAuthAndRegisterReducer";
 
 const SkeletonItem = () => {
-    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
+    const visibleCurrentFilm = useSelector(
+        (state: RootState) =>
+            state.modalAuthAndRegisterReducer.isVisibleCurrentFilm
+    );
+    const handleOpenCurrentFilm = useCallback(() => {
+        dispatch(AuthActions.openCurrentFilm());
+    }, [dispatch]);
+    const handleCloseCurrentFilm = useCallback(() => {
+        dispatch(AuthActions.closeCurrentFilm());
+    }, [dispatch]);
+    // const [open, setOpen] = useState(false);
 
-    const showLargeDrawer = () => {
-        setOpen(true);
-    };
-    const onClose = () => {
-        setOpen(false);
-    };
+    // const showDrawer = () => {
+    //   setOpen(true);
+    // };
+
+    // const onClose = () => {
+    //   setOpen(false);
+    // };
     return (
         <Col className="gutter-row" span={6} style={{ position: "relative" }}>
             <Card
@@ -28,7 +43,7 @@ const SkeletonItem = () => {
                         }}
                     />
                 }
-                onClick={showLargeDrawer}
+                onClick={handleOpenCurrentFilm}
                 style={{
                     display: "flex",
                     justifyContent: "center",
@@ -45,13 +60,26 @@ const SkeletonItem = () => {
                 </Row>
             </Card>
             <Drawer
-                title={" "}
+                title={
+                    <Divider
+                        orientation="center"
+                        style={{ fontSize: 26, fontWeight: "bold" }}
+                    >
+                        The martian
+                    </Divider>
+                }
                 placement="right"
                 size={"large"}
                 closable={false}
-                open={open}
+                open={visibleCurrentFilm}
+                onClose={handleCloseCurrentFilm}
                 style={{ overflow: "hidden" }}
-                extra={<CloseOutlined onClick={onClose} style={{color: "grey"}} />}
+                extra={
+                    <CloseOutlined
+                        onClick={handleCloseCurrentFilm}
+                        style={{ color: "grey" }}
+                    />
+                }
             >
                 <CurrentFilm />
             </Drawer>
