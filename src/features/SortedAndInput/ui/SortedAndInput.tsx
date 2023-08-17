@@ -14,15 +14,13 @@ export const SortedAndInput = () => {
     return (
         <Row justify="space-between" align="middle" style={{ margin: 10 }}>
             <Col span={14}>
-                <Tooltip placement="top" title={"Select sorting"} arrow>
-                    <Select
-                        defaultValue={currentFilter}
-                        style={{ width: 140 }}
-                        placement="bottomLeft"
-                        options={filters}
-                        onChange={handleChange}
-                    />
-                </Tooltip>
+                <Select
+                    defaultValue={currentFilter}
+                    style={{ width: 140 }}
+                    placement="bottomLeft"
+                    options={filters}
+                    onChange={handleChange}
+                />
             </Col>
             <Col span={10}>
                 <Space.Compact style={{ width: "100%" }}>
