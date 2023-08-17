@@ -52,35 +52,33 @@ export const Navbar = memo(() => {
             >
                 {isRegister ? (
                     <>
-                        <Tooltip placement="left" title={"Log in to your profile"} arrow>
-                            <Button
-                                onClick={handleOpenUserAccount}
-                                type="link"
+                        <Button
+                            onClick={handleOpenUserAccount}
+                            type="link"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <div
                                 style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
+                                    color: "gray",
+                                    fontSize: 18,
+                                    marginRight: 10,
                                 }}
                             >
-                                <div
-                                    style={{
-                                        color: "gray",
-                                        fontSize: 18,
-                                        marginRight: 10,
-                                    }}
-                                >
-                                    {valueUserNameRegister}
-                                </div>
-                                <UserOutlined
-                                    style={{
-                                        fontSize: 35,
-                                        border: "2px solid gray",
-                                        borderRadius: 5,
-                                        color: "gray",
-                                    }}
-                                />
-                            </Button>
-                        </Tooltip>
+                                {valueUserNameRegister}
+                            </div>
+                            <UserOutlined
+                                style={{
+                                    fontSize: 35,
+                                    border: "2px solid gray",
+                                    borderRadius: 5,
+                                    color: "gray",
+                                }}
+                            />
+                        </Button>
                     </>
                 ) : (
                     <>

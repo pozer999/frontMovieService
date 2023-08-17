@@ -60,6 +60,7 @@ const SkeletonItem = () => {
                 </Row>
             </Card>
             <Drawer
+                mask={false}
                 title={
                     <Divider
                         orientation="center"

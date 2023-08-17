@@ -1,8 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
+import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
 
+interface IvalueRegister {
+    valueUserNameRegister: string;
+    valuePasswordRegister: string;
+}
+const valueRegister = {
+    valueUserNameRegister: "",
+    valuePasswordRegister: "",
+};
 interface IinitialState {
     isRegister: boolean;
     errorRegister: boolean;
@@ -14,12 +21,14 @@ interface IinitialState {
     isLoadingTheAuthButton: boolean;
     isVisibleRegister: boolean;
     isLoadingTheRegisterButton: boolean;
+    statusInputLoginAndPassword: "error" | "warning" | undefined;
+    valueRegister: IvalueRegister;
     isVisibleUserAccount: boolean;
     isVisibleCurrentFilm: boolean;
 }
 
 const initialState: IinitialState = {
-    isRegister: true,
+    isRegister: false,
     errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
@@ -29,6 +38,8 @@ const initialState: IinitialState = {
     isLoadingTheAuthButton: false,
     isVisibleRegister: false,
     isLoadingTheRegisterButton: false,
+    statusInputLoginAndPassword: undefined,
+    valueRegister: valueRegister,
     isVisibleUserAccount: false,
     isVisibleCurrentFilm: false,
 };
@@ -64,18 +75,6 @@ export const modalAuthAndRegisterReducer = createSlice({
             state.isVisibleRegister = false;
             state.isLoadingTheRegisterButton = false;
         },
-        openUserAccount(state) {
-            state.isVisibleUserAccount = true;
-        },
-        closeUserAccount(state) {
-            state.isVisibleUserAccount = false;
-        },
-        openCurrentFilm(state) {
-            state.isVisibleCurrentFilm = true;
-        },
-        closeCurrentFilm(state) {
-            state.isVisibleCurrentFilm = false;
-        },
         changePasswordAuth(state, action) {
             state.valuePasswordAuth = action.payload;
         },
@@ -87,6 +86,21 @@ export const modalAuthAndRegisterReducer = createSlice({
         },
         changePasswordRegister(state, action) {
             state.valuePasswordRegister = action.payload;
+        },
+        changeStatusInputLoginAndPassword(state, action) {
+            state.statusInputLoginAndPassword = action.payload;
+        },
+        openUserAccount(state) {
+            state.isVisibleUserAccount = true;
+        },
+        closeUserAccount(state) {
+            state.isVisibleUserAccount = false;
+        },
+        openCurrentFilm(state) {
+            state.isVisibleCurrentFilm = true;
+        },
+        closeCurrentFilm(state) {
+            state.isVisibleCurrentFilm = false;
         },
     },
     extraReducers: (builder) => {
@@ -117,33 +131,30 @@ export const modalAuthAndRegisterReducer = createSlice({
             });
     },
 });
-
 interface IRegister {
     valueUserNameRegister: string;
     valuePasswordRegister: string;
 }
-
-
 export const register = createAsyncThunk(
     "register/register",
-    async (valueRegister: IRegister) => {
-        console.log("valueRegister: ", valueRegister);
-
+    async (valueRegister: IRegister, thunkApi) => {
+        const { rejectWithValue } = thunkApi;
         const { valueUserNameRegister, valuePasswordRegister } = valueRegister;
+        const errors = validateRegisterData(valueRegister);
+        if (errors.length) {
+            return rejectWithValue(errors);
+        }
         try {
             const response = await AuthService.registration(
                 valueUserNameRegister,
                 valuePasswordRegister
             );
-
             if (!response.data) {
                 throw new Error();
             }
-
             return response.data;
         } catch (e) {
-            console.log("ошибка регистрации: ", e);
-            throw e;
+            rejectWithValue(`ошибка регистрации:${e} `); 
         }
     }
 );
@@ -153,29 +164,24 @@ interface IAuth {
     valuePasswordAuth: string;
 }
 
-export const auth = createAsyncThunk(
-    "auth/auth",
-    async (valueAuth: IAuth) => {
-        console.log(valueAuth);
-
-        const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
-        try {
-            const response = await AuthService.login(
-                valueUserNameAuth,
-                valuePasswordAuth
-            );
-
-            if (!response.data) {
-                throw new Error();
-            }
-
-            return response.data;
-        } catch (e) {
-            console.log(e);
-            throw e;
+export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
+    console.log(valueAuth);
+    const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
+    try {
+        const response = await AuthService.login(
+            valueUserNameAuth,
+            valuePasswordAuth
+        );
+        if (!response.data) {
+            throw new Error();
         }
+
+        return response.data;
+    } catch (e) {
+        console.log(e);
+        throw e;
     }
-);
+});
 
 export const { actions: AuthActions } = modalAuthAndRegisterReducer;
 export const { reducer: AuthReducer } = modalAuthAndRegisterReducer;
