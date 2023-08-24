@@ -25,9 +25,18 @@ export const AuthForm = memo(() => {
                 state.modalAuthAndRegisterReducer.valuePasswordAuth
         )
     );
+    const isRememberMe = useSelector(
+        (state: RootState) => state.modalAuthAndRegisterReducer.isRememberMe
+    );
+
     const dispatch = useDispatch<AppDispatch>();
 
     const handleOkAuth = useCallback(() => {
+        // if (isRememberMe) {
+        //     localStorage.setItem("valueUserNameAuth", valueUserNameAuth);
+        //     localStorage.setItem("valuePasswordAuth", valuePasswordAuth);
+        //     localStorage.setItem("isRememberMe", String(isRememberMe));
+        // }
         const valueAuth = {
             valueUserNameAuth,
             valuePasswordAuth,
@@ -40,7 +49,12 @@ export const AuthForm = memo(() => {
     const handleSwitchRegistrationToAuth = useCallback(() => {
         dispatch(AuthActions.switchRegistrationToAuth());
     }, [dispatch]);
-
+    const handleChangeRememberMe = useCallback(() => {
+        dispatch(AuthActions.changeRememberMe());
+    }, [dispatch]);
+    console.log(isRememberMe);
+    const user = localStorage.getItem('valueUserNameAuth');
+    
     return (
         <Modal
             open={isVisibleAuth}
@@ -76,9 +90,11 @@ export const AuthForm = memo(() => {
                         }
                         placeholder="Username"
                         allowClear
-                        value={valueUserNameAuth}
+                        value={String(user)}
                         onChange={(e) =>
-                            dispatch(AuthActions.changeUserNameAuth(e.target.value))
+                            dispatch(
+                                AuthActions.changeUserNameAuth(e.target.value)
+                            )
                         }
                     />
                 </Form.Item>
@@ -101,13 +117,20 @@ export const AuthForm = memo(() => {
                         allowClear
                         value={valuePasswordAuth}
                         onChange={(e) =>
-                            dispatch(AuthActions.changePasswordAuth(e.target.value))
+                            dispatch(
+                                AuthActions.changePasswordAuth(e.target.value)
+                            )
                         }
                     />
                 </Form.Item>
                 <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>Remember me</Checkbox>
+                        <Checkbox
+                            checked={true}
+                            onChange={handleChangeRememberMe}
+                        >
+                            Remember me
+                        </Checkbox>
                     </Form.Item>
 
                     <a className="login-form-forgot" href="/">

@@ -20,6 +20,10 @@ export const Navbar = memo(() => {
         (state: RootState) =>
             state.modalAuthAndRegisterReducer.valueUserNameRegister
     );
+    const valueUserNameAuth = useSelector(
+        (state: RootState) =>
+            state.modalAuthAndRegisterReducer.valueUserNameAuth
+    );
     const themeType = useSelector(
         (state: RootState) =>
             state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
@@ -68,7 +72,7 @@ export const Navbar = memo(() => {
                                     marginRight: 10,
                                 }}
                             >
-                                {valueUserNameRegister}
+                                {valueUserNameRegister ? valueUserNameRegister : valueUserNameAuth}
                             </div>
                             <UserOutlined
                                 style={{

@@ -13,7 +13,7 @@ const valueRegister = {
 interface IinitialState {
     isRegister: boolean;
     errorRegister: boolean;
-    valueUserNameAuth: string | undefined;
+    valueUserNameAuth: string | null;
     valuePasswordAuth: string | undefined;
     valueUserNameRegister: string | undefined;
     valuePasswordRegister: string | undefined;
@@ -25,12 +25,13 @@ interface IinitialState {
     valueRegister: IvalueRegister;
     isVisibleUserAccount: boolean;
     isVisibleCurrentFilm: boolean;
+    isRememberMe: boolean;
 }
 
 const initialState: IinitialState = {
     isRegister: false,
     errorRegister: false,
-    valueUserNameAuth: "",
+    valueUserNameAuth: '',
     valuePasswordAuth: "",
     valueUserNameRegister: "",
     valuePasswordRegister: "",
@@ -42,6 +43,7 @@ const initialState: IinitialState = {
     valueRegister: valueRegister,
     isVisibleUserAccount: false,
     isVisibleCurrentFilm: false,
+    isRememberMe: true,
 };
 
 export const modalAuthAndRegisterReducer = createSlice({
@@ -102,6 +104,9 @@ export const modalAuthAndRegisterReducer = createSlice({
         closeCurrentFilm(state) {
             state.isVisibleCurrentFilm = false;
         },
+        changeRememberMe(state) {
+            state.isRememberMe = !state.isRememberMe;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -168,6 +173,11 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
     console.log(valueAuth);
     const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
     try {
+        // if (isRememberMe) {
+            localStorage.setItem("valueUserNameAuth", valueUserNameAuth);
+            localStorage.setItem("valuePasswordAuth", valuePasswordAuth);
+            // localStorage.setItem("isRememberMe", String(isRememberMe));
+        // }
         const response = await AuthService.login(
             valueUserNameAuth,
             valuePasswordAuth
