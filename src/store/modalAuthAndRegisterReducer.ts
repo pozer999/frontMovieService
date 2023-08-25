@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
 import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
+import axios from "axios";
+import { AuthResponse } from "models/response/AuthResponse";
+import { API_URL } from "shared/config/http";
 
 interface IvalueRegister {
     valueUserNameRegister: string;
@@ -133,6 +136,19 @@ export const modalAuthAndRegisterReducer = createSlice({
                 state.isLoadingTheAuthButton = false;
                 state.isRegister = true;
                 state.isVisibleAuth = false;
+            })
+            .addCase(checkAuth.fulfilled, (state) => {
+                state.isLoadingTheAuthButton = false;
+                state.isRegister = true;
+                state.isVisibleAuth = false;
+            })
+            .addCase(checkAuth.rejected, (state) => {
+                state.isLoadingTheRegisterButton = false;
+                state.isRegister = false;
+                state.errorRegister = true;
+            })
+            .addCase(checkAuth.pending, (state) => {
+                state.isLoadingTheAuthButton = true;
             });
     },
 });
@@ -157,6 +173,7 @@ export const register = createAsyncThunk(
             if (!response.data) {
                 throw new Error();
             }
+            localStorage.setItem('token', response.data.token)
             return response.data;
         } catch (e) {
             rejectWithValue(`ошибка регистрации:${e} `); 
@@ -173,11 +190,12 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
     console.log(valueAuth);
     const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
     try {
-        // if (isRememberMe) {
-            localStorage.setItem("valueUserNameAuth", valueUserNameAuth);
-            localStorage.setItem("valuePasswordAuth", valuePasswordAuth);
-            // localStorage.setItem("isRememberMe", String(isRememberMe));
-        // }
+        // // if (isRememberMe) {
+        //     localStorage.setItem("valueUserNameAuth", valueUserNameAuth);
+        //     localStorage.setItem("valuePasswordAuth", valuePasswordAuth);
+        //     // localStorage.setItem("isRememberMe", String(isRememberMe));
+        // // }
+        
         const response = await AuthService.login(
             valueUserNameAuth,
             valuePasswordAuth
@@ -185,13 +203,32 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
         if (!response.data) {
             throw new Error();
         }
-
+        localStorage.setItem('token', response.data.token)
         return response.data;
     } catch (e) {
-        console.log(e);
+        console.log("ошибка авторизации", e);
         throw e;
     }
 });
+export const checkAuth = createAsyncThunk(
+    "checkAuth/checkAuth",
+    async ( _,thunkApi) => {
+        const { rejectWithValue } = thunkApi;
+
+        try {
+            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`);
+            console.log("responseCheckAuth: ", response);
+            
+            localStorage.setItem('token', response.data.token)
+            if (!response.data) {
+                throw new Error();
+            }
+            return response.data;
+        } catch (e) {
+            rejectWithValue(`ошибка регистрации:${e} `); 
+        }
+    }
+);
 
 export const { actions: AuthActions } = modalAuthAndRegisterReducer;
 export const { reducer: AuthReducer } = modalAuthAndRegisterReducer;

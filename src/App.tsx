@@ -1,6 +1,6 @@
 import "./styles/App.module.scss";
 import { ConfigProvider, Layout, Row, Switch, theme } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import axios from "axios";
@@ -12,6 +12,11 @@ import { RoutePath } from "shared/config/routeConfig";
 import logo from "./image/movie.png";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { AuthActions, checkAuth } from "store/modalAuthAndRegisterReducer";
+import { ValidateRegisterError } from "features/RegisterForm/model/types/register";
+import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
+
 
 axios.defaults.baseURL = "http://localhost:8080/";
 
@@ -32,6 +37,7 @@ const lime: ThemeData = {
 
 function App() {
     const [data, setData] = useState<ThemeData>(primary);
+    const dispatch = useAppDispatch();
 
     const themeType = useSelector(
         (state: RootState) =>
@@ -53,6 +59,14 @@ function App() {
     //     useEffect(() => {
     //     f();
     //   });
+
+
+    useEffect(() => {
+        if(localStorage.getItem('token')){
+            dispatch(checkAuth())
+        }
+    }, [dispatch])
+
 
     return (
         <ConfigProvider

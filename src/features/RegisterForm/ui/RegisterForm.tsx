@@ -37,6 +37,7 @@ export const RegisterForm = memo(() => {
                 valueUserNameRegister: valueUserNameRegister,
             })
         );
+        localStorage.setItem("username", valueUserNameRegister);
     }, [dispatch, valueUserNameRegister, valuePasswordRegister]);
 
     const handleCloseModalRegister = useCallback(() => {

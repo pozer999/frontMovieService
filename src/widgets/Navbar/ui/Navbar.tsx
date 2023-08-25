@@ -72,7 +72,7 @@ export const Navbar = memo(() => {
                                     marginRight: 10,
                                 }}
                             >
-                                {valueUserNameRegister ? valueUserNameRegister : valueUserNameAuth}
+                                {localStorage.getItem("username")}
                             </div>
                             <UserOutlined
                                 style={{

@@ -15,6 +15,5 @@ export const validateRegisterData = (data: any) => {
     ) {
         errors.push(ValidateRegisterError.INCORRECT_USER_DATA);
     }
-
     return errors;
 };

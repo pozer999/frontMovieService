@@ -42,6 +42,7 @@ export const AuthForm = memo(() => {
             valuePasswordAuth,
         };
         dispatch(auth(valueAuth));
+        localStorage.setItem("username", valueUserNameAuth);
     }, [dispatch, valueUserNameAuth, valuePasswordAuth]);
     const handleCloseModalAuth = useCallback(() => {
         dispatch(AuthActions.closeModalAuth());
