@@ -2,7 +2,11 @@ import cls from "./PostFilm.module.scss";
 import { Badge, Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import { memo } from "react";
-export const PostFilm = memo(({ film }: any) => {
+interface IPostFilm {
+    film: any;
+}
+export const PostFilm = memo((props: IPostFilm) => {
+    const { film } = props;
     console.log("film: ", film);
     return (
         <Badge count={film.rating} color="green">
@@ -14,6 +18,7 @@ export const PostFilm = memo(({ film }: any) => {
                         <img
                             alt="example"
                             src="../image/mstiteli-voyna-beskonechnosti-2160x3840-mstiteli-voyna-beskonechnosti-17937.jpg"
+                            // шаблон
                         />
                     }
                 >

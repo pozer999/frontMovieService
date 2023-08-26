@@ -1,13 +1,13 @@
-import { Button, Drawer, Tooltip } from "antd";
+import { Button, Drawer, Space, Tooltip } from "antd";
 import cls from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
-import { AuthActions } from "../../../store/modalAuthAndRegisterReducer";
+import { AuthActions, logout } from "../../../store/modalAuthAndRegisterReducer";
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { RootState } from "store";
 import { NavLink } from "react-router-dom";
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { RoutePath } from "shared/config/routeConfig";
 import { UserAccount } from "pages/UserAccount";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
@@ -38,6 +38,10 @@ export const Navbar = memo(() => {
     const handleCloseUserAccount = useCallback(() => {
         dispatch(AuthActions.closeUserAccount());
     }, [dispatch]);
+    const handleLogout = useCallback(() => {
+        dispatch(logout());
+    }, [dispatch]);
+
 
     return (
         <>
@@ -49,7 +53,7 @@ export const Navbar = memo(() => {
                 }}
             >
                 {isRegister ? (
-                    <>
+                    <Space align="center" size="small">
                         <Button
                             onClick={handleOpenUserAccount}
                             type="link"
@@ -77,7 +81,26 @@ export const Navbar = memo(() => {
                                 }}
                             />
                         </Button>
-                    </>
+                        <Button
+                            onClick = {handleLogout}
+                            type="link"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginLeft: -30,
+                            }}
+                        >
+                            <LogoutOutlined
+                                style={{
+                                    fontSize: 35,
+                                    border: "2px solid rgb(237, 83, 83)",
+                                    borderRadius: 5,
+                                    color: "rgb(237, 83, 83)",
+                                }}
+                            />
+                        </Button>
+                    </Space>
                 ) : (
                     <>
                         <Button

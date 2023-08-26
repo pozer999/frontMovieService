@@ -1,0 +1,16 @@
+.imageItem {
+    width: 450px;
+    height: 95%;
+    position: relative;
+    border-radius: 5px;
+    z-index: 1;
+    cursor: pointer;
+}
+.progressItem {
+    width: 450px;
+    height: 4px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}

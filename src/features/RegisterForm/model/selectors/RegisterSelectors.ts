@@ -12,3 +12,5 @@ export const getIsRegister = (state: RootState) =>
     state.modalAuthAndRegisterReducer.isRegister || false;
 export const getError = (state: RootState) =>
     state.modalAuthAndRegisterReducer.errorRegister || false;
+// export const isRememberMe = (state: RootState) =>
+//     state.modalAuthAndRegisterReducer.isRememberMe || true;

@@ -1,8 +1,13 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Modal } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
-import { useCallback, memo } from "react";
+import { useSelector } from "react-redux";
+import {
+    useCallback,
+    memo,
+    useEffect,
+    ChangeEvent,
+    HtmlHTMLAttributes,
+} from "react";
 import { AuthActions, auth } from "../../../store/modalAuthAndRegisterReducer";
 import {
     getIsLoadingTheAuthButton,
@@ -12,40 +17,59 @@ import {
     getValueUserNameAuth,
 } from "../model/selectors/AuthSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 
-export const AuthForm = memo(() => {
+export const AuthForm = () => {
+    const dispatch = useAppDispatch();
+
     const isVisibleAuth = useSelector(getIsVisibleAuth);
     const isLoadingTheAuthButton = useSelector(getIsLoadingTheAuthButton);
     const valueUserNameAuth = String(useSelector(getValueUserNameAuth));
     const valuePasswordAuth = String(useSelector(getValuePasswordAuth));
     const isRememberMe = useSelector(getIsRememberMe);
 
-    const dispatch = useAppDispatch();
-
     const handleOkAuth = useCallback(() => {
-        // if (isRememberMe) {
-        //     localStorage.setItem("valueUserNameAuth", valueUserNameAuth);
-        //     localStorage.setItem("valuePasswordAuth", valuePasswordAuth);
-        //     localStorage.setItem("isRememberMe", String(isRememberMe));
-        // }
-        const valueAuth = {
-            valueUserNameAuth,
-            valuePasswordAuth,
-        };
-        dispatch(auth(valueAuth));
-        localStorage.setItem("username", valueUserNameAuth);
-    }, [dispatch, valueUserNameAuth, valuePasswordAuth]);
+        try {
+            const valueAuth = {
+                valueUserNameAuth,
+                valuePasswordAuth,
+                isRememberMe,
+            };
+            dispatch(auth(valueAuth));
+            localStorage.setItem("username", valueUserNameAuth);
+        } catch (e) {
+            console.error("handleOkAuth error: ", e);
+        }
+    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe]);
     const handleCloseModalAuth = useCallback(() => {
         dispatch(AuthActions.closeModalAuth());
     }, [dispatch]);
     const handleSwitchRegistrationToAuth = useCallback(() => {
         dispatch(AuthActions.switchRegistrationToAuth());
     }, [dispatch]);
-    const handleChangeRememberMe = useCallback(() => {
-        dispatch(AuthActions.changeRememberMe());
-    }, [dispatch]);
-    console.log(isRememberMe);
-    const user = localStorage.getItem("valueUserNameAuth");
+    const handleChangeRememberMe = useCallback(
+        (e: CheckboxChangeEvent) => {
+            dispatch(AuthActions.changeRememberMe(e.target.checked));
+            console.log("remember me auth: ",e.target.checked);
+        },
+        [dispatch]
+    );
+    const handlePasswordAuth = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            dispatch(AuthActions.changePasswordAuth(e.target.value));
+        },
+        [dispatch]
+    );
+    const handleChangeUserNameAuth = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            dispatch(AuthActions.changeUserNameAuth(e.target.value));
+        },
+        [dispatch]
+    );
+
+    useEffect(() => {
+        console.log("isRememberMeAuth: ", isRememberMe);
+    }, [isRememberMe]);
 
     return (
         <Modal
@@ -82,12 +106,8 @@ export const AuthForm = memo(() => {
                         }
                         placeholder="Username"
                         allowClear
-                        value={String(user)}
-                        onChange={(e) =>
-                            dispatch(
-                                AuthActions.changeUserNameAuth(e.target.value)
-                            )
-                        }
+                        value={valueUserNameAuth}
+                        onChange={(e) => handleChangeUserNameAuth(e)}
                     />
                 </Form.Item>
                 <Form.Item
@@ -108,17 +128,14 @@ export const AuthForm = memo(() => {
                         placeholder="Password"
                         allowClear
                         value={valuePasswordAuth}
-                        onChange={(e) =>
-                            dispatch(
-                                AuthActions.changePasswordAuth(e.target.value)
-                            )
-                        }
+                        onChange={(e) => handlePasswordAuth(e)}
                     />
                 </Form.Item>
                 <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox
-                            checked={true}
+                            defaultChecked={isRememberMe}
+                            checked={isRememberMe}
                             onChange={handleChangeRememberMe}
                         >
                             Remember me
@@ -144,7 +161,7 @@ export const AuthForm = memo(() => {
                         </Button>
                         <Button
                             type="link"
-                            onClick={handleSwitchRegistrationToAuth}
+                            onChange={handleSwitchRegistrationToAuth}
                         >
                             Or register now!
                         </Button>
@@ -153,4 +170,4 @@ export const AuthForm = memo(() => {
             </Form>
         </Modal>
     );
-});
+};

@@ -3,7 +3,16 @@ import {
     LockOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import { Button, Form, Input, Modal, Select, Space, message } from "antd";
+import {
+    Button,
+    Checkbox,
+    Form,
+    Input,
+    Modal,
+    Select,
+    Space,
+    message,
+} from "antd";
 import { memo, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -16,8 +25,10 @@ import {
 } from "../model/selectors/RegisterSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { AuthActions, register } from "store/modalAuthAndRegisterReducer";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 
-export const RegisterForm = memo(() => {
+export const RegisterForm = () => {
     const dispatch = useAppDispatch();
     const valueUserNameRegister = useSelector(getUserRegisterName);
     const valuePasswordRegister = useSelector(getUserRegisterPassword);
@@ -25,6 +36,7 @@ export const RegisterForm = memo(() => {
     const isLoadingTheRegisterButton = useSelector(getRegisterIsLoading);
     const isRegister = useSelector(getIsRegister);
     const errorRegisterValue = useSelector(getError);
+    const isRememberMe = useSelector(getIsRememberMe);
     const options = [
         { value: "fanesi", label: "Fanesi" },
         { value: "horrors", label: "Horrors" },
@@ -35,10 +47,10 @@ export const RegisterForm = memo(() => {
             register({
                 valuePasswordRegister: valuePasswordRegister,
                 valueUserNameRegister: valueUserNameRegister,
+                isRememberMe: isRememberMe,
             })
         );
-        localStorage.setItem("username", valueUserNameRegister);
-    }, [dispatch, valueUserNameRegister, valuePasswordRegister]);
+    }, [dispatch, valueUserNameRegister, valuePasswordRegister, isRememberMe]);
 
     const handleCloseModalRegister = useCallback(() => {
         dispatch(AuthActions.closeModalRegister());
@@ -52,6 +64,18 @@ export const RegisterForm = memo(() => {
     const handleChangeUsername = (e: React.FormEvent<HTMLInputElement>) => {
         dispatch(AuthActions.changeUserNameRegister(e.currentTarget.value));
     };
+    const handleChangeRememberMe = useCallback(
+        (e: CheckboxChangeEvent) => {
+            dispatch(AuthActions.changeRememberMe(e.target.checked));
+            console.log("remember me register: ",e.target.checked);
+            
+        },
+        [dispatch]
+    );
+
+    useEffect(() => {
+        console.log("isRememberMeRegister: ", isRememberMe);
+    }, [isRememberMe]);
 
     return (
         <Modal
@@ -166,9 +190,22 @@ export const RegisterForm = memo(() => {
                         >
                             Already registered?
                         </Button>
+                        <Form.Item
+                            name="remember"
+                            valuePropName="checked"
+                            noStyle
+                        >
+                            <Checkbox
+                                defaultChecked={isRememberMe}
+                                checked={isRememberMe}
+                                onChange={handleChangeRememberMe}
+                            >
+                                Remember me
+                            </Checkbox>
+                        </Form.Item>
                     </div>
                 </Form.Item>
             </Form>
         </Modal>
     );
-});
+};

@@ -1,9 +1,11 @@
+import { RootState } from "./index";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
 import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
 import axios from "axios";
 import { AuthResponse } from "models/response/AuthResponse";
 import { API_URL } from "shared/config/http";
+import { useSelector } from "react-redux";
 
 interface IvalueRegister {
     valueUserNameRegister: string;
@@ -34,7 +36,7 @@ interface IinitialState {
 const initialState: IinitialState = {
     isRegister: false,
     errorRegister: false,
-    valueUserNameAuth: '',
+    valueUserNameAuth: "",
     valuePasswordAuth: "",
     valueUserNameRegister: "",
     valuePasswordRegister: "",
@@ -107,9 +109,9 @@ export const modalAuthAndRegisterReducer = createSlice({
         closeCurrentFilm(state) {
             state.isVisibleCurrentFilm = false;
         },
-        changeRememberMe(state) {
-            state.isRememberMe = !state.isRememberMe;
-        }
+        changeRememberMe(state, action) {
+            state.isRememberMe = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -128,6 +130,7 @@ export const modalAuthAndRegisterReducer = createSlice({
                 state.isLoadingTheRegisterButton = false;
                 state.isRegister = false;
                 state.errorRegister = true;
+                state.isVisibleRegister = true;
             })
             .addCase(auth.pending, (state) => {
                 state.isLoadingTheAuthButton = true;
@@ -149,18 +152,23 @@ export const modalAuthAndRegisterReducer = createSlice({
             })
             .addCase(checkAuth.pending, (state) => {
                 state.isLoadingTheAuthButton = true;
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.isRegister = false;
             });
     },
 });
 interface IRegister {
     valueUserNameRegister: string;
     valuePasswordRegister: string;
+    isRememberMe: boolean;
 }
 export const register = createAsyncThunk(
     "register/register",
     async (valueRegister: IRegister, thunkApi) => {
         const { rejectWithValue } = thunkApi;
-        const { valueUserNameRegister, valuePasswordRegister } = valueRegister;
+        const { valueUserNameRegister, valuePasswordRegister, isRememberMe } =
+            valueRegister;
         const errors = validateRegisterData(valueRegister);
         if (errors.length) {
             return rejectWithValue(errors);
@@ -173,10 +181,12 @@ export const register = createAsyncThunk(
             if (!response.data) {
                 throw new Error();
             }
-            localStorage.setItem('token', response.data.token)
+            if (isRememberMe) {
+                localStorage.setItem("token", response.data.token);
+            }
             return response.data;
         } catch (e) {
-            rejectWithValue(`ошибка регистрации:${e} `); 
+            rejectWithValue(`ошибка регистрации:${e} `);
         }
     }
 );
@@ -184,18 +194,13 @@ export const register = createAsyncThunk(
 interface IAuth {
     valueUserNameAuth: string;
     valuePasswordAuth: string;
+    isRememberMe: boolean;
 }
 
 export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
-    console.log(valueAuth);
-    const { valueUserNameAuth, valuePasswordAuth } = valueAuth;
+    console.log("valueAuth: ", valueAuth);
+    const { valueUserNameAuth, valuePasswordAuth, isRememberMe } = valueAuth;
     try {
-        // // if (isRememberMe) {
-        //     localStorage.setItem("valueUserNameAuth", valueUserNameAuth);
-        //     localStorage.setItem("valuePasswordAuth", valuePasswordAuth);
-        //     // localStorage.setItem("isRememberMe", String(isRememberMe));
-        // // }
-        
         const response = await AuthService.login(
             valueUserNameAuth,
             valuePasswordAuth
@@ -203,7 +208,10 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
         if (!response.data) {
             throw new Error();
         }
-        localStorage.setItem('token', response.data.token)
+        if (isRememberMe) {
+            localStorage.setItem("token", response.data.token);
+        }
+
         return response.data;
     } catch (e) {
         console.log("ошибка авторизации", e);
@@ -212,23 +220,33 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
 });
 export const checkAuth = createAsyncThunk(
     "checkAuth/checkAuth",
-    async ( _,thunkApi) => {
+    async (_, thunkApi) => {
         const { rejectWithValue } = thunkApi;
-
         try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`);
+            const response = await axios.get<AuthResponse>(
+                `${API_URL}/refresh`
+            );
             console.log("responseCheckAuth: ", response);
-            
-            localStorage.setItem('token', response.data.token)
+            localStorage.setItem("token", response.data.token);
             if (!response.data) {
                 throw new Error();
             }
             return response.data;
         } catch (e) {
-            rejectWithValue(`ошибка регистрации:${e} `); 
+            rejectWithValue(`ошибка регистрации:${e} `);
         }
     }
 );
 
+export const logout = createAsyncThunk("logout/logout", async (_, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+        console.log("logout: ");
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+    } catch (e) {
+        rejectWithValue(`ошибка регистрации:${e} `);
+    }
+});
 export const { actions: AuthActions } = modalAuthAndRegisterReducer;
 export const { reducer: AuthReducer } = modalAuthAndRegisterReducer;
