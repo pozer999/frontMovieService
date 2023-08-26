@@ -5,13 +5,12 @@ import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 import { AuthActions } from "store/modalAuthAndRegisterReducer";
+import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
 const SkeletonItem = () => {
-    const dispatch = useDispatch();
-    const visibleCurrentFilm = useSelector(
-        (state: RootState) =>
-            state.modalAuthAndRegisterReducer.isVisibleCurrentFilm
-    );
+    const dispatch = useAppDispatch();
+    const visibleCurrentFilm = useSelector(getVisibleCurrentFilm);
     const handleOpenCurrentFilm = useCallback(() => {
         dispatch(AuthActions.openCurrentFilm());
     }, [dispatch]);

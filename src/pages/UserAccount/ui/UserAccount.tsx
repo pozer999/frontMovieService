@@ -25,22 +25,16 @@ import image3 from "../../../image/3.jpeg";
 import image4 from "../../../image/4.jpeg";
 import avatar from "../../../image/avatar.jpg";
 import mars from "../../../image/mars.jpg";
+import {
+    getIsVisibleFavourites,
+    getIsVisibleWatchLater,
+    getThemeType,
+} from "../model/selectors/UserAccountSelectors";
 
 export const UserAccount = memo(() => {
-    const isVisibleFavourites = useSelector(
-        (state: RootState) =>
-            state.modalFavouritesAndWatchLaterAndSettingsReducer
-                .isVisibleFavourites
-    );
-    const isVisibleWatchLater = useSelector(
-        (state: RootState) =>
-            state.modalFavouritesAndWatchLaterAndSettingsReducer
-                .isVisibleWatchLater
-    );
-    const themeType = useSelector(
-        (state: RootState) =>
-            state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
-    );
+    const isVisibleFavourites = useSelector(getIsVisibleFavourites);
+    const isVisibleWatchLater = useSelector(getIsVisibleWatchLater);
+    const themeType = useSelector(getThemeType);
     const dispatch = useDispatch();
     const handleCloseModalFavourites = useCallback(() => {
         dispatch(closeModalFavourites());

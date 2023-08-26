@@ -25,30 +25,33 @@ export const SkeletonCurrentFilm = memo(() => {
             <Space direction="vertical" size="small">
                 <Row gutter={[24, 8]}>
                     <Col span={10} style={{ color: "white" }}>
-                        <Skeleton.Image style={{ height: 300, width: 250 }} active/>
+                        <Skeleton.Image
+                            style={{ height: 300, width: 250 }}
+                            active
+                        />
                     </Col>
                     <Col span={14} style={{ color: "white", fontSize: 25 }}>
                         <Space direction="vertical" size={"small"}>
                             <Space>
-                                <Skeleton.Button active size="small"/>
+                                <Skeleton.Button active size="small" />
                             </Space>
                             <Space>
-                                <Skeleton.Button active/>
-                            </Space>
-                            <Space >
-                                <Skeleton.Input active/>
+                                <Skeleton.Button active />
                             </Space>
                             <Space>
-                                <Skeleton.Button active/>
+                                <Skeleton.Input active />
                             </Space>
                             <Space>
-                                <Skeleton.Avatar active shape="square"/>
+                                <Skeleton.Button active />
+                            </Space>
+                            <Space>
+                                <Skeleton.Avatar active shape="square" />
                             </Space>
                             <Space wrap>
-                                <Skeleton.Input active size="small"/>
+                                <Skeleton.Input active size="small" />
                             </Space>
                             <Space wrap>
-                                <Skeleton.Input active/>
+                                <Skeleton.Input active />
                             </Space>
                         </Space>
                     </Col>
@@ -82,7 +85,10 @@ export const SkeletonCurrentFilm = memo(() => {
                             mars,
                         ].map((item, index) => (
                             <SwiperSlide key={index}>
-                                <Skeleton.Image style={{ height: 150, width: 120}} active/>
+                                <Skeleton.Image
+                                    style={{ height: 150, width: 120 }}
+                                    active
+                                />
                             </SwiperSlide>
                         ))}
                     </Swiper>

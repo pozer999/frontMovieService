@@ -6,6 +6,7 @@ import "./CarouselHisroryFilms.module.scss";
 import { ItemHistoryFilmsCarousel } from "entities/ItemHistoryFilmsCarousel";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import { getThemeType } from "../model/selectors/CarouselHistorySelectors";
 interface ICarouselHistoryFilms {
     title: any;
     carouselItems: string[];
@@ -21,10 +22,7 @@ export const CarouselHistoryFilms = memo(
         // 	// ref usage
         // 	console.log(swiperElRef.current?.swiper.activeIndex);
         // }, []);
-        const themeType = useSelector(
-            (state: RootState) =>
-                state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
-        );
+        const themeType = useSelector(getThemeType);
         return (
             <>
                 <Divider

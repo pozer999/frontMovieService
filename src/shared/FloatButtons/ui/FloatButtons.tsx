@@ -12,9 +12,11 @@ import {
     openModalWatchLater,
 } from "../../../store/modalFavouritesAndWatchLaterAndSettingsReducer";
 import { RootState } from "store";
+import { getTypeTheme } from "pages/CurrentFilm/model/selectors/CurrentFilmSelectors";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
 export const FloatButtons = memo(() => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const handleOpenModalFavourites = useCallback(() => {
         dispatch(openModalFavourites());
     }, [dispatch]);
@@ -25,10 +27,13 @@ export const FloatButtons = memo(() => {
         dispatch(changeTheme());
     }, [dispatch]);
 
-    const typeTheme = useSelector((state: RootState) => state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType)
+    const typeTheme = useSelector(getTypeTheme);
 
     return (
-        <FloatButton.Group shape="circle" style={{position: "absolute", right: 50 , bottom: 30 }}>
+        <FloatButton.Group
+            shape="circle"
+            style={{ position: "absolute", right: 50, bottom: 30 }}
+        >
             <FloatButton
                 onClick={handleOpenModalFavourites}
                 tooltip={<div>Favorites</div>}
@@ -40,7 +45,7 @@ export const FloatButtons = memo(() => {
                 icon={<EyeOutlined />}
             />
             <FloatButton
-                type={typeTheme === 'dark' ? "default" : "primary"}
+                type={typeTheme === "dark" ? "default" : "primary"}
                 onClick={handleChangeTheme}
                 tooltip={<div>Theme</div>}
                 icon={<FormatPainterOutlined />}

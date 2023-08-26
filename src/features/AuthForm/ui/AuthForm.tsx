@@ -4,32 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import { useCallback, memo } from "react";
 import { AuthActions, auth } from "../../../store/modalAuthAndRegisterReducer";
+import {
+    getIsLoadingTheAuthButton,
+    getIsRememberMe,
+    getIsVisibleAuth,
+    getValuePasswordAuth,
+    getValueUserNameAuth,
+} from "../model/selectors/AuthSelectors";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
 export const AuthForm = memo(() => {
-    const isVisibleAuth = useSelector(
-        (state: RootState) => state.modalAuthAndRegisterReducer.isVisibleAuth
-    );
-    const isLoadingTheAuthButton = useSelector(
-        (state: RootState) =>
-            state.modalAuthAndRegisterReducer.isLoadingTheAuthButton
-    );
-    const valueUserNameAuth = String(
-        useSelector(
-            (state: RootState) =>
-                state.modalAuthAndRegisterReducer.valueUserNameAuth
-        )
-    );
-    const valuePasswordAuth = String(
-        useSelector(
-            (state: RootState) =>
-                state.modalAuthAndRegisterReducer.valuePasswordAuth
-        )
-    );
-    const isRememberMe = useSelector(
-        (state: RootState) => state.modalAuthAndRegisterReducer.isRememberMe
-    );
+    const isVisibleAuth = useSelector(getIsVisibleAuth);
+    const isLoadingTheAuthButton = useSelector(getIsLoadingTheAuthButton);
+    const valueUserNameAuth = String(useSelector(getValueUserNameAuth));
+    const valuePasswordAuth = String(useSelector(getValuePasswordAuth));
+    const isRememberMe = useSelector(getIsRememberMe);
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const handleOkAuth = useCallback(() => {
         // if (isRememberMe) {
@@ -54,8 +45,8 @@ export const AuthForm = memo(() => {
         dispatch(AuthActions.changeRememberMe());
     }, [dispatch]);
     console.log(isRememberMe);
-    const user = localStorage.getItem('valueUserNameAuth');
-    
+    const user = localStorage.getItem("valueUserNameAuth");
+
     return (
         <Modal
             open={isVisibleAuth}

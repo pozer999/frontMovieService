@@ -10,28 +10,22 @@ import { NavLink } from "react-router-dom";
 import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { RoutePath } from "shared/config/routeConfig";
 import { UserAccount } from "pages/UserAccount";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import {
+    getIsRegister,
+    getOpenUserAccount,
+    getThemeType,
+    getValueUserNameAuth,
+    getValueUserNameRegister,
+} from "../model/selectors/NavbarSelectors";
 
 export const Navbar = memo(() => {
-    const dispatch = useDispatch();
-    const isRegister = useSelector(
-        (state: RootState) => state.modalAuthAndRegisterReducer.isRegister
-    );
-    const valueUserNameRegister = useSelector(
-        (state: RootState) =>
-            state.modalAuthAndRegisterReducer.valueUserNameRegister
-    );
-    const valueUserNameAuth = useSelector(
-        (state: RootState) =>
-            state.modalAuthAndRegisterReducer.valueUserNameAuth
-    );
-    const themeType = useSelector(
-        (state: RootState) =>
-            state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
-    );
-    const openUserAccount = useSelector(
-        (state: RootState) =>
-            state.modalAuthAndRegisterReducer.isVisibleUserAccount
-    );
+    const dispatch = useAppDispatch();
+    const isRegister = useSelector(getIsRegister);
+    const valueUserNameRegister = useSelector(getValueUserNameRegister);
+    const valueUserNameAuth = useSelector(getValueUserNameAuth);
+    const themeType = useSelector(getThemeType);
+    const openUserAccount = useSelector(getOpenUserAccount);
     const handleOpenModalRegister = useCallback(() => {
         dispatch(AuthActions.openModalRegister());
     }, [dispatch]);

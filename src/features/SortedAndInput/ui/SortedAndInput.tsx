@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { filmsActions } from "../../../store/FilmsSlice";
 import { filters } from "../../../shared/const/filters";
+import { getCurrentFilter } from "../model/selectors/SortedAndInputSelectors";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
 export const SortedAndInput = () => {
-    const dispatch = useDispatch();
-    const currentFilter = useSelector((state: any) => state.films.filters);
+    const dispatch = useAppDispatch();
+    const currentFilter = useSelector(getCurrentFilter);
     const handleChange = (value: string) => {
         dispatch(filmsActions.changeFilters(value));
     };
