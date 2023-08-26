@@ -161,7 +161,7 @@ export const AuthForm = () => {
                         </Button>
                         <Button
                             type="link"
-                            onChange={handleSwitchRegistrationToAuth}
+                            onClick={handleSwitchRegistrationToAuth}
                         >
                             Or register now!
                         </Button>

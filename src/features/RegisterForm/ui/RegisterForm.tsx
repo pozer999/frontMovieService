@@ -16,6 +16,7 @@ import {
 import { memo, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
+    getConfirmPasswordRegister,
     getError,
     getIsRegister,
     getRegisterIsLoading,
@@ -27,22 +28,49 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { AuthActions, register } from "store/modalAuthAndRegisterReducer";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
+import { validateRegisterData } from "../model/services/validateRegisterData";
+import { ValidateRegisterError } from "../model/types/register";
+// import { contextHolder, messageWrapper } from "shared/lib/helpers/messages/message";
 
 export const RegisterForm = () => {
     const dispatch = useAppDispatch();
     const valueUserNameRegister = useSelector(getUserRegisterName);
     const valuePasswordRegister = useSelector(getUserRegisterPassword);
+    const valueConfirmPasswordRegister = useSelector(
+        getConfirmPasswordRegister
+    );
     const isVisibleRegister = useSelector(getRegisterIsVisible);
     const isLoadingTheRegisterButton = useSelector(getRegisterIsLoading);
     const isRegister = useSelector(getIsRegister);
     const errorRegisterValue = useSelector(getError);
     const isRememberMe = useSelector(getIsRememberMe);
+    //////////////
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const messageWrapper = useCallback(
+        (text: any) => {
+            messageApi.open({
+                type: "error",
+                content: text,
+            });
+        },
+        [messageApi]
+    );
+    ///////////////////
     const options = [
         { value: "fanesi", label: "Fanesi" },
         { value: "horrors", label: "Horrors" },
         { value: "fighters", label: "Fighters" },
     ];
     const handleOkRegister = useCallback(() => {
+        const isValidate = validateRegisterData({
+            valueUserNameRegister,
+            valuePasswordRegister,
+            valueConfirmPasswordRegister,
+        });
+        console.log("ValidateRegisterError: ", isValidate);
+        isValidate.length !== 0 ? messageWrapper(isValidate[0]) : null;
+
         dispatch(
             register({
                 valuePasswordRegister: valuePasswordRegister,
@@ -50,7 +78,18 @@ export const RegisterForm = () => {
                 isRememberMe: isRememberMe,
             })
         );
-    }, [dispatch, valueUserNameRegister, valuePasswordRegister, isRememberMe]);
+        return isValidate;
+    }, [
+        dispatch,
+        valueUserNameRegister,
+        valuePasswordRegister,
+        isRememberMe,
+        valueConfirmPasswordRegister,
+        messageWrapper,
+    ]);
+
+
+    
 
     const handleCloseModalRegister = useCallback(() => {
         dispatch(AuthActions.closeModalRegister());
@@ -61,14 +100,20 @@ export const RegisterForm = () => {
     const handleChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
         dispatch(AuthActions.changePasswordRegister(e.currentTarget.value));
     };
+    const handleChangeConfirmPassword = (
+        e: React.FormEvent<HTMLInputElement>
+    ) => {
+        dispatch(
+            AuthActions.changeConfirmPasswordRegister(e.currentTarget.value)
+        );
+    };
     const handleChangeUsername = (e: React.FormEvent<HTMLInputElement>) => {
         dispatch(AuthActions.changeUserNameRegister(e.currentTarget.value));
     };
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
             dispatch(AuthActions.changeRememberMe(e.target.checked));
-            console.log("remember me register: ",e.target.checked);
-            
+            console.log("remember me register: ", e.target.checked);
         },
         [dispatch]
     );
@@ -87,14 +132,14 @@ export const RegisterForm = () => {
             <Form
                 name="normal_register"
                 className="register-form"
-                initialValues={{ remember: true }}
+                // initialValues={{ remember: true }}
             >
                 <Form.Item
                     name="username"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your Username!",
+                            message: "Please input your username!",
                         },
                     ]}
                     hasFeedback
@@ -108,13 +153,13 @@ export const RegisterForm = () => {
                         onChange={handleChangeUsername}
                     />
                 </Form.Item>
-                {/* <>{contextHolder}</> */}
+                <>{contextHolder}</>
                 <Form.Item
                     name="password"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your Password!",
+                            message: "Please input your password!",
                         },
                     ]}
                     hasFeedback
@@ -161,6 +206,7 @@ export const RegisterForm = () => {
                         }
                         placeholder="Confirm Password"
                         allowClear
+                        onChange={handleChangeConfirmPassword}
                     />
                 </Form.Item>
                 <Form.Item name="Genre" label="Favorites">

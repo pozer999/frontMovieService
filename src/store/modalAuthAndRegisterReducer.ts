@@ -20,6 +20,7 @@ interface IinitialState {
     errorRegister: boolean;
     valueUserNameAuth: string | null;
     valuePasswordAuth: string | undefined;
+    valueConfirmPasswordRegister: string | undefined;
     valueUserNameRegister: string | undefined;
     valuePasswordRegister: string | undefined;
     isVisibleAuth: boolean;
@@ -38,6 +39,7 @@ const initialState: IinitialState = {
     errorRegister: false,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
+    valueConfirmPasswordRegister: "",
     valueUserNameRegister: "",
     valuePasswordRegister: "",
     isVisibleAuth: false,
@@ -112,6 +114,9 @@ export const modalAuthAndRegisterReducer = createSlice({
         changeRememberMe(state, action) {
             state.isRememberMe = action.payload;
         },
+        changeConfirmPasswordRegister(state, action) {
+            state.valueConfirmPasswordRegister = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -182,8 +187,9 @@ export const register = createAsyncThunk(
                 throw new Error();
             }
             if (isRememberMe) {
-                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("token", response.data.token);  
             }
+            localStorage.setItem("username", valueUserNameRegister);
             return response.data;
         } catch (e) {
             rejectWithValue(`ошибка регистрации:${e} `);
@@ -242,8 +248,7 @@ export const logout = createAsyncThunk("logout/logout", async (_, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
         console.log("logout: ");
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
+        localStorage.clear();
     } catch (e) {
         rejectWithValue(`ошибка регистрации:${e} `);
     }
