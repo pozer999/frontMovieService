@@ -4,8 +4,8 @@ import { MainPageLazy } from "pages/MainPage/MainPageLazy";
 
 export const RoutePath = {
 	MAIN: "/",
-	CURRENTFILM: "/film",
-	USERACCOUNT: '/user'
+	// CURRENTFILM: "/film",
+	// USERACCOUNT: '/user'
 };
 
 export const routeConfig = [
@@ -16,15 +16,15 @@ export const routeConfig = [
 		elem: <MainPageLazy />,
 	},
 
-	{
-		name: "CurrentFilm",
-		path: RoutePath.CURRENTFILM,
-		elem: <CurrentFilm />,
-	},
+	// {
+	// 	name: "CurrentFilm",
+	// 	path: RoutePath.CURRENTFILM,
+	// 	elem: <CurrentFilm />,
+	// },
 
-	{
-		name: "UserAccount",
-		path: RoutePath.USERACCOUNT,
-		elem: <UserAccount />,
-	},
+	// {
+	// 	name: "UserAccount",
+	// 	path: RoutePath.USERACCOUNT,
+	// 	elem: <UserAccount />,
+	// },
 ];

@@ -18,24 +18,21 @@ import { Navigation, Scrollbar } from "swiper/modules";
 import Lorem from "shared/Lorem";
 import { Rate } from "antd";
 import { useSelector } from "react-redux";
-import { RootState } from "store";
 import { SkeletonCurrentFilm } from "shared/SkeletonCurrentPage/SkeletonCurrentPage";
+import { getTypeTheme } from "../model/selectors/CurrentFilmSelectors";
 
 export const CurrentFilm = memo(() => {
-    const typeTheme = useSelector(
-        (state: RootState) =>
-            state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
-    );
+    const typeTheme = useSelector(getTypeTheme);
     const countRate = 4;
     const [isLoadingCurrentPage, setIsLoadingCurrentPage] =
         useState<boolean>(false);
-    const onChange = (checked: boolean) => {
-        setIsLoadingCurrentPage(checked);
-    };
+    function onChange() {
+        setIsLoadingCurrentPage(!isLoadingCurrentPage);
+    }
     return (
         <div style={{ width: 700 }}>
-            <p style={{color: "orange", fontSize: 12, padding: 8,}}>
-                loading? <Switch onChange={onChange} size="small"/>
+            <p style={{ color: "orange", fontSize: 12, padding: 8 }}>
+                loading? <Switch onChange={onChange} size="small" />
             </p>
 
             {isLoadingCurrentPage ? (

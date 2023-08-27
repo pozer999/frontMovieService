@@ -1,33 +1,31 @@
-import { Button, Drawer, Tooltip } from "antd";
+import { Button, Drawer, Space, Tooltip } from "antd";
 import cls from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
-import { AuthActions } from "../../../store/modalAuthAndRegisterReducer";
+import { AuthActions, logout } from "../../../store/modalAuthAndRegisterReducer";
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { RootState } from "store";
 import { NavLink } from "react-router-dom";
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { RoutePath } from "shared/config/routeConfig";
 import { UserAccount } from "pages/UserAccount";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import {
+    getIsRegister,
+    getOpenUserAccount,
+    getThemeType,
+    getValueUserNameAuth,
+    getValueUserNameRegister,
+} from "../model/selectors/NavbarSelectors";
 
 export const Navbar = memo(() => {
-    const dispatch = useDispatch();
-    const isRegister = useSelector(
-        (state: RootState) => state.modalAuthAndRegisterReducer.isRegister
-    );
-    const valueUserNameRegister = useSelector(
-        (state: RootState) =>
-            state.modalAuthAndRegisterReducer.valueUserNameRegister
-    );
-    const themeType = useSelector(
-        (state: RootState) =>
-            state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType
-    );
-    const openUserAccount = useSelector(
-        (state: RootState) =>
-            state.modalAuthAndRegisterReducer.isVisibleUserAccount
-    );
+    const dispatch = useAppDispatch();
+    const isRegister = useSelector(getIsRegister);
+    const valueUserNameRegister = useSelector(getValueUserNameRegister);
+    const valueUserNameAuth = useSelector(getValueUserNameAuth);
+    const themeType = useSelector(getThemeType);
+    const openUserAccount = useSelector(getOpenUserAccount);
     const handleOpenModalRegister = useCallback(() => {
         dispatch(AuthActions.openModalRegister());
     }, [dispatch]);
@@ -40,6 +38,10 @@ export const Navbar = memo(() => {
     const handleCloseUserAccount = useCallback(() => {
         dispatch(AuthActions.closeUserAccount());
     }, [dispatch]);
+    const handleLogout = useCallback(() => {
+        dispatch(logout());
+    }, [dispatch]);
+
 
     return (
         <>
@@ -51,7 +53,7 @@ export const Navbar = memo(() => {
                 }}
             >
                 {isRegister ? (
-                    <>
+                    <Space align="center" size="small">
                         <Button
                             onClick={handleOpenUserAccount}
                             type="link"
@@ -68,7 +70,7 @@ export const Navbar = memo(() => {
                                     marginRight: 10,
                                 }}
                             >
-                                {valueUserNameRegister}
+                                {localStorage.getItem("username")}
                             </div>
                             <UserOutlined
                                 style={{
@@ -79,7 +81,26 @@ export const Navbar = memo(() => {
                                 }}
                             />
                         </Button>
-                    </>
+                        <Button
+                            onClick = {handleLogout}
+                            type="link"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginLeft: -30,
+                            }}
+                        >
+                            <LogoutOutlined
+                                style={{
+                                    fontSize: 35,
+                                    border: "2px solid rgb(237, 83, 83)",
+                                    borderRadius: 5,
+                                    color: "rgb(237, 83, 83)",
+                                }}
+                            />
+                        </Button>
+                    </Space>
                 ) : (
                     <>
                         <Button
