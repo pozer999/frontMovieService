@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import axios from "axios";
-import { UserOutlined } from "@ant-design/icons";
+import { SmileOutlined, UserOutlined } from "@ant-design/icons";
 import { Navbar } from "widgets/Navbar";
 import Routing from "Routing/Routing";
 import { RoutePath } from "shared/config/routeConfig";
