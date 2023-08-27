@@ -3,17 +3,8 @@ import {
     LockOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Modal,
-    Select,
-    Space,
-    message,
-} from "antd";
-import { memo, useCallback, useEffect, useState } from "react";
+import { Button, Checkbox, Form, Input, Modal, Select, message } from "antd";
+import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
     getConfirmPasswordRegister,
@@ -29,10 +20,11 @@ import { AuthActions, register } from "store/modalAuthAndRegisterReducer";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { validateRegisterData } from "../model/services/validateRegisterData";
-import { ValidateRegisterError } from "../model/types/register";
-// import { contextHolder, messageWrapper } from "shared/lib/helpers/messages/message";
+import { messageWrapper } from "shared/lib/helpers/messages/message";
 
 export const RegisterForm = () => {
+    const [messageApi, contextHolder] = message.useMessage();
+
     const dispatch = useAppDispatch();
     const valueUserNameRegister = useSelector(getUserRegisterName);
     const valuePasswordRegister = useSelector(getUserRegisterPassword);
@@ -44,19 +36,7 @@ export const RegisterForm = () => {
     const isRegister = useSelector(getIsRegister);
     const errorRegisterValue = useSelector(getError);
     const isRememberMe = useSelector(getIsRememberMe);
-    //////////////
-    const [messageApi, contextHolder] = message.useMessage();
 
-    const messageWrapper = useCallback(
-        (text: any) => {
-            messageApi.open({
-                type: "error",
-                content: text,
-            });
-        },
-        [messageApi]
-    );
-    ///////////////////
     const options = [
         { value: "fanesi", label: "Fanesi" },
         { value: "horrors", label: "Horrors" },
@@ -68,8 +48,9 @@ export const RegisterForm = () => {
             valuePasswordRegister,
             valueConfirmPasswordRegister,
         });
-        console.log("ValidateRegisterError: ", isValidate);
-        isValidate.length !== 0 ? messageWrapper(isValidate[0]) : null;
+        isValidate.length !== 0
+            ? messageWrapper(isValidate[0], "error", messageApi)
+            : null;
 
         dispatch(
             register({
@@ -78,18 +59,14 @@ export const RegisterForm = () => {
                 isRememberMe: isRememberMe,
             })
         );
-        return isValidate;
     }, [
         dispatch,
         valueUserNameRegister,
         valuePasswordRegister,
         isRememberMe,
         valueConfirmPasswordRegister,
-        messageWrapper,
+        messageApi,
     ]);
-
-
-    
 
     const handleCloseModalRegister = useCallback(() => {
         dispatch(AuthActions.closeModalRegister());

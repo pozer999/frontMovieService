@@ -1,7 +1,6 @@
-import { message } from 'antd';
-import { MessageInstance } from 'antd/es/message/interface';
-import { useCallback } from 'react';
-const [messageApi, contextHolder] = message.useMessage();
+import { message } from "antd";
+import { MessageInstance } from "antd/es/message/interface";
+import { useCallback } from "react";
 
 // interface propsMessage {
 //   type: 'success' | 'error';
@@ -14,13 +13,20 @@ const [messageApi, contextHolder] = message.useMessage();
 //   });
 // };
 
-interface ImessageWrapper {
-  text: string,
-  messageApi: MessageInstance
-}
-export const messageWrapper = ({text, messageApi}: ImessageWrapper) => {
-  messageApi.open({
-    type: 'error',
-    content: text,
-  });
+// interface ImessageWrapper {
+//   text: string,
+//   messageApi: MessageInstance
+// }
+// export const messageWrapper = ({text, messageApi}: ImessageWrapper) => {
+//   messageApi.open({
+//     type: 'error',
+//     content: text,
+//   });
+// };
+
+export const messageWrapper = (text: string, type: any, messageApi: any) => {
+    messageApi.open({
+        type: type,
+        content: text,
+    });
 };

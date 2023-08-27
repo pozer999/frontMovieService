@@ -50,7 +50,7 @@ export const AuthForm = () => {
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
             dispatch(AuthActions.changeRememberMe(e.target.checked));
-            console.log("remember me auth: ",e.target.checked);
+            console.log("remember me auth: ", e.target.checked);
         },
         [dispatch]
     );
