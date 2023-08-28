@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/frontMovieService/static/css/main.a59908b3.css",
-    "main.js": "/frontMovieService/static/js/main.60084526.js",
-    "static/css/919.3e24e492.chunk.css": "/frontMovieService/static/css/919.3e24e492.chunk.css",
-    "static/js/919.185ced80.chunk.js": "/frontMovieService/static/js/919.185ced80.chunk.js",
+    "main.css": "/frontMovieService/static/css/main.ae583f96.css",
+    "main.js": "/frontMovieService/static/js/main.752d54c2.js",
+    "static/css/919.91394815.chunk.css": "/frontMovieService/static/css/919.91394815.chunk.css",
+    "static/js/919.7e4816d1.chunk.js": "/frontMovieService/static/js/919.7e4816d1.chunk.js",
     "static/js/744.ff987f97.chunk.js": "/frontMovieService/static/js/744.ff987f97.chunk.js",
     "static/media/mars.jpg": "/frontMovieService/static/media/mars.5fcdf656a17678e8347f.jpg",
     "static/media/2.jpg": "/frontMovieService/static/media/2.da9c59a7fd989f29ee95.jpg",
@@ -11,16 +11,16 @@
     "static/media/4.jpeg": "/frontMovieService/static/media/4.d5f78a56facca3d8644b.jpeg",
     "static/media/3.jpeg": "/frontMovieService/static/media/3.614e6d4c4d10918f2a09.jpeg",
     "static/media/avatar.jpg": "/frontMovieService/static/media/avatar.432a6d43f39dd3b337b0.jpg",
-    "static/media/movie.png": "/frontMovieService/static/media/movie.99f0994632e53c901ae3.png",
+    "static/media/movie.png": "/frontMovieService/static/media/movie.0e17be2228d41160c20c.png",
     "index.html": "/frontMovieService/index.html",
-    "main.a59908b3.css.map": "/frontMovieService/static/css/main.a59908b3.css.map",
-    "main.60084526.js.map": "/frontMovieService/static/js/main.60084526.js.map",
-    "919.3e24e492.chunk.css.map": "/frontMovieService/static/css/919.3e24e492.chunk.css.map",
-    "919.185ced80.chunk.js.map": "/frontMovieService/static/js/919.185ced80.chunk.js.map",
+    "main.ae583f96.css.map": "/frontMovieService/static/css/main.ae583f96.css.map",
+    "main.752d54c2.js.map": "/frontMovieService/static/js/main.752d54c2.js.map",
+    "919.91394815.chunk.css.map": "/frontMovieService/static/css/919.91394815.chunk.css.map",
+    "919.7e4816d1.chunk.js.map": "/frontMovieService/static/js/919.7e4816d1.chunk.js.map",
     "744.ff987f97.chunk.js.map": "/frontMovieService/static/js/744.ff987f97.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a59908b3.css",
-    "static/js/main.60084526.js"
+    "static/css/main.ae583f96.css",
+    "static/js/main.752d54c2.js"
   ]
 }
