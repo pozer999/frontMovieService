@@ -33,58 +33,68 @@
         width: 210px;
     }
 }
-@media screen and (max-width: 1205px) {
+@media screen and (max-width: 1200px) {
     .rowEmpty{
-        width: 190px;
+        width: 250px;
     }
 }
 @media screen and (max-width: 1025px) {
     .rowEmpty{
-        width: 200px;
+        width: 210px;
     }
 }
-@media screen and (max-width: 854px) {
+@media screen and (max-width: 894px) {
     .rowEmpty{
         width: 170px;
     }
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 764px) {
     .rowEmpty{
-        width: 150px;
+        width: 250px;
     }
 }
 @media screen and (max-width: 725px) {
     .rowEmpty{
-        width: 135px;
+        width: 250px;
     }
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 690px) {
     .rowEmpty{
         width: 200px;
     }
 }
 @media screen and (max-width: 575px) {
     .rowEmpty{
-        width: 180px;
+        width: 400px;
     }
 }
 @media screen and (max-width: 540px) {
     .rowEmpty{
-        width: 150px;
+        width: 350px;
     }
 }
-@media screen and (max-width: 468px) {
+@media screen and (max-width: 477px) {
     .rowEmpty{
-        width: 130px;
+        width: 300px;
     }
 }
 @media screen and (max-width: 425px) {
-    .skeletonInput{
-        width: 100px;
+    .rowEmpty{
+        width: 250px;
     }
 }
-@media screen and (max-width: 410px) {
-    .skeletonInput{
-        min-width: 70px;
+@media screen and (max-width: 365px) {
+    .rowEmpty{
+        width: 200px;
+    }
+}
+@media screen and (max-width: 310px) {
+    .rowEmpty{
+        width: 170px;
+    }
+}
+@media screen and (max-width: 255px) {
+    .rowEmpty{
+        width: 150px;
     }
 }

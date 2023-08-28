@@ -48,7 +48,7 @@ const SkeletonItem = () => {
     return (
         <Col
             className="gutter-row"
-            span={ window.innerWidth < 1025 ? window.innerWidth < 640 ? 12: 8 : 6}
+            xs={24} sm={12} md={8} lg={8} xl={6}
             style={{ position: "relative" }}
         >
             <Card
@@ -79,7 +79,7 @@ const SkeletonItem = () => {
                 // }}
                 className={cls.cardSkeletonItem}
             >
-                <Row gutter={[1, window.innerWidth < 550 ? 5 : 15]} className={cls.rowEmpty}>
+                <Row gutter={[1, { xs: 8, sm: 10 }]} className={cls.rowEmpty}>
                     {/* <div className={cls.divSkeletonImage}>
                         <Skeleton.Image
                             active={true}
@@ -92,6 +92,7 @@ const SkeletonItem = () => {
                             // }}
                         />
                     </div> */}
+                    
                     <Empty
                         image={Empty.PRESENTED_IMAGE_SIMPLE}
                         // imageStyle={{ height: 100 }}
@@ -101,9 +102,10 @@ const SkeletonItem = () => {
                             </span>
                         }
                     />
+                    <>
                     <Skeleton.Input active={true} className={cls.skeletonInput} size="small" style={{height: window.innerWidth < 550 ? window.innerWidth < 410 ? 16 : 20 : 24}}/>
                     <Skeleton.Input active={true} className={cls.skeletonInput} size="small" style={{height: window.innerWidth < 550 ? window.innerWidth < 410 ? 16 : 20 : 24}} block />
-                    <Skeleton.Input active={true} className={cls.skeletonInput} size="small" style={{height: window.innerWidth < 550 ? window.innerWidth < 410 ? 16 : 20 : 24}} block />
+                    <Skeleton.Input active={true} className={cls.skeletonInput} size="small" style={{height: window.innerWidth < 550 ? window.innerWidth < 410 ? 16 : 20 : 24}} block /></>
                 </Row>
             </Card>
             <Drawer
