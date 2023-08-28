@@ -15,7 +15,7 @@
     flex-direction: column;
     width: 250px;
 }
-.cardSkeletonItem{
+.cardSkeletonItem {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -23,101 +23,101 @@
     width: 100%;
     height: 100%;
 }
-.spanEmptyImage{
+.spanEmptyImage {
     font-size: 18;
 }
 @media screen and (max-width: 1450px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 230px;
     }
 }
 @media screen and (max-width: 1320px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 210px;
     }
 }
 @media screen and (max-width: 1199px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 250px;
     }
 }
 @media screen and (max-width: 1025px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 210px;
     }
 }
 @media screen and (max-width: 894px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 170px;
     }
 }
 @media screen and (max-width: 767px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 250px;
     }
-    .spanEmptyImage{
+    .spanEmptyImage {
         white-space: nowrap;
     }
 }
 @media screen and (max-width: 725px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 250px;
     }
 }
 @media screen and (max-width: 690px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 200px;
     }
 }
 @media screen and (max-width: 575px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 300px;
     }
-    .cardSkeletonItem{
+    .cardSkeletonItem {
         width: 330px;
         margin: 0 auto;
     }
 }
 @media screen and (max-width: 477px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 250px;
     }
-    .cardSkeletonItem{
+    .cardSkeletonItem {
         width: 280px;
         margin: 0 auto;
     }
 }
 @media screen and (max-width: 425px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 250px;
     }
-    .spanEmptyImage{
+    .spanEmptyImage {
         font-size: 14px;
     }
 }
 @media screen and (max-width: 365px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 200px;
     }
-    .cardSkeletonItem{
+    .cardSkeletonItem {
         width: 230px;
         margin: 0 auto;
     }
 }
 @media screen and (max-width: 310px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 150px;
     }
-    .cardSkeletonItem{
+    .cardSkeletonItem {
         width: 180px;
         margin: 0 auto;
     }
 }
 @media screen and (max-width: 255px) {
-    .rowEmpty{
+    .rowEmpty {
         width: 120px;
     }
-    .cardSkeletonItem{
+    .cardSkeletonItem {
         width: 150px;
         margin: 0 auto;
     }

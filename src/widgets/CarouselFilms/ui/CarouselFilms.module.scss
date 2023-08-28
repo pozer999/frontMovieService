@@ -1,61 +1,61 @@
 .carousel {
-  margin: 50px 0 auto;
-  width: 80vw;
-  height: 304px;
-  z-index: 2;
-  border-radius: 5px;
-  border: 2px solid darkgrey;
+    margin: 50px 0 auto;
+    width: 80vw;
+    height: 304px;
+    z-index: 2;
+    border-radius: 5px;
+    border: 2px solid darkgrey;
 }
 
 .imageCarousel {
-  height: 300px;
-  width: 100%;
+    height: 300px;
+    width: 100%;
 }
 
 li {
-  background-color: white;
+    background-color: white;
 }
 
-@media screen and (max-width: 1199px){
-  .carousel{
-    height: 254px;
-    margin: 30px 0 auto;
-  }
-  .imageCarousel{
-    height: 250px;
-  }
+@media screen and (max-width: 1199px) {
+    .carousel {
+        height: 254px;
+        margin: 30px 0 auto;
+    }
+    .imageCarousel {
+        height: 250px;
+    }
 }
-@media screen and (max-width: 1000px){
-  .carousel{
-    height: 204px;
-  }
-  .imageCarousel{
-    height: 200px;
-  }
+@media screen and (max-width: 1000px) {
+    .carousel {
+        height: 204px;
+    }
+    .imageCarousel {
+        height: 200px;
+    }
 }
-@media screen and (max-width: 764px){
-  .carousel{
-    height: 154px;
-    margin: 20px 0 auto;
-  }
-  .imageCarousel{
-    height: 150px;
-  }
+@media screen and (max-width: 764px) {
+    .carousel {
+        height: 154px;
+        margin: 20px 0 auto;
+    }
+    .imageCarousel {
+        height: 150px;
+    }
 }
-@media screen and (max-width: 425px){
-  .carousel{
-    height: 134px;
-    margin: 10px 0 auto;
-  }
-  .imageCarousel{
-    height: 130px;
-  }
+@media screen and (max-width: 425px) {
+    .carousel {
+        height: 134px;
+        margin: 10px 0 auto;
+    }
+    .imageCarousel {
+        height: 130px;
+    }
 }
-@media screen and (max-width: 310px){
-  .carousel{
-    height: 104px;
-  }
-  .imageCarousel{
-    height: 100px;
-  }
+@media screen and (max-width: 310px) {
+    .carousel {
+        height: 104px;
+    }
+    .imageCarousel {
+        height: 100px;
+    }
 }

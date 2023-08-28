@@ -2,7 +2,10 @@ import { Button, Drawer, Space, Tooltip } from "antd";
 import cls from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
-import { AuthActions, logout } from "../../../store/modalAuthAndRegisterReducer";
+import {
+    AuthActions,
+    logout,
+} from "../../../store/modalAuthAndRegisterReducer";
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { RootState } from "store";
@@ -42,7 +45,6 @@ export const Navbar = memo(() => {
         dispatch(logout());
     }, [dispatch]);
 
-
     return (
         <>
             <div
@@ -63,17 +65,13 @@ export const Navbar = memo(() => {
                                 justifyContent: "center",
                             }}
                         >
-                            <div
-                        className={cls.username}
-                            >
+                            <div className={cls.username}>
                                 {localStorage.getItem("username")}
                             </div>
-                            <UserOutlined
-                            className={cls.userOutlined}
-                            />
+                            <UserOutlined className={cls.userOutlined} />
                         </Button>
                         <Button
-                            onClick = {handleLogout}
+                            onClick={handleLogout}
                             type="link"
                             style={{
                                 display: "flex",
@@ -82,9 +80,7 @@ export const Navbar = memo(() => {
                                 marginLeft: -30,
                             }}
                         >
-                            <LogoutOutlined
-                            className={cls.logoutOutlined}
-                            />
+                            <LogoutOutlined className={cls.logoutOutlined} />
                         </Button>
                     </Space>
                 ) : (
