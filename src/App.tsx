@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import axios from "axios";
-import { UserOutlined } from "@ant-design/icons";
+import { SmileOutlined, UserOutlined } from "@ant-design/icons";
 import { Navbar } from "widgets/Navbar";
 import Routing from "Routing/Routing";
 import { RoutePath } from "shared/config/routeConfig";
@@ -18,6 +18,7 @@ import { ValidateRegisterError } from "features/RegisterForm/model/types/registe
 import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
 import { getThemeType } from "pages/UserAccount/model/selectors/UserAccountSelectors";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
+import cls from './styles/App.module.scss';
 
 axios.defaults.baseURL = "http://localhost:8080/";
 
@@ -77,7 +78,7 @@ function App() {
         >
             <div className="App">
                 <Layout.Header
-                    className="headerNavbar"
+                    className={cls.headerNavbar}
                     style={{
                         backgroundColor:
                             themeType === "dark" ? "rgb(15,15,15)" : "white",
@@ -91,12 +92,14 @@ function App() {
                     >
                         <NavLink
                             to={RoutePath.MAIN}
-                            style={{ height: "50px", maxWidth: "20%" }}
+                            // className={cls.navLinkLogoImage}
+                            // style={{ height: 50, maxWidth: 200 }}
                         >
                             <img
                                 src={logo}
                                 alt=""
-                                style={{ maxWidth: "100%" }}
+                                // style={{ maxWidth: "100%" }}
+                                className={cls.App_navLinkLogoImage__clTId}
                             />
                         </NavLink>
                         <Navbar />

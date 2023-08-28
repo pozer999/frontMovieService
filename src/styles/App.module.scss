@@ -1,14 +1,55 @@
 $bodyBackgroundColor: rgb(15, 15, 15);
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.headerNavbar{
-  padding-top: 10px;
+.headerNavbar {
+    padding: 10px;
+    padding-inline: 50px;
 }
 
-body{
-  background-color: $bodyBackgroundColor;
+body {
+    background-color: $bodyBackgroundColor;
+}
+.App_navLinkLogoImage__clTId {
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}
+@media screen and (max-width: 767px) {
+    .App_navLinkLogoImage__clTId {
+        max-width: 150px;
+    }
+    .headerNavbar {
+        padding-inline: 30px;
+    }
+}
+@media screen and (max-width: 551px) {
+    .App_navLinkLogoImage__clTId {
+        max-width: 130px;
+    }
+    .headerNavbar {
+        padding-inline: 20px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .App_navLinkLogoImage__clTId {
+        max-width: 100px;
+    }
+    .headerNavbar {
+        padding-inline: 10px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .App_navLinkLogoImage__clTId {
+        max-width: 90px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .App_navLinkLogoImage__clTId {
+        max-width: 70px;
+    }
 }

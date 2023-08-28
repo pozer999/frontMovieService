@@ -71,7 +71,7 @@ export const ListFilms = memo(() => {
                     gutter={[16, 24]}
                     style={{ margin: 10, marginTop: 50, marginBottom: 50 }}
                 >
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
                         <SkeletonItem key={index} />
                     ))}
                 </Row>

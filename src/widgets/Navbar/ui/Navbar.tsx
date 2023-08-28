@@ -2,7 +2,10 @@ import { Button, Drawer, Space, Tooltip } from "antd";
 import cls from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
-import { AuthActions, logout } from "../../../store/modalAuthAndRegisterReducer";
+import {
+    AuthActions,
+    logout,
+} from "../../../store/modalAuthAndRegisterReducer";
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { RootState } from "store";
@@ -42,11 +45,10 @@ export const Navbar = memo(() => {
         dispatch(logout());
     }, [dispatch]);
 
-
     return (
         <>
             <div
-                className={cls.headerNavbar}
+                className="headerNavbar"
                 style={{
                     backgroundColor:
                         themeType === "dark" ? "rgb(15, 15, 15)" : "white",
@@ -63,26 +65,13 @@ export const Navbar = memo(() => {
                                 justifyContent: "center",
                             }}
                         >
-                            <div
-                                style={{
-                                    color: "gray",
-                                    fontSize: 18,
-                                    marginRight: 10,
-                                }}
-                            >
+                            <div className={cls.username}>
                                 {localStorage.getItem("username")}
                             </div>
-                            <UserOutlined
-                                style={{
-                                    fontSize: 35,
-                                    border: "2px solid gray",
-                                    borderRadius: 5,
-                                    color: "gray",
-                                }}
-                            />
+                            <UserOutlined className={cls.userOutlined} />
                         </Button>
                         <Button
-                            onClick = {handleLogout}
+                            onClick={handleLogout}
                             type="link"
                             style={{
                                 display: "flex",
@@ -91,14 +80,7 @@ export const Navbar = memo(() => {
                                 marginLeft: -30,
                             }}
                         >
-                            <LogoutOutlined
-                                style={{
-                                    fontSize: 35,
-                                    border: "2px solid rgb(237, 83, 83)",
-                                    borderRadius: 5,
-                                    color: "rgb(237, 83, 83)",
-                                }}
-                            />
+                            <LogoutOutlined className={cls.logoutOutlined} />
                         </Button>
                     </Space>
                 ) : (

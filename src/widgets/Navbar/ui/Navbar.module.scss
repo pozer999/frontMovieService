@@ -1,10 +1,79 @@
 @import "../../../styles/App.module.scss";
 
-.headerNavbar{
-  padding-top: 10px;
-  background-color: $bodyBackgroundColor;
-  .buttonNavbar:not(:first-child){
-    margin-left: 5px;
-    color: rgb(41, 41, 41);
-  }
+.headerNavbar {
+    padding-top: 10px;
+    background-color: $bodyBackgroundColor;
+    .buttonNavbar:not(:first-child) {
+        margin-left: 5px;
+        color: rgb(41, 41, 41);
+    }
+}
+.username {
+    color: gray;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.userOutlined {
+    font-size: 35px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    color: gray;
+}
+.logoutOutlined {
+    font-size: 35px;
+    border: 2px solid rgb(237, 83, 83);
+    border-radius: 5px;
+    color: rgb(237, 83, 83);
+}
+@media screen and (max-width: 767px) {
+    .username {
+        font-size: 16px;
+    }
+    .userOutlined {
+        font-size: 28px;
+    }
+    .logoutOutlined {
+        font-size: 28px;
+    }
+}
+@media screen and (max-width: 551px) {
+    .userOutlined {
+        font-size: 20px;
+    }
+    .logoutOutlined {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .username {
+        font-size: 14px;
+    }
+    .userOutlined {
+        font-size: 18px;
+    }
+    .logoutOutlined {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .username {
+        font-size: 12px;
+    }
+    .userOutlined {
+        font-size: 14px;
+    }
+    .logoutOutlined {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .username {
+        font-size: 10px;
+    }
+    .userOutlined {
+        font-size: 12px;
+    }
+    .logoutOutlined {
+        font-size: 12px;
+    }
 }
