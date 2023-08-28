@@ -46,7 +46,7 @@ export const Navbar = memo(() => {
     return (
         <>
             <div
-                className={cls.headerNavbar}
+                className="headerNavbar"
                 style={{
                     backgroundColor:
                         themeType === "dark" ? "rgb(15, 15, 15)" : "white",
@@ -64,21 +64,12 @@ export const Navbar = memo(() => {
                             }}
                         >
                             <div
-                                style={{
-                                    color: "gray",
-                                    fontSize: 18,
-                                    marginRight: 10,
-                                }}
+                        className={cls.username}
                             >
                                 {localStorage.getItem("username")}
                             </div>
                             <UserOutlined
-                                style={{
-                                    fontSize: 35,
-                                    border: "2px solid gray",
-                                    borderRadius: 5,
-                                    color: "gray",
-                                }}
+                            className={cls.userOutlined}
                             />
                         </Button>
                         <Button
@@ -92,12 +83,7 @@ export const Navbar = memo(() => {
                             }}
                         >
                             <LogoutOutlined
-                                style={{
-                                    fontSize: 35,
-                                    border: "2px solid rgb(237, 83, 83)",
-                                    borderRadius: 5,
-                                    color: "rgb(237, 83, 83)",
-                                }}
+                            className={cls.logoutOutlined}
                             />
                         </Button>
                     </Space>

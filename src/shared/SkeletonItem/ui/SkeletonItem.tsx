@@ -97,7 +97,7 @@ const SkeletonItem = () => {
                         image={Empty.PRESENTED_IMAGE_SIMPLE}
                         // imageStyle={{ height: 100 }}
                         description={
-                            <span style={{ fontSize: window.innerWidth < 410 ? 14 : 18 }}>
+                            <span className={cls.spanEmptyImage}>
                                 Error loading movies
                             </span>
                         }
