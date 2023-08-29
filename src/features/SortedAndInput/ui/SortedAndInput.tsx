@@ -7,6 +7,8 @@ import { filters } from "../../../shared/const/filters";
 import { getCurrentFilter } from "../model/selectors/SortedAndInputSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
+import cls from "./SortedAndInput.module.scss";
+
 export const SortedAndInput = () => {
     const dispatch = useAppDispatch();
     const currentFilter = useSelector(getCurrentFilter);
@@ -18,7 +20,7 @@ export const SortedAndInput = () => {
             <Col span={14}>
                 <Select
                     defaultValue={currentFilter}
-                    style={{ width: 140 }}
+                    className={cls.selectInput}
                     placement="bottomLeft"
                     options={filters}
                     onChange={handleChange}

@@ -12,9 +12,7 @@ import { RootState } from "store";
 import { AuthActions } from "store/modalAuthAndRegisterReducer";
 import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-
 import cls from "./SkeletonItem.module.scss";
-
 const SkeletonItem = () => {
     const dispatch = useAppDispatch();
     const visibleCurrentFilm = useSelector(getVisibleCurrentFilm);

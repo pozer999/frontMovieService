@@ -1,3 +1,6 @@
+@import "../../const/mediaQueriesDigital.scss";
+
+
 .divSkeletonImage {
     // font-size: 40px;
     width: 250px;
@@ -26,9 +29,10 @@
 .spanEmptyImage {
     font-size: 18;
 }
-@media screen and (max-width: 1450px) {
+
+@media screen and (max-width: $XXL) {
     .rowEmpty {
-        width: 230px;
+        width: 240px;
     }
 }
 @media screen and (max-width: 1320px) {
@@ -36,12 +40,12 @@
         width: 210px;
     }
 }
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: $XL) {
     .rowEmpty {
-        width: 250px;
+        width: 240px;
     }
 }
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: $LG) {
     .rowEmpty {
         width: 210px;
     }
@@ -51,7 +55,7 @@
         width: 170px;
     }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: $MD) {
     .rowEmpty {
         width: 250px;
     }
@@ -69,7 +73,7 @@
         width: 200px;
     }
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: $SM) {
     .rowEmpty {
         width: 300px;
     }
