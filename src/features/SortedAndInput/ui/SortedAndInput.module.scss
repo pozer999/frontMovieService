@@ -1,6 +1,47 @@
+@import '../../../shared/const/mediaQueriesDigital.scss';
+
 .buttonUpperLayout{
   margin-left: 5px;
   }
 .selectInput{
   width: 140px;
+}
+.ant-select-selector{
+  height: 10px;
+}
+.spanInputSearch_icon{
+  display: none;
+}
+.spaceInputButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: $SM) {
+  .selectInput{
+    width: 120px;
+  }
+  .spanInputSearch_search{
+    display: none;
+  }
+  .spanInputSearch_icon{
+    display: block;
+  }
+  .spaceInputButton{
+    width: 20px;
+  }
+}
+@media screen and (max-width: $S) {
+  .inputSearch{
+    font-size: 12px;
+  }
+  .selectInput{
+    width: 100px;
+  }
+}
+@media screen and (max-width: $XS){
+  .selectInput{
+    width: 70px;
+  }
 }

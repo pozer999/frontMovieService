@@ -21,6 +21,7 @@ import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { validateRegisterData } from "../model/services/validateRegisterData";
 import { messageWrapper } from "shared/lib/helpers/messages/message";
+import cls from './RegisterForm.module.scss';
 
 export const RegisterForm = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -199,17 +200,18 @@ export const RegisterForm = () => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="register-form-button"
                             key="submit"
                             loading={isLoadingTheRegisterButton}
                             disabled={isLoadingTheRegisterButton}
                             onClick={handleOkRegister}
+                            className={cls.buttonToSubmitForm}
                         >
                             Register
                         </Button>
                         <Button
                             type="link"
                             onClick={handleSwitchAuthToRegistration}
+                            className={cls.alreadyRegistered}
                         >
                             Already registered?
                         </Button>
@@ -222,6 +224,7 @@ export const RegisterForm = () => {
                                 defaultChecked={isRememberMe}
                                 checked={isRememberMe}
                                 onChange={handleChangeRememberMe}
+                                className={cls.checkboxIsRemeberMe}
                             >
                                 Remember me
                             </Checkbox>

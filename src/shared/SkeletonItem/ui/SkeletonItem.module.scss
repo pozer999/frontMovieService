@@ -1,6 +1,5 @@
 @import "../../const/mediaQueriesDigital.scss";
 
-
 .divSkeletonImage {
     // font-size: 40px;
     width: 250px;
@@ -30,14 +29,10 @@
     font-size: 18;
 }
 
+
 @media screen and (max-width: $XXL) {
     .rowEmpty {
-        width: 240px;
-    }
-}
-@media screen and (max-width: 1320px) {
-    .rowEmpty {
-        width: 210px;
+        width: 220px;
     }
 }
 @media screen and (max-width: $XL) {
@@ -47,30 +42,15 @@
 }
 @media screen and (max-width: $LG) {
     .rowEmpty {
-        width: 210px;
-    }
-}
-@media screen and (max-width: 894px) {
-    .rowEmpty {
         width: 170px;
     }
 }
 @media screen and (max-width: $MD) {
     .rowEmpty {
-        width: 250px;
+        width: 205px;
     }
     .spanEmptyImage {
         white-space: nowrap;
-    }
-}
-@media screen and (max-width: 725px) {
-    .rowEmpty {
-        width: 250px;
-    }
-}
-@media screen and (max-width: 690px) {
-    .rowEmpty {
-        width: 200px;
     }
 }
 @media screen and (max-width: $SM) {
@@ -82,7 +62,7 @@
         margin: 0 auto;
     }
 }
-@media screen and (max-width: 477px) {
+@media screen and (max-width: $S) {
     .rowEmpty {
         width: 250px;
     }
@@ -91,38 +71,21 @@
         margin: 0 auto;
     }
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: $XS) {
     .rowEmpty {
-        width: 250px;
-    }
-    .spanEmptyImage {
-        font-size: 14px;
-    }
-}
-@media screen and (max-width: 365px) {
-    .rowEmpty {
-        width: 200px;
+        width: 180px;
     }
     .cardSkeletonItem {
-        width: 230px;
+        width: 210px;
         margin: 0 auto;
     }
 }
-@media screen and (max-width: 310px) {
+@media screen and (max-width: $XXS) {
     .rowEmpty {
-        width: 150px;
+        width: 140px;
     }
     .cardSkeletonItem {
         width: 180px;
-        margin: 0 auto;
-    }
-}
-@media screen and (max-width: 255px) {
-    .rowEmpty {
-        width: 120px;
-    }
-    .cardSkeletonItem {
-        width: 150px;
         margin: 0 auto;
     }
 }

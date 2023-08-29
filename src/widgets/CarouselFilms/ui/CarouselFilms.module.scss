@@ -1,3 +1,5 @@
+@import '../../../shared/const/mediaQueriesDigital.scss';
+
 .carousel {
     margin: 50px 0 auto;
     width: 80vw;
@@ -16,7 +18,7 @@ li {
     background-color: white;
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: $XL) {
     .carousel {
         height: 254px;
         margin: 30px 0 auto;
@@ -25,7 +27,7 @@ li {
         height: 250px;
     }
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: $LG) {
     .carousel {
         height: 204px;
     }
@@ -33,7 +35,7 @@ li {
         height: 200px;
     }
 }
-@media screen and (max-width: 764px) {
+@media screen and (max-width: $MD) {
     .carousel {
         height: 154px;
         margin: 20px 0 auto;
@@ -42,7 +44,7 @@ li {
         height: 150px;
     }
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: $SM) {
     .carousel {
         height: 134px;
         margin: 10px 0 auto;
@@ -51,7 +53,7 @@ li {
         height: 130px;
     }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: $XS) {
     .carousel {
         height: 84px;
     }
