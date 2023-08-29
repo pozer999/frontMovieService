@@ -43,6 +43,17 @@
     .logoutOutlined {
         font-size: 20px;
     }
+    .buttonNavbar {
+        font-size: 12px;
+        height: 27px;
+        display: flex;
+        padding: 0px 6px;
+        border-radius: 6px;
+        align-items: center;
+    }
+    .spaceNavbarButton{
+        margin-right: 10px;
+    }
 }
 @media screen and (max-width: 425px) {
     .username {
