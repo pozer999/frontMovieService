@@ -1,5 +1,6 @@
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import $api from "shared/config/http";
 
 interface filmsStateSchema {
     films: Array<any>;

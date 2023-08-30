@@ -1,3 +1,5 @@
+@import '../../../shared/const/mediaQueriesDigital.scss';
+
 .imageItem {
     width: 450px;
     height: 95%;
@@ -13,4 +15,44 @@
     bottom: 0;
     left: 0;
     z-index: 2;
+}
+@media screen and (max-width: $XXL) {
+    .imageItem {
+        width: 350px;
+    }
+    .progressItem {
+        width: 350px;
+    }
+}
+@media screen and (max-width: $XL) {
+    .imageItem {
+        width: 300px;
+    }
+    .progressItem {
+        width: 300px;
+    }
+}
+@media screen and (max-width: $LG) {
+    .imageItem {
+        width: 250px;
+    }
+    .progressItem {
+        width: 250px;
+    }
+}
+@media screen and (max-width: $SM) {
+    .imageItem {
+        width: 250px;
+    }
+    .progressItem {
+        width: 250px;
+    }
+}
+@media screen and (max-width: $SM) {
+    .imageItem {
+        width: 250px;
+    }
+    .progressItem {
+        width: 250px;
+    }
 }

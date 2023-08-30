@@ -4,7 +4,7 @@ import AuthService from "../services/AuthService";
 import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
 import axios from "axios";
 import { AuthResponse } from "models/response/AuthResponse";
-import { API_URL } from "shared/config/http";
+import $api, { API_URL } from "shared/config/http";
 import { useSelector } from "react-redux";
 
 interface IvalueRegister {
@@ -187,7 +187,7 @@ export const register = createAsyncThunk(
                 throw new Error();
             }
             if (isRememberMe) {
-                localStorage.setItem("token", response.data.token);  
+                localStorage.setItem("token", response.data.token);
             }
             localStorage.setItem("username", valueUserNameRegister);
             return response.data;
@@ -229,9 +229,7 @@ export const checkAuth = createAsyncThunk(
     async (_, thunkApi) => {
         const { rejectWithValue } = thunkApi;
         try {
-            const response = await axios.get<AuthResponse>(
-                `${API_URL}/refresh`
-            );
+            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
             console.log("responseCheckAuth: ", response);
             localStorage.setItem("token", response.data.token);
             if (!response.data) {

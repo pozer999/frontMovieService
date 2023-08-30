@@ -1,0 +1,44 @@
+@import "../../../shared/const/mediaQueriesDigital.scss";
+
+.swiperHistoryFilm {
+    border-radius: 5px;
+    height: 200px;
+}
+
+@media screen and (max-width: $XXL) {
+    .wrapperSwiper {
+        width: 1100px;
+        height: 180px;
+    }
+    .swiperHistoryFilm {
+        height: 180px;
+    }
+}
+@media screen and (max-width: $XL) {
+    .wrapperSwiper {
+        width: 900px;
+    }
+    .swiperHistoryFilm {
+        height: 150px;
+    }
+}
+@media screen and (max-width: $LG) {
+    .wrapperSwiper {
+        width: 800px;
+    }
+}
+@media screen and (max-width: $MD) {
+    .wrapperSwiper {
+        margin-left: -60px;
+    }
+}
+@media screen and (max-width: $SM) {
+    .swiperHistoryFilm {
+        height: 120px;
+    }
+}
+@media screen and (max-width: $S) {
+    .swiperHistoryFilm {
+        height: 100px;
+    }
+}
