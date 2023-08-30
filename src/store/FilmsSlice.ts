@@ -1,6 +1,9 @@
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { IFilms } from "models/IFilms";
+import { useSelector } from "react-redux";
 import $api from "shared/config/http";
+import { RootState } from "store";
 
 interface filmsStateSchema {
     films: Array<any>;
@@ -16,13 +19,19 @@ const initialState: filmsStateSchema = {
 };
 
 // createAsyncThunk надо нормально типизировать а не использовать any
-export const fetchFilms = createAsyncThunk<Array<any>, string>(
+export const fetchFilms = createAsyncThunk(
     "films/fetchFilms",
-    async (filters, thunkApi) => {
+    async (_, thunkApi) => {
         const { rejectWithValue } = thunkApi;
-        console.log("async");
+        const valueInputSearch = useSelector((state: RootState) => state.fetchValueInputSearchReducer.valueInputSearch)
+        console.log("отработал фетч филмс");
         try {
-            const response = await axios.get(`/movies`);
+            const response = await $api.get<IFilms[]>('/movies', {params: {
+                valueInputSearch
+            }});
+
+            console.log("отработал фетч филмс");
+            
 
             if (!response.data) {
                 throw new Error();
@@ -53,7 +62,7 @@ const filmsSlice = createSlice({
             })
             .addCase(fetchFilms.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.films = action.payload;
+                // state.films = action.payload;
             })
             .addCase(fetchFilms.rejected, (state, action) => {
                 state.isLoading = false;

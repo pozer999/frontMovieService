@@ -15,7 +15,7 @@ import { RootState } from "store";
 import { getTypeTheme } from "pages/CurrentFilm/model/selectors/CurrentFilmSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
-import cls from './FloatButtons.module.scss';
+import cls from "./FloatButtons.module.scss";
 
 export const FloatButtons = memo(() => {
     const dispatch = useAppDispatch();
@@ -32,10 +32,7 @@ export const FloatButtons = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
 
     return (
-        <FloatButton.Group
-            shape="circle"
-            className={cls.floatButtonPosition}
-        >
+        <FloatButton.Group shape="circle" className={cls.floatButtonPosition}>
             <FloatButton
                 onClick={handleOpenModalFavourites}
                 tooltip={<div>Favorites</div>}

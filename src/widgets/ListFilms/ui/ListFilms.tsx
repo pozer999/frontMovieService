@@ -21,9 +21,9 @@ export const ListFilms = memo(() => {
     const isLoading = useSelector(getIsLoading);
     const error = useSelector(getError);
     console.log("list: ", films);
-    useEffect(() => {
-        dispatch(fetchFilms(filter));
-    }, [filter, dispatch]);
+    // useEffect(() => {
+    //     dispatch(fetchFilms());
+    // }, [filter, dispatch]);
     return (
         <div>
             {isLoading ? (
