@@ -229,7 +229,10 @@ export const checkAuth = createAsyncThunk(
     async (_, thunkApi) => {
         const { rejectWithValue } = thunkApi;
         try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
+            const response = await axios.get<AuthResponse>(
+                `${API_URL}/refresh`,
+                { withCredentials: true }
+            );
             console.log("responseCheckAuth: ", response);
             localStorage.setItem("token", response.data.token);
             if (!response.data) {
