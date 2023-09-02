@@ -2,10 +2,7 @@ import { Button, Drawer, Space, Tooltip } from "antd";
 import cls from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
-import {
-    AuthActions,
-    logout,
-} from "../../../store/modalAuthAndRegisterReducer";
+
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { RootState } from "store";
@@ -21,6 +18,9 @@ import {
     getValueUserNameAuth,
     getValueUserNameRegister,
 } from "../model/selectors/NavbarSelectors";
+import { RegisterActions } from "store/modalRegister";
+import { AuthActions } from "store/modalAuth";
+import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer, logout } from "store/generalAuthAndRegister";
 
 export const Navbar = memo(() => {
     const dispatch = useAppDispatch();
@@ -30,16 +30,16 @@ export const Navbar = memo(() => {
     const themeType = useSelector(getThemeType);
     const openUserAccount = useSelector(getOpenUserAccount);
     const handleOpenModalRegister = useCallback(() => {
-        dispatch(AuthActions.openModalRegister());
+        dispatch(RegisterActions.openModalRegister());
     }, [dispatch]);
     const handleOpenModalAuth = useCallback(() => {
         dispatch(AuthActions.openModalAuth());
     }, [dispatch]);
     const handleOpenUserAccount = useCallback(() => {
-        dispatch(AuthActions.openUserAccount());
+        dispatch(GeneralAuthAndRegisterActions.openUserAccount());
     }, [dispatch]);
     const handleCloseUserAccount = useCallback(() => {
-        dispatch(AuthActions.closeUserAccount());
+        dispatch(GeneralAuthAndRegisterActions.closeUserAccount());
     }, [dispatch]);
     const handleLogout = useCallback(() => {
         dispatch(logout());

@@ -13,12 +13,12 @@ import logo from "./image/movie.png";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { AuthActions, checkAuth } from "store/modalAuthAndRegisterReducer";
 import { ValidateRegisterError } from "features/RegisterForm/model/types/register";
 import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
 import { getThemeType } from "pages/UserAccount/model/selectors/UserAccountSelectors";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import cls from './styles/App.module.scss';
+import { checkAuth } from "store/generalAuthAndRegister";
 
 axios.defaults.baseURL = "http://localhost:8080/";
 

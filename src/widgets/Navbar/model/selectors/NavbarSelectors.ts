@@ -1,12 +1,13 @@
+import { modalRegisterReducer } from './../../../../store/modalRegister';
 import { RootState } from "store";
 
 export const getIsRegister = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.isRegister;
+    state.generalAuthAndRegisterReducer.isRegister;
 export const getValueUserNameRegister = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.valueUserNameRegister;
+    state.modalRegisterReducer.valueUserNameRegister;
 export const getValueUserNameAuth = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.valueUserNameAuth;
+    state.modalAuthReducer.modalAuthInitialState.valueUserNameAuth;
 export const getThemeType = (state: RootState) =>
     state.modalFavouritesAndWatchLaterAndSettingsReducer.themeType;
 export const getOpenUserAccount = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.isVisibleUserAccount;
+    state.generalAuthAndRegisterReducer.isVisibleUserAccount;

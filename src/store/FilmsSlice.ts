@@ -38,10 +38,13 @@ const filmsSlice = createSlice({
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(fetchFilms.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.films = action.payload;
-            })
+            .addCase(
+                fetchFilms.fulfilled,
+                (state, action: PayloadAction<Array<any>>) => {
+                    state.isLoading = false;
+                    state.films = action.payload;
+                }
+            )
             .addCase(fetchFilms.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload as string;

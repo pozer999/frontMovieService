@@ -17,12 +17,14 @@ import {
     getUserRegisterPassword,
 } from "../model/selectors/RegisterSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { AuthActions, register } from "store/modalAuthAndRegisterReducer";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { validateRegisterData } from "../model/services/validateRegisterData";
 import { messageWrapper } from "shared/lib/helpers/messages/message";
 import cls from "./RegisterForm.module.scss";
+import { RegisterActions, register } from "store/modalRegister";
+import { AuthActions } from "store/modalAuth";
+import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
 
 export const RegisterForm = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -72,27 +74,27 @@ export const RegisterForm = () => {
     ]);
 
     const handleCloseModalRegister = useCallback(() => {
-        dispatch(AuthActions.closeModalRegister());
+        dispatch(RegisterActions.closeModalRegister());
     }, [dispatch]);
     const handleSwitchAuthToRegistration = useCallback(() => {
-        dispatch(AuthActions.switchAuthToRegistration());
+        dispatch(GeneralAuthAndRegisterActions.switchAuthToRegistration());
     }, [dispatch]);
     const handleChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
-        dispatch(AuthActions.changePasswordRegister(e.currentTarget.value));
+        dispatch(RegisterActions.changePasswordRegister(e.currentTarget.value));
     };
     const handleChangeConfirmPassword = (
         e: React.FormEvent<HTMLInputElement>
     ) => {
         dispatch(
-            AuthActions.changeConfirmPasswordRegister(e.currentTarget.value)
+            RegisterActions.changeConfirmPasswordRegister(e.currentTarget.value)
         );
     };
     const handleChangeUsername = (e: React.FormEvent<HTMLInputElement>) => {
-        dispatch(AuthActions.changeUserNameRegister(e.currentTarget.value));
+        dispatch(RegisterActions.changeUserNameRegister(e.currentTarget.value));
     };
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
-            dispatch(AuthActions.changeRememberMe(e.target.checked));
+            dispatch(GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked));
             console.log("remember me register: ", e.target.checked);
         },
         [dispatch]
@@ -104,9 +106,9 @@ export const RegisterForm = () => {
             valuePasswordRegister === "" ||
             valueConfirmPasswordRegister === ""
         ) {
-            dispatch(AuthActions.toggleDisabledButtonToRegister(true));
+            dispatch(RegisterActions.toggleDisabledButtonToRegister(true));
         } else {
-            dispatch(AuthActions.toggleDisabledButtonToRegister(false));
+            dispatch(RegisterActions.toggleDisabledButtonToRegister(false));
         }
         console.log("isRememberMeAuth: ", isRememberMe);
     }, [

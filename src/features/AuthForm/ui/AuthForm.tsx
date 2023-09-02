@@ -8,7 +8,6 @@ import {
     ChangeEvent,
     HtmlHTMLAttributes,
 } from "react";
-import { AuthActions, auth } from "../../../store/modalAuthAndRegisterReducer";
 import {
     getIsDisabledButtonToAuth,
     getIsLoadingTheAuthButton,
@@ -19,6 +18,9 @@ import {
 } from "../model/selectors/AuthSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { AuthActions, auth } from "store/modalAuth";
+import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
+import { getIsRegister } from "features/RegisterForm/model/selectors/RegisterSelectors";
 
 export const AuthForm = () => {
     const dispatch = useAppDispatch();
@@ -29,6 +31,7 @@ export const AuthForm = () => {
     const valuePasswordAuth = String(useSelector(getValuePasswordAuth));
     const isRememberMe = useSelector(getIsRememberMe);
     const isDisabledButtonToAuth = useSelector(getIsDisabledButtonToAuth);
+    const isRegister = useSelector(getIsRegister);
 
     const handleOkAuth = useCallback(() => {
         try {
@@ -39,19 +42,21 @@ export const AuthForm = () => {
             };
             dispatch(auth(valueAuth));
             localStorage.setItem("username", valueUserNameAuth);
+            console.log("is: ", isRegister);
+            
         } catch (e) {
             console.error("handleOkAuth error: ", e);
         }
-    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe]);
+    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe, isRegister]);
     const handleCloseModalAuth = useCallback(() => {
         dispatch(AuthActions.closeModalAuth());
     }, [dispatch]);
     const handleSwitchRegistrationToAuth = useCallback(() => {
-        dispatch(AuthActions.switchRegistrationToAuth());
+        dispatch(GeneralAuthAndRegisterActions.switchRegistrationToAuth());
     }, [dispatch]);
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
-            dispatch(AuthActions.changeRememberMe(e.target.checked));
+            dispatch(GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked));
             console.log("remember me auth: ", e.target.checked);
         },
         [dispatch]
