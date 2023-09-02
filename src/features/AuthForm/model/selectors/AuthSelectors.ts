@@ -10,3 +10,5 @@ export const getValuePasswordAuth = (state: RootState) =>
     state.modalAuthAndRegisterReducer.valuePasswordAuth || "";
 export const getIsRememberMe = (state: RootState) =>
     state.modalAuthAndRegisterReducer.isRememberMe;
+export const getIsDisabledButtonToAuth = (state: RootState) =>
+    state.modalAuthAndRegisterReducer.isDisabledButtonToAuth;

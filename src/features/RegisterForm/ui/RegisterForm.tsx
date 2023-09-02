@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import {
     getConfirmPasswordRegister,
     getError,
+    getIsDisabledButtonToRegister,
     getIsRegister,
     getRegisterIsLoading,
     getRegisterIsVisible,
@@ -21,7 +22,7 @@ import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { validateRegisterData } from "../model/services/validateRegisterData";
 import { messageWrapper } from "shared/lib/helpers/messages/message";
-import cls from './RegisterForm.module.scss';
+import cls from "./RegisterForm.module.scss";
 
 export const RegisterForm = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -37,6 +38,7 @@ export const RegisterForm = () => {
     const isRegister = useSelector(getIsRegister);
     const errorRegisterValue = useSelector(getError);
     const isRememberMe = useSelector(getIsRememberMe);
+    const isDisabledButtonToRegister = useSelector(getIsDisabledButtonToRegister);
 
     const options = [
         { value: "fanesi", label: "Fanesi" },
@@ -97,8 +99,23 @@ export const RegisterForm = () => {
     );
 
     useEffect(() => {
-        console.log("isRememberMeRegister: ", isRememberMe);
-    }, [isRememberMe]);
+        if (
+            valueUserNameRegister === "" ||
+            valuePasswordRegister === "" ||
+            valueConfirmPasswordRegister === ""
+        ) {
+            dispatch(AuthActions.toggleDisabledButtonToRegister(true));
+        } else {
+            dispatch(AuthActions.toggleDisabledButtonToRegister(false));
+        }
+        console.log("isRememberMeAuth: ", isRememberMe);
+    }, [
+        isRememberMe,
+        dispatch,
+        valueUserNameRegister,
+        valuePasswordRegister,
+        valueConfirmPasswordRegister,
+    ]);
 
     return (
         <Modal
@@ -202,7 +219,7 @@ export const RegisterForm = () => {
                             htmlType="submit"
                             key="submit"
                             loading={isLoadingTheRegisterButton}
-                            disabled={isLoadingTheRegisterButton}
+                            disabled={isDisabledButtonToRegister}
                             onClick={handleOkRegister}
                             className={cls.buttonToSubmitForm}
                         >

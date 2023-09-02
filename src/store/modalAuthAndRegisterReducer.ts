@@ -1,5 +1,5 @@
 import { RootState } from "./index";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
 import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
 import axios from "axios";
@@ -32,6 +32,8 @@ interface IinitialState {
     isVisibleUserAccount: boolean;
     isVisibleCurrentFilm: boolean;
     isRememberMe: boolean;
+    isDisabledButtonToAuth: boolean;
+    isDisabledButtonToRegister: boolean;
 }
 
 const initialState: IinitialState = {
@@ -51,6 +53,8 @@ const initialState: IinitialState = {
     isVisibleUserAccount: false,
     isVisibleCurrentFilm: false,
     isRememberMe: true,
+    isDisabledButtonToAuth: true,
+    isDisabledButtonToRegister: true,
 };
 
 export const modalAuthAndRegisterReducer = createSlice({
@@ -98,6 +102,12 @@ export const modalAuthAndRegisterReducer = createSlice({
         },
         changeStatusInputLoginAndPassword(state, action) {
             state.statusInputLoginAndPassword = action.payload;
+        },
+        toggleDisabledButtonToAuth(state, action: PayloadAction<boolean>){
+            state.isDisabledButtonToAuth = action.payload; 
+        },
+        toggleDisabledButtonToRegister(state, action: PayloadAction<boolean>){
+            state.isDisabledButtonToRegister = action.payload; 
         },
         openUserAccount(state) {
             state.isVisibleUserAccount = true;
