@@ -10,7 +10,6 @@ import {
 } from "antd";
 import { memo, useState } from "react";
 import { Typography } from "antd";
-import "./CurrentFilm.module.scss";
 const { Text } = Typography;
 import mars from "../../../image/mars.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,6 +19,8 @@ import { Rate } from "antd";
 import { useSelector } from "react-redux";
 import { SkeletonCurrentFilm } from "shared/SkeletonCurrentPage/SkeletonCurrentPage";
 import { getTypeTheme } from "../model/selectors/CurrentFilmSelectors";
+import cls from './CurrentFilm.module.scss';
+
 
 export const CurrentFilm = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
@@ -30,7 +31,7 @@ export const CurrentFilm = memo(() => {
         setIsLoadingCurrentPage(!isLoadingCurrentPage);
     }
     return (
-        <div style={{ width: 700 }}>
+        <div className={cls.wrapperCurrentFilm}>
             <p style={{ color: "orange", fontSize: 12, padding: 8 }}>
                 loading? <Switch onChange={onChange} size="small" />
             </p>
@@ -38,16 +39,16 @@ export const CurrentFilm = memo(() => {
             {isLoadingCurrentPage ? (
                 <SkeletonCurrentFilm />
             ) : (
-                <Space direction="vertical" size="small">
+                <Space direction="vertical" size="small" className={cls.spaceText}>
                     <Row gutter={[24, 8]}>
-                        <Col span={10} style={{ color: "white" }}>
+                        <Col xl={10} md={8} xs={8} span={8}>
                             <img
                                 src={mars}
-                                alt=""
-                                style={{ maxWidth: "100%" }}
+                                alt="avatar"
+                                className={cls.imgCurrentFilm}
                             />
                         </Col>
-                        <Col span={14} style={{ color: "white", fontSize: 25 }}>
+                        <Col span={14} className={cls.wrapperForText}>
                             <Space direction="vertical" size={"small"}>
                                 <Space>
                                     <Text strong>Year of publication:</Text>
@@ -87,7 +88,7 @@ export const CurrentFilm = memo(() => {
                                 <Space wrap>
                                     <Text strong>The actors:</Text>
                                     <Text>
-                                        <p style={{ maxWidth: "90%" }}>
+                                        <p className={cls.actorsText}>
                                             Laurent Luca, Brigitte Laet, Gigi
                                             Coursigny, Jean-Luc Couchard, Jacqui
                                             Berroyer, Philippe Naon, Philippe
@@ -98,7 +99,7 @@ export const CurrentFilm = memo(() => {
                                 </Space>
                                 <Space wrap>
                                     <Collapse
-                                        style={{ margin: -16, marginTop: -25 }}
+                                        className={cls.collapse}
                                         ghost
                                         items={[
                                             {
@@ -121,7 +122,7 @@ export const CurrentFilm = memo(() => {
                         </Col>
                     </Row>
                     <>
-                        <Divider orientation="left" style={{ fontSize: 20 }}>
+                        <Divider orientation="left" className={cls.driverSimilar}>
                             Similar
                         </Divider>
                         <Swiper
@@ -131,11 +132,7 @@ export const CurrentFilm = memo(() => {
                             }}
                             modules={[Navigation, Scrollbar]}
                             slidesPerView={4}
-                            style={{
-                                borderRadius: 5,
-                                height: 200,
-                                width: "700px",
-                            }}
+                            className={cls.swiperSimilar}
                         >
                             {[
                                 mars,
@@ -151,8 +148,8 @@ export const CurrentFilm = memo(() => {
                                 <SwiperSlide key={index}>
                                     <img
                                         src={item}
-                                        alt=""
-                                        style={{ height: 200 }}
+                                        alt="FILM"
+                                        className={cls.swiperSimilar_item}
                                     />
                                 </SwiperSlide>
                             ))}

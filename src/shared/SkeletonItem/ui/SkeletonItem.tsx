@@ -12,9 +12,7 @@ import { RootState } from "store";
 import { AuthActions } from "store/modalAuthAndRegisterReducer";
 import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-
 import cls from "./SkeletonItem.module.scss";
-
 const SkeletonItem = () => {
     const dispatch = useAppDispatch();
     const visibleCurrentFilm = useSelector(getVisibleCurrentFilm);
@@ -24,22 +22,7 @@ const SkeletonItem = () => {
     const handleCloseCurrentFilm = useCallback(() => {
         dispatch(AuthActions.closeCurrentFilm());
     }, [dispatch]);
-    // const [open, setOpen] = useState(false);
 
-    // const showDrawer = () => {
-    //   setOpen(true);
-    // };
-
-    // const onClose = () => {
-    //   setOpen(false);
-    // };
-
-    // const customizeRenderEmpty = () => (
-    //     <div style={{ textAlign: 'center' }}>
-    //       <SmileOutlined style={{ fontSize: 20 }} />
-    //       <p>Data Not Found</p>
-    //     </div>
-    //   );
     useEffect(() => {
         const { innerWidth: width, innerHeight: height } = window;
         console.log(height, width);
@@ -48,51 +31,20 @@ const SkeletonItem = () => {
     return (
         <Col
             className="gutter-row"
-            xs={24} sm={12} md={8} lg={8} xl={6}
+            xs={24}
+            sm={12}
+            md={8}
+            lg={8}
+            xl={6}
             style={{ position: "relative" }}
         >
             <Card
                 loading={false}
                 hoverable
-                // cover={
-                //     <div className={cls.skeletonImage}>
-                //         <Skeleton.Image
-                //             active={true}
-                //             // className={cls.skeletonImage}
-                //             // style={{
-                //             //     fontSize: 40,
-                //             //     width: 250,
-                //             //     height: 200,
-                //             //     marginTop: 20,
-                //             // }}
-                //         />
-                //     </div>
-                // }
                 onClick={handleOpenCurrentFilm}
-                // style={{
-                //     display: "flex",
-                //     justifyContent: "center",
-                //     flexDirection: "column",
-                //     alignItems: "center",
-                //     width: "100%",
-                //     height: "100%",
-                // }}
                 className={cls.cardSkeletonItem}
             >
-                <Row gutter={[1, { xs: 8, sm: 10 }]} className={cls.rowEmpty}>
-                    {/* <div className={cls.divSkeletonImage}>
-                        <Skeleton.Image
-                            active={true}
-                             className={cls.skeletonImage}
-                            // style={{
-                            //     fontSize: 40,
-                            //     width: 250,
-                            //     height: 200,
-                            //     marginTop: 20,
-                            // }}
-                        />
-                    </div> */}
-                    
+                <Row gutter={[1, 4]} className={cls.rowEmpty}>
                     <Empty
                         image={Empty.PRESENTED_IMAGE_SIMPLE}
                         // imageStyle={{ height: 100 }}
@@ -103,9 +55,27 @@ const SkeletonItem = () => {
                         }
                     />
                     <>
-                    <Skeleton.Input active={true} className={cls.skeletonInput} size="small" style={{height: window.innerWidth < 550 ? window.innerWidth < 410 ? 16 : 20 : 24}}/>
-                    <Skeleton.Input active={true} className={cls.skeletonInput} size="small" style={{height: window.innerWidth < 550 ? window.innerWidth < 410 ? 16 : 20 : 24}} block />
-                    <Skeleton.Input active={true} className={cls.skeletonInput} size="small" style={{height: window.innerWidth < 550 ? window.innerWidth < 410 ? 16 : 20 : 24}} block /></>
+                        <Skeleton.Input
+                            active={true}
+                            className={cls.skeletonInput}
+                            size="small"
+                            style={{ height: 20 }}
+                        />
+                        <Skeleton.Input
+                            active={true}
+                            className={cls.skeletonInput}
+                            size="small"
+                            style={{ height: 20 }}
+                            block
+                        />
+                        <Skeleton.Input
+                            active={true}
+                            className={cls.skeletonInput}
+                            size="small"
+                            style={{ height: 20 }}
+                            block
+                        />
+                    </>
                 </Row>
             </Card>
             <Drawer

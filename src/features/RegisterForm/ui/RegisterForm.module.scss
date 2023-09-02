@@ -1,0 +1,14 @@
+@import '../../../shared/const/mediaQueriesDigital.scss';
+
+@media screen and (max-width: $S){
+    .checkboxIsRemeberMe span{
+    font-size: 12px;
+    }
+    .alreadyRegistered{
+        font-size: 12px;
+    }
+    .buttonToSubmitForm{
+        font-size: 12px;
+        padding: 0px 8px;
+    }
+}

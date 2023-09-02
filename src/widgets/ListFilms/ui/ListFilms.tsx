@@ -20,10 +20,10 @@ export const ListFilms = memo(() => {
     const films = useSelector(getFilms);
     const isLoading = useSelector(getIsLoading);
     const error = useSelector(getError);
-    console.log("list: ", films);
-    useEffect(() => {
-        dispatch(fetchFilms(filter));
-    }, [filter, dispatch]);
+    // console.log("list: ", films);
+    // useEffect(() => {
+    //     dispatch(fetchFilms());
+    // }, [filter, dispatch]);
     return (
         <div>
             {isLoading ? (

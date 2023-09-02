@@ -10,6 +10,7 @@ import {
 } from "react";
 import { AuthActions, auth } from "../../../store/modalAuthAndRegisterReducer";
 import {
+    getIsDisabledButtonToAuth,
     getIsLoadingTheAuthButton,
     getIsRememberMe,
     getIsVisibleAuth,
@@ -27,6 +28,7 @@ export const AuthForm = () => {
     const valueUserNameAuth = String(useSelector(getValueUserNameAuth));
     const valuePasswordAuth = String(useSelector(getValuePasswordAuth));
     const isRememberMe = useSelector(getIsRememberMe);
+    const isDisabledButtonToAuth = useSelector(getIsDisabledButtonToAuth);
 
     const handleOkAuth = useCallback(() => {
         try {
@@ -68,8 +70,13 @@ export const AuthForm = () => {
     );
 
     useEffect(() => {
+        if(valueUserNameAuth === '' || valuePasswordAuth === ''){
+            dispatch(AuthActions.toggleDisabledButtonToAuth(true))        
+        }else{
+            dispatch(AuthActions.toggleDisabledButtonToAuth(false))
+        }
         console.log("isRememberMeAuth: ", isRememberMe);
-    }, [isRememberMe]);
+    }, [isRememberMe, dispatch, valuePasswordAuth, valueUserNameAuth]);
 
     return (
         <Modal
@@ -150,6 +157,7 @@ export const AuthForm = () => {
                 <Form.Item>
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <Button
+                            disabled={isDisabledButtonToAuth}
                             type="primary"
                             htmlType="submit"
                             className="login-form-button"

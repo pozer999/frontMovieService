@@ -7,6 +7,8 @@ import { ItemHistoryFilmsCarousel } from "entities/ItemHistoryFilmsCarousel";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 import { getThemeType } from "../model/selectors/CarouselHistorySelectors";
+
+import cls from "./CarouselHisroryFilms.module.scss";
 interface ICarouselHistoryFilms {
     title: any;
     carouselItems: string[];
@@ -34,21 +36,23 @@ export const CarouselHistoryFilms = memo(
                 >
                     {title}
                 </Divider>
-                <Swiper
-                    navigation={true}
-                    scrollbar={{
-                        hide: true,
-                    }}
-                    modules={[Navigation, Scrollbar]}
-                    slidesPerView={2.8}
-                    style={{ borderRadius: 5, height: 200 }}
-                >
-                    {carouselItems.map((item, index) => (
-                        <SwiperSlide key={index}>
-                            <ItemHistoryFilmsCarousel item={item} />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                <div className={cls.wrapperSwiper}>
+                    <Swiper
+                        navigation={true}
+                        scrollbar={{
+                            hide: true,
+                        }}
+                        modules={[Navigation, Scrollbar]}
+                        slidesPerView={2.8}
+                        className={cls.swiperHistoryFilm}
+                    >
+                        {carouselItems.map((item, index) => (
+                            <SwiperSlide key={index}>
+                                <ItemHistoryFilmsCarousel item={item} />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
             </>
         );
     }

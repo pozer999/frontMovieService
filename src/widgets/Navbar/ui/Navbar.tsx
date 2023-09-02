@@ -84,7 +84,7 @@ export const Navbar = memo(() => {
                         </Button>
                     </Space>
                 ) : (
-                    <>
+                    <Space className={cls.spaceNavbarButton}>
                         <Button
                             type="dashed"
                             onClick={handleOpenModalRegister}
@@ -99,7 +99,7 @@ export const Navbar = memo(() => {
                         >
                             Log in
                         </Button>
-                    </>
+                    </Space>
                 )}
             </div>
             <AuthForm />
