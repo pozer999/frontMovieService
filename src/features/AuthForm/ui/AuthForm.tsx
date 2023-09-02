@@ -46,7 +46,7 @@ export const AuthForm = () => {
         }
     }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe,]);
     const handleCloseModalAuth = useCallback(() => {
-        dispatch(AuthActions.closeModalAuth());
+        dispatch(GeneralAuthAndRegisterActions.closeModalAuth());
     }, [dispatch]);
     const handleSwitchRegistrationToAuth = useCallback(() => {
         dispatch(GeneralAuthAndRegisterActions.switchRegistrationToAuth());

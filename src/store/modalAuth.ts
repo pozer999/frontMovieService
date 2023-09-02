@@ -11,7 +11,7 @@ import { GeneralAuthAndRegisterActions, generalInitialState } from "./generalAut
 interface IinitialState{
     valueUserNameAuth: string | null;
     valuePasswordAuth: string | undefined;
-    isVisibleAuth: boolean;
+    // isVisibleAuth: boolean;
     isLoadingTheAuthButton: boolean;
     isDisabledButtonToAuth: boolean;
 }
@@ -19,7 +19,7 @@ interface IinitialState{
 const modalAuthInitialState: IinitialState  = {
     valueUserNameAuth: "",
     valuePasswordAuth: "",
-    isVisibleAuth: generalInitialState.isVisibleAuth,
+    // isVisibleAuth: generalInitialState.isVisibleAuth,
     isLoadingTheAuthButton: generalInitialState.isLoadingTheAuthButton,
     isDisabledButtonToAuth: true,
 };
@@ -29,16 +29,13 @@ export const modalAuthReducer = createSlice({
     name: "modalAuthReducer",
     initialState: modalAuthInitialState,
     reducers: {
-        openModalAuth(state) {
-            state.isVisibleAuth = true;
-        },
         okAuth(state) {
             state.isLoadingTheAuthButton = true;
         },
-        closeModalAuth(state) {
-            state.isVisibleAuth = false;
-            state.isLoadingTheAuthButton = false;
-        },
+        // closeModalAuth(state) {
+        //     state.isVisibleAuth = false;
+        //     state.isLoadingTheAuthButton = false;
+        // },
         changePasswordAuth(state, action: PayloadAction<string>) {
             state.valuePasswordAuth = action.payload;
         },
@@ -56,14 +53,12 @@ export const modalAuthReducer = createSlice({
             })
             .addCase(auth.fulfilled, (state) => {
                 state.isLoadingTheAuthButton = false;
-                // state.isRegister = true;
-                state.isVisibleAuth = false;
+                // state.isVisibleAuth = false;
                 console.log("auth.fulfilled");
             })
             .addCase(auth.rejected, (state) => {
                 state.isLoadingTheAuthButton = false;
-                // state.isRegister = false;
-                state.isVisibleAuth = true;
+                // state.isVisibleAuth = true;
                 console.log("ошибка auth.rejected");
             })
     },
@@ -86,6 +81,7 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth, thunk
             valuePasswordAuth
         );
         dispatch(GeneralAuthAndRegisterActions.setAccess(true))
+        dispatch(GeneralAuthAndRegisterActions.openModalAuth(false))
         if (!response.data) {
             throw new Error();
         }
@@ -97,6 +93,8 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth, thunk
     } catch (e) {
         console.log("ошибка авторизации", e);
         dispatch(GeneralAuthAndRegisterActions.setAccess(false))
+        dispatch(GeneralAuthAndRegisterActions.openModalAuth(true))
+
         rejectWithValue(`ошибка регистрации:${e} `);
         throw e;
     }

@@ -30,10 +30,10 @@ export const Navbar = memo(() => {
     const themeType = useSelector(getThemeType);
     const openUserAccount = useSelector(getOpenUserAccount);
     const handleOpenModalRegister = useCallback(() => {
-        dispatch(RegisterActions.openModalRegister());
+        dispatch(GeneralAuthAndRegisterActions.openModalRegister(true));
     }, [dispatch]);
     const handleOpenModalAuth = useCallback(() => {
-        dispatch(AuthActions.openModalAuth());
+        dispatch(GeneralAuthAndRegisterActions.openModalAuth(true));
     }, [dispatch]);
     const handleOpenUserAccount = useCallback(() => {
         dispatch(GeneralAuthAndRegisterActions.openUserAccount());

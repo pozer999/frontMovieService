@@ -6,7 +6,11 @@ import axios from "axios";
 import { AuthResponse } from "models/response/AuthResponse";
 import $api, { API_URL } from "shared/config/http";
 import { useSelector } from "react-redux";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer, generalInitialState } from "./generalAuthAndRegister";
+import {
+    GeneralAuthAndRegisterActions,
+    generalAuthAndRegisterReducer,
+    generalInitialState,
+} from "./generalAuthAndRegister";
 
 export interface IvalueRegister {
     valueUserNameRegister: string;
@@ -17,12 +21,11 @@ export const valueRegister = {
     valuePasswordRegister: "",
 };
 export interface IinitialState {
-    // isRegister: boolean;
     errorRegister: boolean;
     valueConfirmPasswordRegister: string | undefined;
     valueUserNameRegister: string | undefined;
     valuePasswordRegister: string | undefined;
-    isVisibleRegister: boolean;
+    // isVisibleRegister: boolean;
     isLoadingTheRegisterButton: boolean;
     statusInputLoginAndPassword: "error" | "warning" | undefined;
     valueRegister: IvalueRegister;
@@ -30,12 +33,11 @@ export interface IinitialState {
 }
 
 export const initialState: IinitialState = {
-    // isRegister: generalInitialState.isRegister,
     errorRegister: generalInitialState.errorRegister,
     valueConfirmPasswordRegister: "",
     valueUserNameRegister: "",
     valuePasswordRegister: "",
-    isVisibleRegister: generalInitialState.isVisibleRegister,
+    // isVisibleRegister: generalInitialState.isVisibleRegister,
     isLoadingTheRegisterButton: generalInitialState.isLoadingTheRegisterButton,
     statusInputLoginAndPassword: undefined,
     valueRegister: valueRegister,
@@ -46,13 +48,13 @@ export const modalRegisterReducer = createSlice({
     name: "modalAuthAndRegisterReducer",
     initialState,
     reducers: {
-        openModalRegister(state) {
-            state.isVisibleRegister = true;
-        },
-        closeModalRegister(state) {
-            state.isVisibleRegister = false;
-            state.isLoadingTheRegisterButton = false;
-        },
+        // openModalRegister(state) {
+        //     state.isVisibleRegister = true;
+        // },
+        // closeModalRegister(state) {
+        //     state.isVisibleRegister = false;
+        //     state.isLoadingTheRegisterButton = false;
+        // },
 
         changeUserNameRegister(state, action: PayloadAction<string>) {
             state.valueUserNameRegister = action.payload;
@@ -79,19 +81,16 @@ export const modalRegisterReducer = createSlice({
             .addCase(register.pending, (state) => {
                 state.isLoadingTheRegisterButton = true;
                 state.errorRegister = false;
-                // state.isRegister = false;
             })
             .addCase(register.fulfilled, (state) => {
-                state.isVisibleRegister = false;
+                // state.isVisibleRegister = false;
                 state.isLoadingTheRegisterButton = false;
-                // state.isRegister = true;
                 state.errorRegister = false;
             })
             .addCase(register.rejected, (state) => {
                 state.isLoadingTheRegisterButton = false;
-                // state.isRegister = false;
                 state.errorRegister = true;
-                state.isVisibleRegister = true;
+                // state.isVisibleRegister = true;
             });
     },
 });
@@ -115,7 +114,8 @@ export const register = createAsyncThunk(
                 valueUserNameRegister,
                 valuePasswordRegister
             );
-            dispatch(GeneralAuthAndRegisterActions.setAccess(true))
+            dispatch(GeneralAuthAndRegisterActions.setAccess(true));
+            dispatch(GeneralAuthAndRegisterActions.closeModalRegister());
             if (!response.data) {
                 throw new Error();
             }
@@ -125,7 +125,8 @@ export const register = createAsyncThunk(
             localStorage.setItem("username", valueUserNameRegister);
             return response.data;
         } catch (e) {
-            dispatch(GeneralAuthAndRegisterActions.setAccess(false))
+            dispatch(GeneralAuthAndRegisterActions.setAccess(false));
+            dispatch(GeneralAuthAndRegisterActions.openModalRegister(true));
             rejectWithValue(`ошибка регистрации:${e} `);
         }
     }

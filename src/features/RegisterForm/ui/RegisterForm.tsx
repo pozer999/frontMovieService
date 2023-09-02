@@ -34,11 +34,11 @@ export const RegisterForm = () => {
     const valueConfirmPasswordRegister = useSelector(
         getConfirmPasswordRegister
     );
-    const isVisibleRegister = useSelector(getRegisterIsVisible);
     const isLoadingTheRegisterButton = useSelector(getRegisterIsLoading);
     const errorRegisterValue = useSelector(getError);
     const isRememberMe = useSelector(getIsRememberMe);
     const isDisabledButtonToRegister = useSelector(getIsDisabledButtonToRegister);
+    const isVisibleRegister = useSelector(getRegisterIsVisible);
 
     const options = [
         { value: "fanesi", label: "Fanesi" },
@@ -72,7 +72,7 @@ export const RegisterForm = () => {
     ]);
 
     const handleCloseModalRegister = useCallback(() => {
-        dispatch(RegisterActions.closeModalRegister());
+        dispatch(GeneralAuthAndRegisterActions.closeModalRegister());
     }, [dispatch]);
     const handleSwitchAuthToRegistration = useCallback(() => {
         dispatch(GeneralAuthAndRegisterActions.switchAuthToRegistration());

@@ -35,6 +35,20 @@ export const generalAuthAndRegisterReducer = createSlice({
     name: "generalAuthAndRegisterReducer",
     initialState: generalInitialState,
     reducers: {
+        openModalAuth(state, action) {
+            state.isVisibleAuth = action.payload;
+        },
+        closeModalAuth(state) {
+            state.isVisibleAuth = false;
+            state.isLoadingTheAuthButton = false;
+        },
+        openModalRegister(state, action) {
+            state.isVisibleRegister = action.payload;
+        },
+        closeModalRegister(state) {
+            state.isVisibleRegister = false;
+            state.isLoadingTheRegisterButton = false;
+        },
         switchRegistrationToAuth(state) {
             state.isVisibleAuth = false;
             state.isVisibleRegister = true;
@@ -69,19 +83,19 @@ export const generalAuthAndRegisterReducer = createSlice({
         builder
             .addCase(checkAuth.fulfilled, (state) => {
                 state.isLoadingTheAuthButton = false;
-                // state.isRegister = true;
+                state.isAccess = true;
                 state.isVisibleAuth = false;
             })
             .addCase(checkAuth.rejected, (state) => {
                 state.isLoadingTheRegisterButton = false;
-                // state.isRegister = false;
+                state.isAccess = false;
                 state.errorRegister = true;
             })
             .addCase(checkAuth.pending, (state) => {
                 state.isLoadingTheAuthButton = true;
             })
             .addCase(logout.fulfilled, (state) => {
-                // state.isRegister = false;
+                state.isAccess = false;
             });
     },
 });

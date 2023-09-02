@@ -7,7 +7,7 @@ export const getUserRegisterPassword = (state: RootState) =>
 export const getConfirmPasswordRegister = (state: RootState) =>
     state.modalRegisterReducer.valueConfirmPasswordRegister || "";
 export const getRegisterIsVisible = (state: RootState) =>
-    state.modalRegisterReducer.isVisibleRegister || false;
+    state.generalAuthAndRegisterReducer.isVisibleRegister || false;
 export const getRegisterIsLoading = (state: RootState) =>
     state.modalAuthReducer.isLoadingTheAuthButton || false;
 export const getError = (state: RootState) =>

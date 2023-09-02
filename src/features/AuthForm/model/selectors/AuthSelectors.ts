@@ -1,7 +1,7 @@
 import { RootState } from "store";
 
 export const getIsVisibleAuth = (state: RootState) =>
-    state.modalAuthReducer.isVisibleAuth || false;
+    state.generalAuthAndRegisterReducer.isVisibleAuth || false;
 export const getIsLoadingTheAuthButton = (state: RootState) =>
     state.modalAuthReducer.isLoadingTheAuthButton || false;
 export const getValueUserNameAuth = (state: RootState) =>
