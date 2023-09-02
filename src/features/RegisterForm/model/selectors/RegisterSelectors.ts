@@ -9,9 +9,7 @@ export const getConfirmPasswordRegister = (state: RootState) =>
 export const getRegisterIsVisible = (state: RootState) =>
     state.modalRegisterReducer.isVisibleRegister || false;
 export const getRegisterIsLoading = (state: RootState) =>
-    state.modalAuthReducer.modalAuthInitialState.isLoadingTheAuthButton || false;
-export const getIsRegister = (state: RootState) =>
-    state.modalRegisterReducer.isRegister || false;
+    state.modalAuthReducer.isLoadingTheAuthButton || false;
 export const getError = (state: RootState) =>
     state.modalRegisterReducer.errorRegister || false;
 export const getIsDisabledButtonToRegister = (state: RootState) =>

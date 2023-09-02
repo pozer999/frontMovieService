@@ -20,7 +20,6 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { AuthActions, auth } from "store/modalAuth";
 import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
-import { getIsRegister } from "features/RegisterForm/model/selectors/RegisterSelectors";
 
 export const AuthForm = () => {
     const dispatch = useAppDispatch();
@@ -31,7 +30,6 @@ export const AuthForm = () => {
     const valuePasswordAuth = String(useSelector(getValuePasswordAuth));
     const isRememberMe = useSelector(getIsRememberMe);
     const isDisabledButtonToAuth = useSelector(getIsDisabledButtonToAuth);
-    const isRegister = useSelector(getIsRegister);
 
     const handleOkAuth = useCallback(() => {
         try {
@@ -42,12 +40,11 @@ export const AuthForm = () => {
             };
             dispatch(auth(valueAuth));
             localStorage.setItem("username", valueUserNameAuth);
-            console.log("is: ", isRegister);
             
         } catch (e) {
             console.error("handleOkAuth error: ", e);
         }
-    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe, isRegister]);
+    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe,]);
     const handleCloseModalAuth = useCallback(() => {
         dispatch(AuthActions.closeModalAuth());
     }, [dispatch]);

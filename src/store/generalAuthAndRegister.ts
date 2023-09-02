@@ -8,7 +8,7 @@ import $api, { API_URL } from "shared/config/http";
 import { useSelector } from "react-redux";
 
 export interface IgeneralInitialState {
-    isRegister: boolean;
+    isAccess: boolean;
     errorRegister: boolean;
     isVisibleAuth: boolean;
     isVisibleRegister: boolean;
@@ -20,7 +20,7 @@ export interface IgeneralInitialState {
 }
 
 export const generalInitialState: IgeneralInitialState = {
-    isRegister: false,
+    isAccess: false,
     errorRegister: false,
     isVisibleAuth: false,
     isVisibleRegister: false,
@@ -61,24 +61,27 @@ export const generalAuthAndRegisterReducer = createSlice({
         changeRememberMe(state, action) {
             state.isRememberMe = action.payload;
         },
+        setAccess(state, action) {
+            state.isAccess = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
             .addCase(checkAuth.fulfilled, (state) => {
                 state.isLoadingTheAuthButton = false;
-                state.isRegister = true;
+                // state.isRegister = true;
                 state.isVisibleAuth = false;
             })
             .addCase(checkAuth.rejected, (state) => {
                 state.isLoadingTheRegisterButton = false;
-                state.isRegister = false;
+                // state.isRegister = false;
                 state.errorRegister = true;
             })
             .addCase(checkAuth.pending, (state) => {
                 state.isLoadingTheAuthButton = true;
             })
             .addCase(logout.fulfilled, (state) => {
-                state.isRegister = false;
+                // state.isRegister = false;
             });
     },
 });

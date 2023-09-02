@@ -12,7 +12,7 @@ import { RoutePath } from "shared/config/routeConfig";
 import { UserAccount } from "pages/UserAccount";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import {
-    getIsRegister,
+    getIsAccess,
     getOpenUserAccount,
     getThemeType,
     getValueUserNameAuth,
@@ -24,7 +24,7 @@ import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer, logout } 
 
 export const Navbar = memo(() => {
     const dispatch = useAppDispatch();
-    const isRegister = useSelector(getIsRegister);
+    const isAccess = useSelector(getIsAccess);
     const valueUserNameRegister = useSelector(getValueUserNameRegister);
     const valueUserNameAuth = useSelector(getValueUserNameAuth);
     const themeType = useSelector(getThemeType);
@@ -54,7 +54,7 @@ export const Navbar = memo(() => {
                         themeType === "dark" ? "rgb(15, 15, 15)" : "white",
                 }}
             >
-                {isRegister ? (
+                {isAccess ? (
                     <Space align="center" size="small">
                         <Button
                             onClick={handleOpenUserAccount}

@@ -6,7 +6,7 @@ import axios from "axios";
 import { AuthResponse } from "models/response/AuthResponse";
 import $api, { API_URL } from "shared/config/http";
 import { useSelector } from "react-redux";
-import { generalInitialState } from "./generalAuthAndRegister";
+import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer, generalInitialState } from "./generalAuthAndRegister";
 
 export interface IvalueRegister {
     valueUserNameRegister: string;
@@ -17,7 +17,7 @@ export const valueRegister = {
     valuePasswordRegister: "",
 };
 export interface IinitialState {
-    isRegister: boolean;
+    // isRegister: boolean;
     errorRegister: boolean;
     valueConfirmPasswordRegister: string | undefined;
     valueUserNameRegister: string | undefined;
@@ -30,7 +30,7 @@ export interface IinitialState {
 }
 
 export const initialState: IinitialState = {
-    isRegister: generalInitialState.isRegister,
+    // isRegister: generalInitialState.isRegister,
     errorRegister: generalInitialState.errorRegister,
     valueConfirmPasswordRegister: "",
     valueUserNameRegister: "",
@@ -79,17 +79,17 @@ export const modalRegisterReducer = createSlice({
             .addCase(register.pending, (state) => {
                 state.isLoadingTheRegisterButton = true;
                 state.errorRegister = false;
-                state.isRegister = false;
+                // state.isRegister = false;
             })
             .addCase(register.fulfilled, (state) => {
                 state.isVisibleRegister = false;
                 state.isLoadingTheRegisterButton = false;
-                state.isRegister = true;
+                // state.isRegister = true;
                 state.errorRegister = false;
             })
             .addCase(register.rejected, (state) => {
                 state.isLoadingTheRegisterButton = false;
-                state.isRegister = false;
+                // state.isRegister = false;
                 state.errorRegister = true;
                 state.isVisibleRegister = true;
             });
@@ -103,7 +103,7 @@ export interface IRegister {
 export const register = createAsyncThunk(
     "register/register",
     async (valueRegister: IRegister, thunkApi) => {
-        const { rejectWithValue } = thunkApi;
+        const { rejectWithValue, dispatch } = thunkApi;
         const { valueUserNameRegister, valuePasswordRegister, isRememberMe } =
             valueRegister;
         const errors = validateRegisterData(valueRegister);
@@ -115,6 +115,7 @@ export const register = createAsyncThunk(
                 valueUserNameRegister,
                 valuePasswordRegister
             );
+            dispatch(GeneralAuthAndRegisterActions.setAccess(true))
             if (!response.data) {
                 throw new Error();
             }
@@ -124,6 +125,7 @@ export const register = createAsyncThunk(
             localStorage.setItem("username", valueUserNameRegister);
             return response.data;
         } catch (e) {
+            dispatch(GeneralAuthAndRegisterActions.setAccess(false))
             rejectWithValue(`ошибка регистрации:${e} `);
         }
     }

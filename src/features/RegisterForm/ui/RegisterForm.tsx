@@ -10,7 +10,6 @@ import {
     getConfirmPasswordRegister,
     getError,
     getIsDisabledButtonToRegister,
-    getIsRegister,
     getRegisterIsLoading,
     getRegisterIsVisible,
     getUserRegisterName,
@@ -37,7 +36,6 @@ export const RegisterForm = () => {
     );
     const isVisibleRegister = useSelector(getRegisterIsVisible);
     const isLoadingTheRegisterButton = useSelector(getRegisterIsLoading);
-    const isRegister = useSelector(getIsRegister);
     const errorRegisterValue = useSelector(getError);
     const isRememberMe = useSelector(getIsRememberMe);
     const isDisabledButtonToRegister = useSelector(getIsDisabledButtonToRegister);

@@ -5,11 +5,10 @@ import { validateRegisterData } from "features/RegisterForm/model/services/valid
 import axios from "axios";
 import { AuthResponse } from "models/response/AuthResponse";
 import $api, { API_URL } from "shared/config/http";
-import { generalInitialState } from "./generalAuthAndRegister";
+import { GeneralAuthAndRegisterActions, generalInitialState } from "./generalAuthAndRegister";
 
 
 interface IinitialState{
-    // isRegister: boolean;
     valueUserNameAuth: string | null;
     valuePasswordAuth: string | undefined;
     isVisibleAuth: boolean;
@@ -18,7 +17,6 @@ interface IinitialState{
 }
 
 const modalAuthInitialState: IinitialState  = {
-    // isRegister: generalInitialState.isRegister,
     valueUserNameAuth: "",
     valuePasswordAuth: "",
     isVisibleAuth: generalInitialState.isVisibleAuth,
@@ -29,43 +27,43 @@ const modalAuthInitialState: IinitialState  = {
 
 export const modalAuthReducer = createSlice({
     name: "modalAuthReducer",
-    initialState: {modalAuthInitialState, generalInitialState},
+    initialState: modalAuthInitialState,
     reducers: {
         openModalAuth(state) {
-            state.modalAuthInitialState.isVisibleAuth = true;
+            state.isVisibleAuth = true;
         },
         okAuth(state) {
-            state.modalAuthInitialState.isLoadingTheAuthButton = true;
+            state.isLoadingTheAuthButton = true;
         },
         closeModalAuth(state) {
-            state.modalAuthInitialState.isVisibleAuth = false;
-            state.modalAuthInitialState.isLoadingTheAuthButton = false;
+            state.isVisibleAuth = false;
+            state.isLoadingTheAuthButton = false;
         },
         changePasswordAuth(state, action: PayloadAction<string>) {
-            state.modalAuthInitialState.valuePasswordAuth = action.payload;
+            state.valuePasswordAuth = action.payload;
         },
         changeUserNameAuth(state, action: PayloadAction<string>) {
-            state.modalAuthInitialState.valueUserNameAuth = action.payload;
+            state.valueUserNameAuth = action.payload;
         },
         toggleDisabledButtonToAuth(state, action: PayloadAction<boolean>) {
-            state.modalAuthInitialState.isDisabledButtonToAuth = action.payload;
+            state.isDisabledButtonToAuth = action.payload;
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(auth.pending, (state) => {
-                state.modalAuthInitialState.isLoadingTheAuthButton = true;
+                state.isLoadingTheAuthButton = true;
             })
             .addCase(auth.fulfilled, (state) => {
-                state.modalAuthInitialState.isLoadingTheAuthButton = false;
-                state.generalInitialState.isRegister = true;
-                state.modalAuthInitialState.isVisibleAuth = false;
+                state.isLoadingTheAuthButton = false;
+                // state.isRegister = true;
+                state.isVisibleAuth = false;
                 console.log("auth.fulfilled");
             })
             .addCase(auth.rejected, (state) => {
-                state.modalAuthInitialState.isLoadingTheAuthButton = false;
-                state.generalInitialState.isRegister = false;
-                state.modalAuthInitialState.isVisibleAuth = true;
+                state.isLoadingTheAuthButton = false;
+                // state.isRegister = false;
+                state.isVisibleAuth = true;
                 console.log("ошибка auth.rejected");
             })
     },
@@ -77,14 +75,17 @@ interface IAuth {
     isRememberMe: boolean;
 }
 
-export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
+export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth, thunkApi) => {
     console.log("valueAuth: ", valueAuth);
     const { valueUserNameAuth, valuePasswordAuth, isRememberMe } = valueAuth;
+    const { rejectWithValue, dispatch } = thunkApi;
+
     try {
         const response = await AuthService.login(
             valueUserNameAuth,
             valuePasswordAuth
         );
+        dispatch(GeneralAuthAndRegisterActions.setAccess(true))
         if (!response.data) {
             throw new Error();
         }
@@ -95,6 +96,8 @@ export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth) => {
         return response.data;
     } catch (e) {
         console.log("ошибка авторизации", e);
+        dispatch(GeneralAuthAndRegisterActions.setAccess(false))
+        rejectWithValue(`ошибка регистрации:${e} `);
         throw e;
     }
 });
