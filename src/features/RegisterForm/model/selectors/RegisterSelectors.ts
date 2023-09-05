@@ -1,21 +1,16 @@
 import { RootState } from "store";
 
 export const getUserRegisterName = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.valueUserNameRegister || "";
+    state.modalRegisterReducer.valueUserNameRegister || "";
 export const getUserRegisterPassword = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.valuePasswordRegister || "";
+    state.modalRegisterReducer.valuePasswordRegister || "";
 export const getConfirmPasswordRegister = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.valueConfirmPasswordRegister || "";
+    state.modalRegisterReducer.valueConfirmPasswordRegister || "";
 export const getRegisterIsVisible = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.isVisibleRegister || false;
+    state.generalAuthAndRegisterReducer.isVisibleRegister || false;
 export const getRegisterIsLoading = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.isLoadingTheAuthButton || false;
-export const getIsRegister = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.isRegister || false;
+    state.modalAuthReducer.isLoadingTheAuthButton || false;
 export const getError = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.errorRegister || false;
+    state.modalRegisterReducer.errorRegister || false;
 export const getIsDisabledButtonToRegister = (state: RootState) =>
-    state.modalAuthAndRegisterReducer.isDisabledButtonToRegister;
-
-// export const isRememberMe = (state: RootState) =>
-//     state.modalAuthAndRegisterReducer.isRememberMe || true;
+    state.modalRegisterReducer.isDisabledButtonToRegister;

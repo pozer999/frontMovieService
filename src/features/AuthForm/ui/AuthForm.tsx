@@ -8,7 +8,6 @@ import {
     ChangeEvent,
     HtmlHTMLAttributes,
 } from "react";
-import { AuthActions, auth } from "../../../store/modalAuthAndRegisterReducer";
 import {
     getIsDisabledButtonToAuth,
     getIsLoadingTheAuthButton,
@@ -19,6 +18,8 @@ import {
 } from "../model/selectors/AuthSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { AuthActions, auth } from "store/modalAuth";
+import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
 
 export const AuthForm = () => {
     const dispatch = useAppDispatch();
@@ -39,19 +40,20 @@ export const AuthForm = () => {
             };
             dispatch(auth(valueAuth));
             localStorage.setItem("username", valueUserNameAuth);
+            
         } catch (e) {
             console.error("handleOkAuth error: ", e);
         }
-    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe]);
+    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe,]);
     const handleCloseModalAuth = useCallback(() => {
-        dispatch(AuthActions.closeModalAuth());
+        dispatch(GeneralAuthAndRegisterActions.closeModalAuth());
     }, [dispatch]);
     const handleSwitchRegistrationToAuth = useCallback(() => {
-        dispatch(AuthActions.switchRegistrationToAuth());
+        dispatch(GeneralAuthAndRegisterActions.switchRegistrationToAuth());
     }, [dispatch]);
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
-            dispatch(AuthActions.changeRememberMe(e.target.checked));
+            dispatch(GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked));
             console.log("remember me auth: ", e.target.checked);
         },
         [dispatch]

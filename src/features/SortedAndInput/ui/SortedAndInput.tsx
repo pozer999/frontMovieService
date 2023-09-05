@@ -14,7 +14,6 @@ import cls from "./SortedAndInput.module.scss";
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useCallback } from "react";
 import { useDebounce } from "shared/lib/hooks/useDebounce";
-import { RootState } from "store";
 
 export const SortedAndInput = () => {
     const dispatch = useAppDispatch();
@@ -22,8 +21,8 @@ export const SortedAndInput = () => {
     const valueInputSearch = useSelector(getValueInputSearch);
     const fetchData = useCallback(() => {
         try {
-            const data = {currentFilter, valueInputSearch};
-            dispatch(fetchFilms(data));
+            const data = { currentFilter, valueInputSearch };
+            dispatch(fetchFilms());
         } catch (e) {
             console.error(e);
         } finally {
@@ -42,8 +41,8 @@ export const SortedAndInput = () => {
     );
     const handleChangeSelect = (value: string) => {
         dispatch(filmsActions.changeFilters(value));
-        const data = {currentFilter, valueInputSearch};
-        dispatch(fetchFilms(data));
+        const data = { currentFilter, valueInputSearch };
+        dispatch(fetchFilms());
     };
 
     return (

@@ -2,10 +2,7 @@ import { Button, Drawer, Space, Tooltip } from "antd";
 import cls from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
-import {
-    AuthActions,
-    logout,
-} from "../../../store/modalAuthAndRegisterReducer";
+
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { RootState } from "store";
@@ -15,31 +12,34 @@ import { RoutePath } from "shared/config/routeConfig";
 import { UserAccount } from "pages/UserAccount";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import {
-    getIsRegister,
+    getIsAccess,
     getOpenUserAccount,
     getThemeType,
     getValueUserNameAuth,
     getValueUserNameRegister,
 } from "../model/selectors/NavbarSelectors";
+import { RegisterActions } from "store/modalRegister";
+import { AuthActions } from "store/modalAuth";
+import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer, logout } from "store/generalAuthAndRegister";
 
 export const Navbar = memo(() => {
     const dispatch = useAppDispatch();
-    const isRegister = useSelector(getIsRegister);
+    const isAccess = useSelector(getIsAccess);
     const valueUserNameRegister = useSelector(getValueUserNameRegister);
     const valueUserNameAuth = useSelector(getValueUserNameAuth);
     const themeType = useSelector(getThemeType);
     const openUserAccount = useSelector(getOpenUserAccount);
     const handleOpenModalRegister = useCallback(() => {
-        dispatch(AuthActions.openModalRegister());
+        dispatch(GeneralAuthAndRegisterActions.openModalRegister(true));
     }, [dispatch]);
     const handleOpenModalAuth = useCallback(() => {
-        dispatch(AuthActions.openModalAuth());
+        dispatch(GeneralAuthAndRegisterActions.openModalAuth(true));
     }, [dispatch]);
     const handleOpenUserAccount = useCallback(() => {
-        dispatch(AuthActions.openUserAccount());
+        dispatch(GeneralAuthAndRegisterActions.openUserAccount());
     }, [dispatch]);
     const handleCloseUserAccount = useCallback(() => {
-        dispatch(AuthActions.closeUserAccount());
+        dispatch(GeneralAuthAndRegisterActions.closeUserAccount());
     }, [dispatch]);
     const handleLogout = useCallback(() => {
         dispatch(logout());
@@ -54,7 +54,7 @@ export const Navbar = memo(() => {
                         themeType === "dark" ? "rgb(15, 15, 15)" : "white",
                 }}
             >
-                {isRegister ? (
+                {isAccess ? (
                     <Space align="center" size="small">
                         <Button
                             onClick={handleOpenUserAccount}

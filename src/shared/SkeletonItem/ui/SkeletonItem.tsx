@@ -9,18 +9,20 @@ import { CurrentFilm } from "pages/CurrentFilm";
 import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
-import { AuthActions } from "store/modalAuthAndRegisterReducer";
+
 import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import cls from "./SkeletonItem.module.scss";
+import { AuthActions } from "store/modalAuth";
+import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
 const SkeletonItem = () => {
     const dispatch = useAppDispatch();
     const visibleCurrentFilm = useSelector(getVisibleCurrentFilm);
     const handleOpenCurrentFilm = useCallback(() => {
-        dispatch(AuthActions.openCurrentFilm());
+        dispatch(GeneralAuthAndRegisterActions.openCurrentFilm());
     }, [dispatch]);
     const handleCloseCurrentFilm = useCallback(() => {
-        dispatch(AuthActions.closeCurrentFilm());
+        dispatch(GeneralAuthAndRegisterActions.closeCurrentFilm());
     }, [dispatch]);
 
     useEffect(() => {

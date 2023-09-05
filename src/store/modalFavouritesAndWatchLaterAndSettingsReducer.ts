@@ -14,7 +14,6 @@ export const closeModalWatchLater = createAction("modal/closeModalWatchLater");
 
 export const changeTheme = createAction("modal/changeTheme");
 
-
 const initialState: IinitialState = {
     isVisibleFavourites: false,
     isVisibleWatchLater: false,
@@ -40,6 +39,6 @@ export const modalFavouritesAndWatchLaterAndSettingsReducer = createReducer(
             })
             .addCase(changeTheme, (state) => {
                 state.themeType = state.themeType === "dark" ? "light" : "dark";
-            })
+            });
     }
 );

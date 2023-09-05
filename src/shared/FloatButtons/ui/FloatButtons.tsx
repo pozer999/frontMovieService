@@ -19,6 +19,9 @@ import cls from "./FloatButtons.module.scss";
 
 export const FloatButtons = memo(() => {
     const dispatch = useAppDispatch();
+
+    const typeTheme = useSelector(getTypeTheme);
+    
     const handleOpenModalFavourites = useCallback(() => {
         dispatch(openModalFavourites());
     }, [dispatch]);
@@ -27,9 +30,9 @@ export const FloatButtons = memo(() => {
     }, [dispatch]);
     const handleChangeTheme = useCallback(() => {
         dispatch(changeTheme());
-    }, [dispatch]);
+        localStorage.setItem("theme", typeTheme)
+    }, [dispatch, typeTheme]);
 
-    const typeTheme = useSelector(getTypeTheme);
 
     return (
         <FloatButton.Group shape="circle" className={cls.floatButtonPosition}>

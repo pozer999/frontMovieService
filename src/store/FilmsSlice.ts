@@ -1,8 +1,9 @@
+import { getValueInputSearch } from "./../features/SortedAndInput/model/selectors/SortedAndInputSelectors";
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { IFilms } from "models/IFilms";
 import $api from "shared/config/http";
 import { Filters } from "shared/const/filters";
+import { RootState } from "store";
 
 interface filmsStateSchema {
     films: Array<any>;
@@ -38,10 +39,13 @@ const filmsSlice = createSlice({
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(fetchFilms.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.films = action.payload;
-            })
+            .addCase(
+                fetchFilms.fulfilled,
+                (state, action: PayloadAction<Array<any>>) => {
+                    state.isLoading = false;
+                    state.films = action.payload;
+                }
+            )
             .addCase(fetchFilms.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload as string;
@@ -49,50 +53,23 @@ const filmsSlice = createSlice({
     },
 });
 
-interface Idata {
-    valueInputSearch: string;
-    currentFilter: any;
-}
+
 // createAsyncThunk надо нормально типизировать а не использовать any
 export const fetchFilms = createAsyncThunk(
     "films/fetchFilms",
-    async (data: Idata, thunkApi) => {
-        // const valueInputSearch = useSelector((state: RootState) => state.films.valueInputSearch)
-        const { valueInputSearch, currentFilter } = data;
+    async (_, thunkApi) => {
+        const { getState } = thunkApi;
+        const state: any = getState() as RootState;
+        const currentFilter = state.films.selectedValueSelect;
+        const valueInputSearch = state.films.valueInputSearch;
         console.log("fetchFilms->currentFilter: ", currentFilter);
         console.log("fetchFilms->valueInputSearch: ", valueInputSearch);
 
         const { rejectWithValue } = thunkApi;
         try {
-            let response = null;
-            switch (currentFilter) {
-                case "By date":
-                    response = await $api.get<IFilms[]>(
-                        "/movies?sortType=by date"
-                    );
-                    console.log("ушел запрос по дате");
-
-                    break;
-                case "By alphabet":
-                    response = await $api.get<IFilms[]>(
-                        "/movies?sortType=by alphabet"
-                    );
-                    console.log("ушел запрос по алфавиту");
-                    break;
-                case "By rating":
-                    response = await $api.get<IFilms[]>(
-                        "/movies?sortType=by rating"
-                    );
-                    console.log("ушел запрос по рейтингу");
-                    break;
-                default:
-                    response = await $api.get<IFilms[]>(
-                        "/movies?sortType=by date"
-                    );
-                    console.log("ушел запрос по дате");
-                    break;
-            }
-
+            const response = await $api.get<IFilms[]>(
+                `/movies?sortType=${currentFilter.toLowerCase()}&search=${valueInputSearch}`
+            );
             if (!response.data) {
                 throw new Error();
             }
