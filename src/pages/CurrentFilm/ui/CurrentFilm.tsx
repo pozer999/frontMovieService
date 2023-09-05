@@ -52,7 +52,11 @@ export const CurrentFilm = memo(() => {
                             md={8}
                             xs={8}
                             span={8}
-                            style={{ display: "flex", flexDirection: "column", alignItems: "center"}}
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                            }}
                         >
                             <img
                                 src={mars}
@@ -64,7 +68,7 @@ export const CurrentFilm = memo(() => {
                                     type="primary"
                                     size="large"
                                     icon={<PlayCircleOutlined />}
-                                    style={{ marginTop: "10px" }}
+                                    className={cls.btnWathchRightNow}
                                 >
                                     Watch right now
                                 </Button>
@@ -150,6 +154,7 @@ export const CurrentFilm = memo(() => {
                         >
                             Similar
                         </Divider>
+                        <div className={cls.wrapperSwiper}>
                         <Swiper
                             navigation={true}
                             scrollbar={{
@@ -179,6 +184,7 @@ export const CurrentFilm = memo(() => {
                                 </SwiperSlide>
                             ))}
                         </Swiper>
+                        </div>
                     </>
                 </Space>
             )}

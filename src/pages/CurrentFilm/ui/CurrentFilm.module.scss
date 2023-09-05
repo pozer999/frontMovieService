@@ -35,12 +35,18 @@ $heightSwiperSimilar_item: 200px;
 .swiperSimilar_item{
     height: $heightSwiperSimilar_item;
 }
+.btnWathchRightNow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
 @media screen and (max-width: $MD){
     .imgCurrentFilm{
         max-width: 100%;
     }
     .swiperSimilar{
-        width: 500px;
+        width: 600px;
         height: calc($heightSwiperSimilar_item * 0.8);
     }
     .swiperSimilar_item{
@@ -55,10 +61,17 @@ $heightSwiperSimilar_item: 200px;
     .swiper{
         margin-left: 5px;
     }
+    .wrapperSwiper {
+        margin-left: -20px;
+    }
+
 }
 @media screen and (max-width: $SM){
     .spaceText{
         width: 500px;
+    }
+    .wrapperSwiper {
+        margin-left: -60px;
     }
     .swiperSimilar{
         width: 450px;
@@ -79,13 +92,20 @@ $heightSwiperSimilar_item: 200px;
     .swiperSimilar_item{
         height: $heightSwiperSimilar_item * 0.6;
     }
+    .btnWathchRightNow{
+        width: 90%;
+        height: 90%;
+        span{
+            font-size: 12px;
+        }
+    }
 }
 @media screen and (max-width: $XS){
     .spaceText{
         width: 350px;
     }
     .swiperSimilar{
-        width: 220px;
+        width: 300px;
         height: calc($heightSwiperSimilar_item * 0.5);
     }
     .swiperSimilar_item{

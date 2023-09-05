@@ -33,11 +33,14 @@ import {
 export const MoviePage = () => {
     return (
         <div className={cls.wrapperVideo}>
+            <Divider orientation="center" style={{ fontSize: 35, marginTop: 30 }}>
+                The martian
+            </Divider>
             <ReactPlayer
                 width="90%"
                 height="90%"
                 style={{ margin: "20px auto" }}
-                url="https://www.youtube.com/watch?v=GNrdg3PzpJQ"
+                url="https://www.youtube.com/watch?v=ej3ioOneTy8"
                 controls={true}
             />
             <Space.Compact block style={{ width: "90%", margin: "10px auto" }}>

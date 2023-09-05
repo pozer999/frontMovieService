@@ -1,2 +1,1 @@
-export {CurrentFilm} from "./ui/CurrentFilm";
-
+export { CurrentFilm } from "./ui/CurrentFilm";

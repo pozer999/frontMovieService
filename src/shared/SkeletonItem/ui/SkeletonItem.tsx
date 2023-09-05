@@ -5,7 +5,7 @@ import {
     SmileOutlined,
 } from "@ant-design/icons";
 import { Button, Card, Col, Divider, Drawer, Empty, Row, Skeleton } from "antd";
-import { CurrentFilm } from "pages/CurrentFilm";
+
 import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
@@ -15,6 +15,8 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import cls from "./SkeletonItem.module.scss";
 import { AuthActions } from "store/modalAuth";
 import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
+import { CurrentFilm } from "pages/CurrentFilm";
+
 const SkeletonItem = () => {
     const dispatch = useAppDispatch();
     const visibleCurrentFilm = useSelector(getVisibleCurrentFilm);
