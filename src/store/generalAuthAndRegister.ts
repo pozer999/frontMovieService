@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthResponse } from "models/response/AuthResponse";
 import $api, { API_URL } from "shared/config/http";
 import { useSelector } from "react-redux";
+import { rolesUsers } from "shared/const/rolesUsers";
 
 export interface IgeneralInitialState {
     isAccess: boolean;
@@ -15,8 +16,8 @@ export interface IgeneralInitialState {
     isVisibleUserAccount: boolean;
     isVisibleCurrentFilm: boolean;
     isRememberMe: boolean;
-    isLoadingTheAuthButton: boolean,
-    isLoadingTheRegisterButton: boolean,
+    isLoadingTheAuthButton: boolean;
+    isLoadingTheRegisterButton: boolean;
 }
 
 export const generalInitialState: IgeneralInitialState = {
@@ -76,8 +77,8 @@ export const generalAuthAndRegisterReducer = createSlice({
             state.isRememberMe = action.payload;
         },
         setAccess(state, action) {
-            state.isAccess = action.payload
-        }
+            state.isAccess = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -110,9 +111,17 @@ export const checkAuth = createAsyncThunk(
                 { withCredentials: true }
             );
             console.log("responseCheckAuth: ", response);
-            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("roles", response.data.roles[0].name);
+            localStorage.setItem("username", response.data.username);
+            localStorage.setItem("token", response.data.accessToken);
             if (!response.data) {
                 throw new Error();
+            }
+            if (response.data.roles[0].name === rolesUsers.user) {
+                console.log("АВТОРИЗОВАН КАК ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ");
+            }
+            if (response.data.roles[0].name === rolesUsers.admin) {
+                console.log("АВТОРИЗОВАН КАК АДМИН");
             }
             return response.data;
         } catch (e) {
@@ -130,5 +139,7 @@ export const logout = createAsyncThunk("logout/logout", async (_, thunkApi) => {
         rejectWithValue(`ошибка регистрации:${e} `);
     }
 });
-export const { actions:  GeneralAuthAndRegisterActions } = generalAuthAndRegisterReducer;
-export const { reducer:  GeneralAuthAndRegisterReducer } = generalAuthAndRegisterReducer;
+export const { actions: GeneralAuthAndRegisterActions } =
+    generalAuthAndRegisterReducer;
+export const { reducer: GeneralAuthAndRegisterReducer } =
+    generalAuthAndRegisterReducer;
