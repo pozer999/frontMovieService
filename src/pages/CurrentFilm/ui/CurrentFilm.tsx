@@ -1,5 +1,6 @@
 import {
     Breadcrumb,
+    Button,
     Col,
     Collapse,
     Divider,
@@ -19,8 +20,9 @@ import { Rate } from "antd";
 import { useSelector } from "react-redux";
 import { SkeletonCurrentFilm } from "shared/SkeletonCurrentPage/SkeletonCurrentPage";
 import { getTypeTheme } from "../model/selectors/CurrentFilmSelectors";
-import cls from './CurrentFilm.module.scss';
-
+import cls from "./CurrentFilm.module.scss";
+import { PlayCircleOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
 
 export const CurrentFilm = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
@@ -39,14 +41,34 @@ export const CurrentFilm = memo(() => {
             {isLoadingCurrentPage ? (
                 <SkeletonCurrentFilm />
             ) : (
-                <Space direction="vertical" size="small" className={cls.spaceText}>
+                <Space
+                    direction="vertical"
+                    size="small"
+                    className={cls.spaceText}
+                >
                     <Row gutter={[24, 8]}>
-                        <Col xl={10} md={8} xs={8} span={8}>
+                        <Col
+                            xl={10}
+                            md={8}
+                            xs={8}
+                            span={8}
+                            style={{ display: "flex", flexDirection: "column", alignItems: "center"}}
+                        >
                             <img
                                 src={mars}
                                 alt="avatar"
                                 className={cls.imgCurrentFilm}
                             />
+                            <NavLink to="/movie">
+                                <Button
+                                    type="primary"
+                                    size="large"
+                                    icon={<PlayCircleOutlined />}
+                                    style={{ marginTop: "10px" }}
+                                >
+                                    Watch right now
+                                </Button>
+                            </NavLink>
                         </Col>
                         <Col span={14} className={cls.wrapperForText}>
                             <Space direction="vertical" size={"small"}>
@@ -122,7 +144,10 @@ export const CurrentFilm = memo(() => {
                         </Col>
                     </Row>
                     <>
-                        <Divider orientation="left" className={cls.driverSimilar}>
+                        <Divider
+                            orientation="left"
+                            className={cls.driverSimilar}
+                        >
                             Similar
                         </Divider>
                         <Swiper

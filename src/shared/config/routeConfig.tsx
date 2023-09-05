@@ -1,10 +1,11 @@
 import { UserAccount } from "pages/UserAccount";
 import { CurrentFilm } from "pages/CurrentFilm";
 import { MainPageLazy } from "pages/MainPage/MainPageLazy";
+import MoviePage from "pages/MoviePage/ui/MoviePage";
 
 export const RoutePath = {
 	MAIN: "/",
-	// CURRENTFILM: "/film",
+	MOVIEPAGE: "/movie",
 	// USERACCOUNT: '/user'
 };
 
@@ -16,11 +17,11 @@ export const routeConfig = [
 		elem: <MainPageLazy />,
 	},
 
-	// {
-	// 	name: "CurrentFilm",
-	// 	path: RoutePath.CURRENTFILM,
-	// 	elem: <CurrentFilm />,
-	// },
+	{
+		name: "MoviePage",
+		path: RoutePath.MOVIEPAGE,
+		elem: <MoviePage />,
+	},
 
 	// {
 	// 	name: "UserAccount",
