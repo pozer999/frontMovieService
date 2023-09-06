@@ -9,8 +9,10 @@ import {
     ShareAltOutlined,
     WarningOutlined,
 } from "@ant-design/icons";
-import { Button, Dropdown, MenuProps, Space, Tooltip } from "antd";
+import { Dropdown, MenuProps, Tooltip } from "antd";
+import Compact from "antd/es/space/Compact";
 import { memo } from "react";
+import { AButton } from "shared/ui/button";
 
 export const BtnsFeedback = memo(() => {
     const items: MenuProps["items"] = [
@@ -56,30 +58,30 @@ export const BtnsFeedback = memo(() => {
     ];
 
     return (
-        <Space.Compact block style={{ width: "90%", margin: "10px auto" }}>
+        <Compact block style={{ width: "90%", margin: "10px auto" }}>
             <Tooltip title="Like">
-                <Button type="text" icon={<LikeOutlined />} size="large" />
+                <AButton type="text" icon={<LikeOutlined />} size="large" />
             </Tooltip>
             <Tooltip title="Comment">
-                <Button type="text" icon={<CommentOutlined />} size="large" />
+                <AButton type="text" icon={<CommentOutlined />} size="large" />
             </Tooltip>
             <Tooltip title="Heart">
-                <Button type="text" icon={<HeartOutlined />} size="large" />
+                <AButton type="text" icon={<HeartOutlined />} size="large" />
             </Tooltip>
             <Tooltip title="Share">
-                <Button type="text" icon={<ShareAltOutlined />} size="large" />
+                <AButton type="text" icon={<ShareAltOutlined />} size="large" />
             </Tooltip>
             <Tooltip title="Download">
-                <Button type="text" icon={<DownloadOutlined />} size="large" />
+                <AButton type="text" icon={<DownloadOutlined />} size="large" />
             </Tooltip>
             <Dropdown
                 placement="bottomRight"
                 menu={{ items }}
                 trigger={["hover"]}
             >
-                <Button type="text" icon={<EllipsisOutlined />} size="large" />
+                <AButton type="text" icon={<EllipsisOutlined />} size="large" />
             </Dropdown>
-        </Space.Compact>
+        </Compact>
     );
 });
 

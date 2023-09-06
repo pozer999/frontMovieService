@@ -2,7 +2,7 @@ import cls from "./PostFilm.module.scss";
 import { Badge } from "antd";
 import Meta from "antd/es/card/Meta";
 import { memo } from "react";
-import CardComponent from "shared/ui/card/CardComponent";
+import { ACard } from "shared/ui/card";
 
 interface IPostFilm {
     film: any;
@@ -13,7 +13,7 @@ export const PostFilm = memo((props: IPostFilm) => {
     return (
         <Badge count={film.rating} color="green">
             <div className={cls.containerPost}>
-                <CardComponent
+                <ACard
                     loading={false}
                     hoverable
                     cover={
@@ -29,7 +29,7 @@ export const PostFilm = memo((props: IPostFilm) => {
                         description={film.genre}
                     />
                     <Meta description={film.actors} />
-                </CardComponent>
+                </ACard>
             </div>
         </Badge>
     );

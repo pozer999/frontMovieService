@@ -1,4 +1,4 @@
-import { Grid, Row, Skeleton, Space, Spin } from "antd";
+import { Grid, Skeleton, Spin } from "antd";
 import React, { memo } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,8 @@ import {
     getIsLoading,
 } from "../model/selectors/ListFilmsSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import ColComponent from "shared/ui/col/ColComponent";
+import ACol from "shared/ui/col/ui/ACol";
+import ARow from "shared/ui/row/ui/ARow";
 
 export const ListFilms = memo(() => {
     const dispatch = useAppDispatch();
@@ -40,7 +41,6 @@ export const ListFilms = memo(() => {
                                 marginTop: 30,
                             }}
                         ></Spin>
-                        <Skeleton.Image active={true} />
                     </>
                 ) : (
                     <div
@@ -57,25 +57,25 @@ export const ListFilms = memo(() => {
                     </div>
                 )
             ) : films.length !== 0 ? (
-                <Row
+                <ARow
                     gutter={[16, 24]}
                     style={{ margin: 10, marginTop: 50, marginBottom: 50 }}
                 >
                     {films.map((film: any, i: number) => (
-                        <ColComponent className="gutter-row" span={6} key={i}>
+                        <ACol className="gutter-row" span={6} key={i}>
                             <PostFilm film={film} />
-                        </ColComponent>
+                        </ACol>
                     ))}
-                </Row>
+                </ARow>
             ) : (
-                <Row
+                <ARow
                     gutter={[16, 24]}
                     style={{ margin: 10, marginTop: 50, marginBottom: 50 }}
                 >
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
                         <SkeletonItem key={index} />
                     ))}
-                </Row>
+                </ARow>
             )}
         </div>
     );

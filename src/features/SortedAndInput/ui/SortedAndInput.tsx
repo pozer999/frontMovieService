@@ -1,20 +1,24 @@
-import { Button, Input, Row, Select, Space, Tooltip } from "antd";
+import { useSelector } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
-
-import { fetchFilms, filmsActions } from "../../../store/FilmsSlice";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { filters } from "../../../shared/const/filters";
+import { fetchFilms, filmsActions } from "../../../store/FilmsSlice";
 import {
     getCurrentFilter,
     getValueInputSearch,
 } from "../model/selectors/SortedAndInputSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
-import cls from "./SortedAndInput.module.scss";
 import { SearchOutlined } from "@ant-design/icons";
+import Compact from "antd/es/space/Compact";
 import React, { useCallback } from "react";
 import { useDebounce } from "shared/lib/hooks/useDebounce";
-import ColComponent from "shared/ui/col/ColComponent";
+import cls from "./SortedAndInput.module.scss";
+import { AInput } from "shared/ui/input";
+import { AButton } from "shared/ui/button";
+import { ASelect } from "shared/ui/select";
+import { ACol } from "shared/ui/col";
+import { ARow } from "shared/ui/row";
+
 
 export const SortedAndInput = () => {
     const dispatch = useAppDispatch();
@@ -47,34 +51,34 @@ export const SortedAndInput = () => {
     };
 
     return (
-        <Row justify="space-between" align="middle" style={{ margin: 10 }}>
-            <ColComponent span={5} className={cls.inputSearch}>
-                <Select
+        <ARow justify="space-between" align="middle" style={{ margin: 10 }}>
+            <ACol span={5} className={cls.inputSearch}>
+                <ASelect
                     defaultValue={currentFilter}
                     className={cls.selectInput}
                     placement="bottomLeft"
                     options={filters}
                     onChange={handleChangeSelect}
                 />
-            </ColComponent>
-            <ColComponent xl={10} xs={14}>
-                <Space.Compact
+            </ACol>
+            <ACol xl={10} xs={14}>
+                <Compact
                     style={{ width: "100%" }}
                     className={cls.spaceInputSearch}
                 >
-                    <Input
+                    <AInput
                         placeholder="Enter the name of the movie"
                         className={cls.inputSearch}
                         onChange={(e) => handleOnChangeSearch(e)}
                     />
-                    <Button type="primary" className={cls.spaceInputButton}>
+                    <AButton type="primary" className={cls.spaceInputButton}>
                         <div className={cls.spanInputSearch_search}>Search</div>
                         <div className={cls.spanInputSearch_icon}>
                             <SearchOutlined />
                         </div>
-                    </Button>
-                </Space.Compact>
-            </ColComponent>
-        </Row>
+                    </AButton>
+                </Compact>
+            </ACol>
+        </ARow>
     );
 };

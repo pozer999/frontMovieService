@@ -1,13 +1,14 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { Form, Input } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import {
-    useCallback,
-    memo,
-    useEffect,
-    ChangeEvent,
-    HtmlHTMLAttributes,
-} from "react";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { AButton } from "shared/ui/button";
+import { ACheckbox } from "shared/ui/checkbox";
+import AModal from "shared/ui/modal/ui/AModal";
+import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
+import { AuthActions, auth } from "store/modalAuth";
 import {
     getIsDisabledButtonToAuth,
     getIsLoadingTheAuthButton,
@@ -16,10 +17,7 @@ import {
     getValuePasswordAuth,
     getValueUserNameAuth,
 } from "../model/selectors/AuthSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { AuthActions, auth } from "store/modalAuth";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
+import { AInput } from "shared/ui/input";
 
 export const AuthForm = () => {
     const dispatch = useAppDispatch();
@@ -40,11 +38,10 @@ export const AuthForm = () => {
             };
             dispatch(auth(valueAuth));
             localStorage.setItem("username", valueUserNameAuth);
-            
         } catch (e) {
             console.error("handleOkAuth error: ", e);
         }
-    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe,]);
+    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe]);
     const handleCloseModalAuth = useCallback(() => {
         dispatch(GeneralAuthAndRegisterActions.closeModalAuth());
     }, [dispatch]);
@@ -53,7 +50,9 @@ export const AuthForm = () => {
     }, [dispatch]);
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
-            dispatch(GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked));
+            dispatch(
+                GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked)
+            );
             console.log("remember me auth: ", e.target.checked);
         },
         [dispatch]
@@ -72,16 +71,16 @@ export const AuthForm = () => {
     );
 
     useEffect(() => {
-        if(valueUserNameAuth === '' || valuePasswordAuth === ''){
-            dispatch(AuthActions.toggleDisabledButtonToAuth(true))        
-        }else{
-            dispatch(AuthActions.toggleDisabledButtonToAuth(false))
+        if (valueUserNameAuth === "" || valuePasswordAuth === "") {
+            dispatch(AuthActions.toggleDisabledButtonToAuth(true));
+        } else {
+            dispatch(AuthActions.toggleDisabledButtonToAuth(false));
         }
         console.log("isRememberMeAuth: ", isRememberMe);
     }, [isRememberMe, dispatch, valuePasswordAuth, valueUserNameAuth]);
 
     return (
-        <Modal
+        <AModal
             open={isVisibleAuth}
             title="Log in"
             onCancel={handleCloseModalAuth}
@@ -109,7 +108,7 @@ export const AuthForm = () => {
                     ]}
                     hasFeedback
                 >
-                    <Input
+                    <AInput
                         prefix={
                             <UserOutlined className="site-form-item-icon" />
                         }
@@ -142,13 +141,13 @@ export const AuthForm = () => {
                 </Form.Item>
                 <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox
+                        <ACheckbox
                             defaultChecked={isRememberMe}
                             checked={isRememberMe}
                             onChange={handleChangeRememberMe}
                         >
                             Remember me
-                        </Checkbox>
+                        </ACheckbox>
                     </Form.Item>
 
                     <a className="login-form-forgot" href="/">
@@ -158,7 +157,7 @@ export const AuthForm = () => {
 
                 <Form.Item>
                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <Button
+                        <AButton
                             disabled={isDisabledButtonToAuth}
                             type="primary"
                             htmlType="submit"
@@ -168,16 +167,16 @@ export const AuthForm = () => {
                             onClick={handleOkAuth}
                         >
                             Log in
-                        </Button>
-                        <Button
+                        </AButton>
+                        <AButton
                             type="link"
                             onClick={handleSwitchRegistrationToAuth}
                         >
                             Or register now!
-                        </Button>
+                        </AButton>
                     </div>
                 </Form.Item>
             </Form>
-        </Modal>
+        </AModal>
     );
 };

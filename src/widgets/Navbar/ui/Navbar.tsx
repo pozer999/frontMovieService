@@ -1,16 +1,17 @@
-import { Button, Drawer, Space, Tooltip } from "antd";
-import cls from "./Navbar.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
+import { useSelector } from "react-redux";
+import cls from "./Navbar.module.scss";
 
+import { CloseOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
-import { RootState } from "store";
-import { NavLink } from "react-router-dom";
-import { CloseOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { RoutePath } from "shared/config/routeConfig";
 import { UserAccount } from "pages/UserAccount";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { ADrawer } from "shared/ui/drawer";
+import {
+    GeneralAuthAndRegisterActions,
+    logout,
+} from "store/generalAuthAndRegister";
 import {
     getIsAccess,
     getOpenUserAccount,
@@ -18,9 +19,8 @@ import {
     getValueUserNameAuth,
     getValueUserNameRegister,
 } from "../model/selectors/NavbarSelectors";
-import { RegisterActions } from "store/modalRegister";
-import { AuthActions } from "store/modalAuth";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer, logout } from "store/generalAuthAndRegister";
+import { ASpace } from "shared/ui/space";
+import { AButton } from "shared/ui/button";
 
 export const Navbar = memo(() => {
     const dispatch = useAppDispatch();
@@ -55,8 +55,8 @@ export const Navbar = memo(() => {
                 }}
             >
                 {isAccess ? (
-                    <Space align="center" size="small">
-                        <Button
+                    <ASpace align="center" size="small">
+                        <AButton
                             onClick={handleOpenUserAccount}
                             type="link"
                             style={{
@@ -69,8 +69,8 @@ export const Navbar = memo(() => {
                                 {localStorage.getItem("username")}
                             </div>
                             <UserOutlined className={cls.userOutlined} />
-                        </Button>
-                        <Button
+                        </AButton>
+                        <AButton
                             onClick={handleLogout}
                             type="link"
                             style={{
@@ -81,30 +81,30 @@ export const Navbar = memo(() => {
                             }}
                         >
                             <LogoutOutlined className={cls.logoutOutlined} />
-                        </Button>
-                    </Space>
+                        </AButton>
+                    </ASpace>
                 ) : (
-                    <Space className={cls.spaceNavbarButton}>
-                        <Button
+                    <ASpace className={cls.spaceNavbarButton}>
+                        <AButton
                             type="dashed"
                             onClick={handleOpenModalRegister}
                             className={cls.buttonNavbar}
                         >
                             Register
-                        </Button>
-                        <Button
+                        </AButton>
+                        <AButton
                             type="primary"
                             onClick={handleOpenModalAuth}
                             className={cls.buttonNavbar}
                         >
                             Log in
-                        </Button>
-                    </Space>
+                        </AButton>
+                    </ASpace>
                 )}
             </div>
             <AuthForm />
             <RegisterForm />
-            <Drawer
+            <ADrawer
                 title={<p style={{ fontSize: 25 }}>Profile</p>}
                 placement="top"
                 size={"default"}
@@ -120,7 +120,7 @@ export const Navbar = memo(() => {
                 }
             >
                 <UserAccount />
-            </Drawer>
+            </ADrawer>
         </>
     );
 });

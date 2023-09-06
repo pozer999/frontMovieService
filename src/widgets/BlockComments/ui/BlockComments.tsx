@@ -1,32 +1,32 @@
 import {
     Avatar,
-    Divider,
     Layout,
     Skeleton,
-    Space,
     Typography,
 } from "antd";
 import Meta from "antd/es/card/Meta";
-import React, { memo } from "react";
-import CardComponent from "shared/ui/card/CardComponent";
+import { memo } from "react";
+import { ACard } from "shared/ui/card";
+import { ADivider } from "shared/ui/divider";
+import { ASpace } from "shared/ui/space";
 
 
 export const BlockComments = memo(() => {
     return (
         <>
-            <Divider orientation="left" style={{ fontSize: 24, marginTop: 30 }}>
+            <ADivider orientation="left" style={{ fontSize: 24, marginTop: 30 }}>
                 Comments:
                 <Typography.Text type="warning" style={{ fontSize: 24 }}>
                     4
                 </Typography.Text>
-            </Divider>
+            </ADivider>
             <Layout.Footer style={{ background: "transparent" }}>
-                <Space
+                <ASpace
                     direction="vertical"
                     size="small"
                     style={{ display: "flex" }}
                 >
-                    <CardComponent>
+                    <ACard>
                         <Skeleton loading={false} avatar active>
                             <Meta
                                 avatar={
@@ -45,8 +45,8 @@ export const BlockComments = memo(() => {
                                 description="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid"
                             />
                         </Skeleton>
-                    </CardComponent>
-                    <CardComponent>
+                    </ACard>
+                    <ACard>
                         <Skeleton loading={false} avatar active>
                             <Meta
                                 avatar={
@@ -65,8 +65,8 @@ export const BlockComments = memo(() => {
                                 description="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid"
                             />
                         </Skeleton>
-                    </CardComponent>
-                    <CardComponent>
+                    </ACard>
+                    <ACard>
                         <Skeleton loading={true} avatar active>
                             <Meta
                                 avatar={
@@ -85,8 +85,8 @@ export const BlockComments = memo(() => {
                                 description="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid"
                             />
                         </Skeleton>
-                    </CardComponent>
-                </Space>
+                    </ACard>
+                </ASpace>
             </Layout.Footer>
         </>
     );

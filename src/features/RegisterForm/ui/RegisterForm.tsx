@@ -3,9 +3,20 @@ import {
     LockOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Modal, Select, message } from "antd";
+import { Form, Input, message } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { messageWrapper } from "shared/lib/helpers/messages/message";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { AButton } from "shared/ui/button";
+import { ACheckbox } from "shared/ui/checkbox";
+import { AInput } from "shared/ui/input";
+import { AModal } from "shared/ui/modal";
+import { ASelect } from "shared/ui/select";
+import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
+import { RegisterActions, register } from "store/modalRegister";
 import {
     getConfirmPasswordRegister,
     getError,
@@ -15,15 +26,8 @@ import {
     getUserRegisterName,
     getUserRegisterPassword,
 } from "../model/selectors/RegisterSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { validateRegisterData } from "../model/services/validateRegisterData";
-import { messageWrapper } from "shared/lib/helpers/messages/message";
 import cls from "./RegisterForm.module.scss";
-import { RegisterActions, register } from "store/modalRegister";
-import { AuthActions } from "store/modalAuth";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
 
 export const RegisterForm = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -37,7 +41,9 @@ export const RegisterForm = () => {
     const isLoadingTheRegisterButton = useSelector(getRegisterIsLoading);
     const errorRegisterValue = useSelector(getError);
     const isRememberMe = useSelector(getIsRememberMe);
-    const isDisabledButtonToRegister = useSelector(getIsDisabledButtonToRegister);
+    const isDisabledButtonToRegister = useSelector(
+        getIsDisabledButtonToRegister
+    );
     const isVisibleRegister = useSelector(getRegisterIsVisible);
 
     const options = [
@@ -92,7 +98,9 @@ export const RegisterForm = () => {
     };
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
-            dispatch(GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked));
+            dispatch(
+                GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked)
+            );
             console.log("remember me register: ", e.target.checked);
         },
         [dispatch]
@@ -118,7 +126,7 @@ export const RegisterForm = () => {
     ]);
 
     return (
-        <Modal
+        <AModal
             open={isVisibleRegister}
             title="Register"
             onCancel={handleCloseModalRegister}
@@ -139,7 +147,7 @@ export const RegisterForm = () => {
                     ]}
                     hasFeedback
                 >
-                    <Input
+                    <AInput
                         prefix={
                             <UserOutlined className="site-form-item-icon" />
                         }
@@ -205,16 +213,16 @@ export const RegisterForm = () => {
                     />
                 </Form.Item>
                 <Form.Item name="Genre" label="Favorites">
-                    <Select
+                    <ASelect
                         placeholder="Please choose your favorite genre"
                         mode="multiple"
                         showArrow
                         options={options}
-                    ></Select>
+                    ></ASelect>
                 </Form.Item>
                 <Form.Item>
                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <Button
+                        <AButton
                             type="primary"
                             htmlType="submit"
                             key="submit"
@@ -224,31 +232,31 @@ export const RegisterForm = () => {
                             className={cls.buttonToSubmitForm}
                         >
                             Register
-                        </Button>
-                        <Button
+                        </AButton>
+                        <AButton
                             type="link"
                             onClick={handleSwitchAuthToRegistration}
                             className={cls.alreadyRegistered}
                         >
                             Already registered?
-                        </Button>
+                        </AButton>
                         <Form.Item
                             name="remember"
                             valuePropName="checked"
                             noStyle
                         >
-                            <Checkbox
+                            <ACheckbox
                                 defaultChecked={isRememberMe}
                                 checked={isRememberMe}
                                 onChange={handleChangeRememberMe}
                                 className={cls.checkboxIsRemeberMe}
                             >
                                 Remember me
-                            </Checkbox>
+                            </ACheckbox>
                         </Form.Item>
                     </div>
                 </Form.Item>
             </Form>
-        </Modal>
+        </AModal>
     );
 };

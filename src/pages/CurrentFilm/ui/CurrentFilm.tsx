@@ -1,13 +1,4 @@
-import {
-    Breadcrumb,
-    Button,
-    Collapse,
-    Divider,
-    Row,
-    Space,
-    Steps,
-    Switch,
-} from "antd";
+import { Breadcrumb, Collapse, Steps, Switch } from "antd";
 import { memo, useState } from "react";
 import { Typography } from "antd";
 const { Text } = Typography;
@@ -22,7 +13,11 @@ import { getTypeTheme } from "../model/selectors/CurrentFilmSelectors";
 import cls from "./CurrentFilm.module.scss";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import ColComponent from "shared/ui/col/ColComponent";
+import { ADivider } from "shared/ui/divider";
+import { ASpace } from "shared/ui/space";
+import { AButton } from "shared/ui/button";
+import { ACol } from "shared/ui/col";
+import { ARow } from "shared/ui/row";
 
 export const CurrentFilm = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
@@ -41,13 +36,13 @@ export const CurrentFilm = memo(() => {
             {isLoadingCurrentPage ? (
                 <SkeletonCurrentFilm />
             ) : (
-                <Space
+                <ASpace
                     direction="vertical"
                     size="small"
                     className={cls.spaceText}
                 >
-                    <Row gutter={[24, 8]}>
-                        <ColComponent
+                    <ARow gutter={[24, 8]}>
+                        <ACol
                             xl={10}
                             md={8}
                             xs={8}
@@ -64,31 +59,31 @@ export const CurrentFilm = memo(() => {
                                 className={cls.imgCurrentFilm}
                             />
                             <NavLink to="/movie">
-                                <Button
+                                <AButton
                                     type="primary"
                                     size="large"
                                     icon={<PlayCircleOutlined />}
                                     className={cls.btnWathchRightNow}
                                 >
                                     Watch right now
-                                </Button>
+                                </AButton>
                             </NavLink>
-                        </ColComponent>
-                        <ColComponent span={14} className={cls.wrapperForText}>
-                            <Space direction="vertical" size={"small"}>
-                                <Space>
+                        </ACol>
+                        <ACol span={14} className={cls.wrapperForText}>
+                            <ASpace direction="vertical" size={"small"}>
+                                <ASpace>
                                     <Text strong>Year of publication:</Text>
                                     <Text>2003</Text>
-                                </Space>
-                                <Space>
+                                </ASpace>
+                                <ASpace>
                                     <Text strong>Duration:</Text>
                                     <Text>2:30</Text>
-                                </Space>
-                                <Space>
+                                </ASpace>
+                                <ASpace>
                                     <Text strong>Genre:</Text>
                                     <Text>comedy</Text>
-                                </Space>
-                                <Space>
+                                </ASpace>
+                                <ASpace>
                                     <Text strong>Rating:</Text>
                                     {typeTheme === "dark" ? (
                                         <Text
@@ -106,12 +101,12 @@ export const CurrentFilm = memo(() => {
                                     ) : (
                                         <Rate disabled defaultValue={4} />
                                     )}
-                                </Space>
-                                <Space>
+                                </ASpace>
+                                <ASpace>
                                     <Text strong>Director:</Text>
                                     <Text>Fabrice Du Welz</Text>
-                                </Space>
-                                <Space wrap>
+                                </ASpace>
+                                <ASpace wrap>
                                     <Text strong>The actors:</Text>
                                     <Text>
                                         <p className={cls.actorsText}>
@@ -122,8 +117,8 @@ export const CurrentFilm = memo(() => {
                                             Lefebvre, Alfred David
                                         </p>
                                     </Text>
-                                </Space>
-                                <Space wrap>
+                                </ASpace>
+                                <ASpace wrap>
                                     <Collapse
                                         className={cls.collapse}
                                         ghost
@@ -143,50 +138,50 @@ export const CurrentFilm = memo(() => {
                                             },
                                         ]}
                                     />
-                                </Space>
-                            </Space>
-                        </ColComponent>
-                    </Row>
+                                </ASpace>
+                            </ASpace>
+                        </ACol>
+                    </ARow>
                     <>
-                        <Divider
+                        <ADivider
                             orientation="left"
                             className={cls.driverSimilar}
                         >
                             Similar
-                        </Divider>
+                        </ADivider>
                         <div className={cls.wrapperSwiper}>
-                        <Swiper
-                            navigation={true}
-                            scrollbar={{
-                                hide: true,
-                            }}
-                            modules={[Navigation, Scrollbar]}
-                            slidesPerView={4}
-                            className={cls.swiperSimilar}
-                        >
-                            {[
-                                mars,
-                                mars,
-                                mars,
-                                mars,
-                                mars,
-                                mars,
-                                mars,
-                                mars,
-                                mars,
-                            ].map((item, index) => (
-                                <SwiperSlide key={index}>
-                                    <img
-                                        src={item}
-                                        alt="FILM"
-                                        className={cls.swiperSimilar_item}
-                                    />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                            <Swiper
+                                navigation={true}
+                                scrollbar={{
+                                    hide: true,
+                                }}
+                                modules={[Navigation, Scrollbar]}
+                                slidesPerView={4}
+                                className={cls.swiperSimilar}
+                            >
+                                {[
+                                    mars,
+                                    mars,
+                                    mars,
+                                    mars,
+                                    mars,
+                                    mars,
+                                    mars,
+                                    mars,
+                                    mars,
+                                ].map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <img
+                                            src={item}
+                                            alt="FILM"
+                                            className={cls.swiperSimilar_item}
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </div>
                     </>
-                </Space>
+                </ASpace>
             )}
         </div>
     );

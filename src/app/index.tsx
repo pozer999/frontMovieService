@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout, Row, theme } from "antd";
+import { ConfigProvider, Layout,theme } from "antd";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./index.module.scss";
@@ -16,6 +16,7 @@ import logo from "../image/movie.png";
 import cls from "./index.module.scss";
 import { Routing } from "pages";
 import { WithProviders } from "./providers";
+import ARow from "shared/ui/row/ui/ARow";
 
 axios.defaults.baseURL = "http://localhost:8080/";
 
@@ -55,7 +56,7 @@ const App = () => {
                             themeType === "dark" ? "rgb(15,15,15)" : "white",
                     }}
                 >
-                    <Row
+                    <ARow
                         justify="space-between"
                         align="middle"
                         className="RowHeaderNavbar"
@@ -69,12 +70,12 @@ const App = () => {
                             />
                         </NavLink>
                         <Navbar />
-                    </Row>
+                    </ARow>
                 </Layout.Header>
                 <Layout.Content>
-                    <Row justify="center" style={{ marginBottom: 30 }}>
+                    <ARow justify="center" style={{ marginBottom: 30 }}>
                         <Routing />
-                    </Row>
+                    </ARow>
                 </Layout.Content>
             </div>
         </ConfigProvider>

@@ -1,65 +1,54 @@
-import {
-    Breadcrumb,
-    Collapse,
-    Divider,
-    Row,
-    Skeleton,
-    Space,
-    Steps,
-} from "antd";
+import { Skeleton } from "antd";
 import { memo } from "react";
-import { Typography } from "antd";
-const { Text } = Typography;
-import mars from "../../../src/image/mars.jpg";
-import { Swiper, SwiperSlide } from "swiper/react";
+import ACol from "shared/ui/col/ui/ACol";
+import { ADivider } from "shared/ui/divider";
+import ARow from "shared/ui/row/ui/ARow";
+import { ASpace } from "shared/ui/space";
 import { Navigation, Scrollbar } from "swiper/modules";
-import Lorem from "shared/Lorem";
-import { Rate } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
-import ColComponent from "shared/ui/col/ColComponent";
+import { Swiper, SwiperSlide } from "swiper/react";
+import mars from "../../../src/image/mars.jpg";
 
 export const SkeletonCurrentFilm = memo(() => {
     return (
         <>
-            <Space direction="vertical" size="small">
-                <Row gutter={[24, 8]}>
-                    <ColComponent span={10} style={{ color: "white" }}>
+            <ASpace direction="vertical" size="small">
+                <ARow gutter={[24, 8]}>
+                    <ACol span={10} style={{ color: "white" }}>
                         <Skeleton.Image
                             style={{ height: 300, width: 250 }}
                             active
                         />
-                    </ColComponent>
-                    <ColComponent span={14} style={{ color: "white", fontSize: 25 }}>
-                        <Space direction="vertical" size={"small"}>
-                            <Space>
+                    </ACol>
+                    <ACol span={14} style={{ color: "white", fontSize: 25 }}>
+                        <ASpace direction="vertical" size={"small"}>
+                            <ASpace>
                                 <Skeleton.Button active size="small" />
-                            </Space>
-                            <Space>
+                            </ASpace>
+                            <ASpace>
                                 <Skeleton.Button active />
-                            </Space>
-                            <Space>
+                            </ASpace>
+                            <ASpace>
                                 <Skeleton.Input active />
-                            </Space>
-                            <Space>
+                            </ASpace>
+                            <ASpace>
                                 <Skeleton.Button active />
-                            </Space>
-                            <Space>
+                            </ASpace>
+                            <ASpace>
                                 <Skeleton.Avatar active shape="square" />
-                            </Space>
-                            <Space wrap>
+                            </ASpace>
+                            <ASpace wrap>
                                 <Skeleton.Input active size="small" />
-                            </Space>
-                            <Space wrap>
+                            </ASpace>
+                            <ASpace wrap>
                                 <Skeleton.Input active />
-                            </Space>
-                        </Space>
-                    </ColComponent>
-                </Row>
+                            </ASpace>
+                        </ASpace>
+                    </ACol>
+                </ARow>
                 <>
-                    <Divider orientation="left" style={{ fontSize: 20 }}>
+                    <ADivider orientation="left" style={{ fontSize: 20 }}>
                         Similar
-                    </Divider>
+                    </ADivider>
                     <Swiper
                         navigation={true}
                         scrollbar={{
@@ -93,7 +82,7 @@ export const SkeletonCurrentFilm = memo(() => {
                         ))}
                     </Swiper>
                 </>
-            </Space>
+            </ASpace>
         </>
     );
 });
