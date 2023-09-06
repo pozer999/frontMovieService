@@ -1,21 +1,19 @@
 import {
-    CloseOutlined,
-    DislikeFilled,
-    ExceptionOutlined,
-    SmileOutlined,
+    CloseOutlined
 } from "@ant-design/icons";
-import { Button, Card, Col, Divider, Drawer, Empty, Row, Skeleton } from "antd";
+import { Divider, Drawer, Empty, Row, Skeleton } from "antd";
 
-import { useCallback, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "store";
+import { useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import cls from "./SkeletonItem.module.scss";
-import { AuthActions } from "store/modalAuth";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
 import { CurrentFilm } from "pages/CurrentFilm";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
+import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";
+import cls from "./SkeletonItem.module.scss";
+import CardComponent from "shared/ui/card/CardComponent";
+import ColComponent from "shared/ui/col/ColComponent";
+
 
 const SkeletonItem = () => {
     const dispatch = useAppDispatch();
@@ -33,7 +31,7 @@ const SkeletonItem = () => {
     }, []);
 
     return (
-        <Col
+        <ColComponent
             className="gutter-row"
             xs={24}
             sm={12}
@@ -42,7 +40,7 @@ const SkeletonItem = () => {
             xl={6}
             style={{ position: "relative" }}
         >
-            <Card
+            <CardComponent
                 loading={false}
                 hoverable
                 onClick={handleOpenCurrentFilm}
@@ -81,7 +79,7 @@ const SkeletonItem = () => {
                         />
                     </>
                 </Row>
-            </Card>
+            </CardComponent>
             <Drawer
                 mask={false}
                 title={
@@ -107,7 +105,7 @@ const SkeletonItem = () => {
             >
                 <CurrentFilm />
             </Drawer>
-        </Col>
+        </ColComponent>
     );
 };
 

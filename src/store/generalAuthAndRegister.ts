@@ -116,6 +116,7 @@ export const checkAuth = createAsyncThunk(
             localStorage.setItem("token", response.data.accessToken);
             if (!response.data) {
                 throw new Error();
+                
             }
             if (response.data.roles[0].name === rolesUsers.user) {
                 console.log("АВТОРИЗОВАН КАК ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ");

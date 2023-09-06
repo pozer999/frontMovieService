@@ -1,7 +1,6 @@
 import {
     Breadcrumb,
     Button,
-    Col,
     Collapse,
     Divider,
     Row,
@@ -23,6 +22,7 @@ import { getTypeTheme } from "../model/selectors/CurrentFilmSelectors";
 import cls from "./CurrentFilm.module.scss";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
+import ColComponent from "shared/ui/col/ColComponent";
 
 export const CurrentFilm = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
@@ -47,7 +47,7 @@ export const CurrentFilm = memo(() => {
                     className={cls.spaceText}
                 >
                     <Row gutter={[24, 8]}>
-                        <Col
+                        <ColComponent
                             xl={10}
                             md={8}
                             xs={8}
@@ -73,8 +73,8 @@ export const CurrentFilm = memo(() => {
                                     Watch right now
                                 </Button>
                             </NavLink>
-                        </Col>
-                        <Col span={14} className={cls.wrapperForText}>
+                        </ColComponent>
+                        <ColComponent span={14} className={cls.wrapperForText}>
                             <Space direction="vertical" size={"small"}>
                                 <Space>
                                     <Text strong>Year of publication:</Text>
@@ -145,7 +145,7 @@ export const CurrentFilm = memo(() => {
                                     />
                                 </Space>
                             </Space>
-                        </Col>
+                        </ColComponent>
                     </Row>
                     <>
                         <Divider

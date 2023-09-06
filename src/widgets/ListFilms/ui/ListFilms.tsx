@@ -1,4 +1,4 @@
-import { Col, Grid, Row, Skeleton, Space, Spin } from "antd";
+import { Grid, Row, Skeleton, Space, Spin } from "antd";
 import React, { memo } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import {
     getIsLoading,
 } from "../model/selectors/ListFilmsSelectors";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import ColComponent from "shared/ui/col/ColComponent";
 
 export const ListFilms = memo(() => {
     const dispatch = useAppDispatch();
@@ -61,9 +62,9 @@ export const ListFilms = memo(() => {
                     style={{ margin: 10, marginTop: 50, marginBottom: 50 }}
                 >
                     {films.map((film: any, i: number) => (
-                        <Col className="gutter-row" span={6} key={i}>
+                        <ColComponent className="gutter-row" span={6} key={i}>
                             <PostFilm film={film} />
-                        </Col>
+                        </ColComponent>
                     ))}
                 </Row>
             ) : (

@@ -1,4 +1,4 @@
-import { Button, Col, Input, Row, Select, Space, Tooltip } from "antd";
+import { Button, Input, Row, Select, Space, Tooltip } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,6 +14,7 @@ import cls from "./SortedAndInput.module.scss";
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useCallback } from "react";
 import { useDebounce } from "shared/lib/hooks/useDebounce";
+import ColComponent from "shared/ui/col/ColComponent";
 
 export const SortedAndInput = () => {
     const dispatch = useAppDispatch();
@@ -47,7 +48,7 @@ export const SortedAndInput = () => {
 
     return (
         <Row justify="space-between" align="middle" style={{ margin: 10 }}>
-            <Col span={5} className={cls.inputSearch}>
+            <ColComponent span={5} className={cls.inputSearch}>
                 <Select
                     defaultValue={currentFilter}
                     className={cls.selectInput}
@@ -55,8 +56,8 @@ export const SortedAndInput = () => {
                     options={filters}
                     onChange={handleChangeSelect}
                 />
-            </Col>
-            <Col xl={10} xs={14}>
+            </ColComponent>
+            <ColComponent xl={10} xs={14}>
                 <Space.Compact
                     style={{ width: "100%" }}
                     className={cls.spaceInputSearch}
@@ -73,7 +74,7 @@ export const SortedAndInput = () => {
                         </div>
                     </Button>
                 </Space.Compact>
-            </Col>
+            </ColComponent>
         </Row>
     );
 };

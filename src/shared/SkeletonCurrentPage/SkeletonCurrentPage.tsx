@@ -1,6 +1,5 @@
 import {
     Breadcrumb,
-    Col,
     Collapse,
     Divider,
     Row,
@@ -18,19 +17,20 @@ import Lorem from "shared/Lorem";
 import { Rate } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import ColComponent from "shared/ui/col/ColComponent";
 
 export const SkeletonCurrentFilm = memo(() => {
     return (
         <>
             <Space direction="vertical" size="small">
                 <Row gutter={[24, 8]}>
-                    <Col span={10} style={{ color: "white" }}>
+                    <ColComponent span={10} style={{ color: "white" }}>
                         <Skeleton.Image
                             style={{ height: 300, width: 250 }}
                             active
                         />
-                    </Col>
-                    <Col span={14} style={{ color: "white", fontSize: 25 }}>
+                    </ColComponent>
+                    <ColComponent span={14} style={{ color: "white", fontSize: 25 }}>
                         <Space direction="vertical" size={"small"}>
                             <Space>
                                 <Skeleton.Button active size="small" />
@@ -54,7 +54,7 @@ export const SkeletonCurrentFilm = memo(() => {
                                 <Skeleton.Input active />
                             </Space>
                         </Space>
-                    </Col>
+                    </ColComponent>
                 </Row>
                 <>
                     <Divider orientation="left" style={{ fontSize: 20 }}>

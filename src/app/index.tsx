@@ -1,62 +1,33 @@
-import "./styles/App.module.scss";
-import { ConfigProvider, Layout, Row, Switch, theme } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { ConfigProvider, Layout, Row, theme } from "antd";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import "./index.module.scss";
+import "./styles/normalize.module.scss";
 
 import axios from "axios";
-import { SmileOutlined, UserOutlined } from "@ant-design/icons";
-import { Navbar } from "widgets/Navbar";
-import Routing from "Routing/Routing";
 import { RoutePath } from "shared/config/routeConfig";
+import { Navbar } from "widgets/Navbar";
 
-import logo from "./image/movie.png";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { ValidateRegisterError } from "features/RegisterForm/model/types/register";
-import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
 import { getThemeType } from "pages/UserAccount/model/selectors/UserAccountSelectors";
-import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
-import cls from './styles/App.module.scss';
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { checkAuth } from "store/generalAuthAndRegister";
+import logo from "../image/movie.png";
+import cls from "./index.module.scss";
+import { Routing } from "pages";
+import { WithProviders } from "./providers";
 
 axios.defaults.baseURL = "http://localhost:8080/";
 
-type ThemeData = {
-    borderRadius: number;
-    colorPrimary: string;
-};
-
-const primary: ThemeData = {
-    borderRadius: 6,
-    colorPrimary: "rgb(184, 178, 178)",
-};
-const lime: ThemeData = {
-    borderRadius: 12,
-    colorPrimary: "rgb(0, 255, 0)",
-};
-
-function App() {
-    const [data, setData] = useState<ThemeData>(primary);
+const App = () => {
     const dispatch = useAppDispatch();
-
     const themeType = useSelector(getThemeType);
-
     const bodyElement = document.body;
+
     useEffect(() => {
         bodyElement.style.backgroundColor =
             themeType === "dark" ? "rgb(15,15,15)" : "white";
     }, [bodyElement.style, themeType]);
-
-    //   async function f() {
-    //     const result = await axios(
-    //         'http://localhost:8080/movies',
-    //     );
-    //     console.log('movies: ', result);
-    //     }
-    //     useEffect(() => {
-    //     f();
-    //   });
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
@@ -72,7 +43,7 @@ function App() {
                     themeType === "dark"
                         ? theme.darkAlgorithm
                         : theme.defaultAlgorithm,
-                token: { colorPrimary: data.colorPrimary },
+                token: { colorPrimary: "rgb(184, 178, 178)" },
                 components: { Button: { colorBorder: "red" } },
             }}
         >
@@ -90,22 +61,16 @@ function App() {
                         className="RowHeaderNavbar"
                         style={{ height: "50px" }}
                     >
-                        <NavLink
-                            to={RoutePath.MAIN}
-                            // className={cls.navLinkLogoImage}
-                            // style={{ height: 50, maxWidth: 200 }}
-                        >
+                        <NavLink to={RoutePath.MAIN}>
                             <img
                                 src={logo}
                                 alt=""
-                                // style={{ maxWidth: "100%" }}
                                 className={cls.App_navLinkLogoImage__clTId}
                             />
                         </NavLink>
                         <Navbar />
                     </Row>
                 </Layout.Header>
-
                 <Layout.Content>
                     <Row justify="center" style={{ marginBottom: 30 }}>
                         <Routing />
@@ -114,6 +79,6 @@ function App() {
             </div>
         </ConfigProvider>
     );
-}
+};
 
-export default App;
+export default WithProviders(App);
