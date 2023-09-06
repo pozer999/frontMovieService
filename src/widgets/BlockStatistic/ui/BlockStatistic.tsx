@@ -1,10 +1,10 @@
 import { LikeOutlined, ShareAltOutlined } from "@ant-design/icons";
 import { Statistic } from "antd";
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 import ACol from "shared/ui/col/ui/ACol";
 import ARow from "shared/ui/row/ui/ARow";
 
-export const BlockStatistic = memo(() => {
+export const BlockStatistic: FC = memo(() => {
     return (
         <ARow justify="center" style={{ margin: "0 auto" }}>
             <ACol span={5} xs={8} xl={5} sm={5}>

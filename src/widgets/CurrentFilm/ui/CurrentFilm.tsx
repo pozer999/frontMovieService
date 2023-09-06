@@ -1,5 +1,5 @@
 import { Breadcrumb, Collapse, Steps, Switch } from "antd";
-import { memo, useState } from "react";
+import { FC, memo, useState } from "react";
 import { Typography } from "antd";
 const { Text } = Typography;
 import mars from "../../../image/mars.jpg";
@@ -19,7 +19,7 @@ import { AButton } from "shared/ui/button";
 import { ACol } from "shared/ui/col";
 import { ARow } from "shared/ui/row";
 
-export const CurrentFilm = memo(() => {
+export const CurrentFilm: FC = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
     const countRate = 4;
     const [isLoadingCurrentPage, setIsLoadingCurrentPage] =

@@ -1,11 +1,11 @@
-import { memo, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import cls from "./Navbar.module.scss";
 
 import { CloseOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
-import { UserAccount } from "pages/UserAccount";
+import { UserAccount } from "widgets/UserAccount";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { ADrawer } from "shared/ui/drawer";
 import {
@@ -22,7 +22,7 @@ import {
 import { ASpace } from "shared/ui/space";
 import { AButton } from "shared/ui/button";
 
-export const Navbar = memo(() => {
+export const Navbar: FC = memo(() => {
     const dispatch = useAppDispatch();
     const isAccess = useSelector(getIsAccess);
     const valueUserNameRegister = useSelector(getValueUserNameRegister);

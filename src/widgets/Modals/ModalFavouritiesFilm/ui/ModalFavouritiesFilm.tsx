@@ -15,7 +15,7 @@ interface IModalFavouritiesFilm {
     handleCloseModal: any;
 }
 
-export const ModalFavouritiesFilm = memo(
+export const ModalFavouritiesFilm= memo(
     ({ items, title, isVisible, handleCloseModal }: IModalFavouritiesFilm) => {
         return (
             <AModal

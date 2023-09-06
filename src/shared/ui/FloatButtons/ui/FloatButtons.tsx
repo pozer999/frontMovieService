@@ -1,19 +1,18 @@
-import { FloatButton } from "antd";
 import {
     EyeOutlined,
     FormatPainterOutlined,
     HeartOutlined,
 } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { FloatButton } from "antd";
 import { memo, useCallback } from "react";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { getTypeTheme } from "widgets/CurrentFilm/model/selectors/CurrentFilmSelectors";
 import {
     changeTheme,
     openModalFavourites,
     openModalWatchLater,
-} from "../../../store/modalFavouritesAndWatchLaterAndSettingsReducer";
-import { RootState } from "store";
-import { getTypeTheme } from "pages/CurrentFilm/model/selectors/CurrentFilmSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+} from "../../../../store/modalFavouritesAndWatchLaterAndSettingsReducer";
 
 import cls from "./FloatButtons.module.scss";
 
@@ -21,7 +20,7 @@ export const FloatButtons = memo(() => {
     const dispatch = useAppDispatch();
 
     const typeTheme = useSelector(getTypeTheme);
-    
+
     const handleOpenModalFavourites = useCallback(() => {
         dispatch(openModalFavourites());
     }, [dispatch]);
@@ -30,9 +29,8 @@ export const FloatButtons = memo(() => {
     }, [dispatch]);
     const handleChangeTheme = useCallback(() => {
         dispatch(changeTheme());
-        localStorage.setItem("theme", typeTheme)
+        localStorage.setItem("theme", typeTheme);
     }, [dispatch, typeTheme]);
-
 
     return (
         <FloatButton.Group shape="circle" className={cls.floatButtonPosition}>

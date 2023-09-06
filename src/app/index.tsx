@@ -1,22 +1,25 @@
-import { ConfigProvider, Layout,theme } from "antd";
-import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import "./index.module.scss";
 import "./styles/normalize.module.scss";
+import cls from "./index.module.scss";
+import logo from "../image/movie.png";
 
 import axios from "axios";
+
+import { ConfigProvider, Layout, theme } from "antd";
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+
 import { RoutePath } from "shared/config/routeConfig";
 import { Navbar } from "widgets/Navbar";
 
-import { getThemeType } from "pages/UserAccount/model/selectors/UserAccountSelectors";
+import { getThemeType } from "widgets/UserAccount/model/selectors/UserAccountSelectors";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { checkAuth } from "store/generalAuthAndRegister";
-import logo from "../image/movie.png";
-import cls from "./index.module.scss";
+
 import { Routing } from "pages";
 import { WithProviders } from "./providers";
-import ARow from "shared/ui/row/ui/ARow";
+import { ARow } from "shared/ui/row";
 
 axios.defaults.baseURL = "http://localhost:8080/";
 

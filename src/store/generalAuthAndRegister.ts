@@ -106,25 +106,25 @@ export const checkAuth = createAsyncThunk(
     async (_, thunkApi) => {
         const { rejectWithValue } = thunkApi;
         try {
-            const response = await axios.get<AuthResponse>(
-                `${API_URL}/refresh`,
-                { withCredentials: true }
-            );
-            console.log("responseCheckAuth: ", response);
-            localStorage.setItem("roles", response.data.roles[0].name);
-            localStorage.setItem("username", response.data.username);
-            localStorage.setItem("token", response.data.accessToken);
-            if (!response.data) {
-                throw new Error();
+            // const response = await axios.get<AuthResponse>(
+            //     `${API_URL}/refresh`,
+            //     { withCredentials: true }
+            // );
+            // console.log("responseCheckAuth: ", response);
+            // localStorage.setItem("roles", response.data.roles[0].name);
+            // localStorage.setItem("username", response.data.username);
+            // localStorage.setItem("token", response.data.accessToken);
+            // if (!response.data) {
+            //     throw new Error();
                 
-            }
-            if (response.data.roles[0].name === rolesUsers.user) {
-                console.log("АВТОРИЗОВАН КАК ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ");
-            }
-            if (response.data.roles[0].name === rolesUsers.admin) {
-                console.log("АВТОРИЗОВАН КАК АДМИН");
-            }
-            return response.data;
+            // }
+            // if (response.data.roles[0].name === rolesUsers.user) {
+            //     console.log("АВТОРИЗОВАН КАК ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ");
+            // }
+            // if (response.data.roles[0].name === rolesUsers.admin) {
+            //     console.log("АВТОРИЗОВАН КАК АДМИН");
+            // }
+            // return response.data;
         } catch (e) {
             rejectWithValue(`ошибка регистрации:${e} `);
         }

@@ -1,5 +1,5 @@
-import { UserAccount } from "pages/UserAccount";
-import { CurrentFilm } from "pages/CurrentFilm";
+import { UserAccount } from "widgets/UserAccount";
+import { CurrentFilm } from "widgets/CurrentFilm";
 import { MainPageLazy } from "pages/MainPage/MainPageLazy";
 import MoviePage from "pages/MoviePage/ui/MoviePage";
 

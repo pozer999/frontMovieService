@@ -6,7 +6,7 @@ import { Skeleton } from "antd";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { CurrentFilm } from "pages/CurrentFilm";
+import { CurrentFilm } from "widgets/CurrentFilm";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
 import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";

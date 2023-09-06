@@ -11,10 +11,10 @@ import {
 } from "@ant-design/icons";
 import { Dropdown, MenuProps, Tooltip } from "antd";
 import Compact from "antd/es/space/Compact";
-import { memo } from "react";
+import { FC, memo } from "react";
 import { AButton } from "shared/ui/button";
 
-export const BtnsFeedback = memo(() => {
+export const BtnsFeedback: FC = memo(() => {
     const items: MenuProps["items"] = [
         {
             key: "1",

@@ -1,29 +1,28 @@
 import { Layout } from "antd";
-import { SwiperRef, SwiperClass } from "swiper/react";
-import { memo, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
+import { SwiperClass, SwiperRef } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FloatButtons } from "shared/ui/FloatButtons";
+import { CarouselHistoryFilms } from "widgets/CarouselHistoryFilms";
+import { ModalFavouritiesFilm } from "widgets/Modals/ModalFavouritiesFilm";
+import { ModalWatchLaterFilm } from "widgets/Modals/ModalWatchLaterFilm";
 import {
     closeModalFavourites,
     closeModalWatchLater,
 } from "../../../store/modalFavouritesAndWatchLaterAndSettingsReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import { CarouselHistoryFilms } from "widgets/CarouselHistoryFilms";
-import { ModalFavouritiesFilm } from "widgets/Modals/ModalFavouritiesFilm";
-import { ModalWatchLaterFilm } from "widgets/Modals/ModalWatchLaterFilm";
-import { FloatButtons } from "shared/FloatButtons";
 
-import mstiteli from "../../../image/kartinki-mstiteli-14.jpg";
 import image2 from "../../../image/2.jpg";
 import image3 from "../../../image/3.jpeg";
 import image4 from "../../../image/4.jpeg";
 import avatar from "../../../image/avatar.jpg";
+import mstiteli from "../../../image/kartinki-mstiteli-14.jpg";
 import mars from "../../../image/mars.jpg";
 import {
     getIsVisibleFavourites,
@@ -31,7 +30,7 @@ import {
     getThemeType,
 } from "../model/selectors/UserAccountSelectors";
 
-export const UserAccount = memo(() => {
+export const UserAccount: FC = memo(() => {
     const isVisibleFavourites = useSelector(getIsVisibleFavourites);
     const isVisibleWatchLater = useSelector(getIsVisibleWatchLater);
     const themeType = useSelector(getThemeType);

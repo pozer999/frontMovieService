@@ -19,21 +19,19 @@ import { ASelect } from "shared/ui/select";
 import { ACol } from "shared/ui/col";
 import { ARow } from "shared/ui/row";
 
-
 export const SortedAndInput = () => {
     const dispatch = useAppDispatch();
     const currentFilter = useSelector(getCurrentFilter);
     const valueInputSearch = useSelector(getValueInputSearch);
     const fetchData = useCallback(() => {
         try {
-            const data = { currentFilter, valueInputSearch };
             dispatch(fetchFilms());
         } catch (e) {
             console.error(e);
         } finally {
             console.log("сработал дебаунс через 3 сек");
         }
-    }, [dispatch, currentFilter, valueInputSearch]);
+    }, [dispatch]);
 
     const fetchInputSearch = useDebounce(fetchData, 3000);
 
@@ -46,7 +44,6 @@ export const SortedAndInput = () => {
     );
     const handleChangeSelect = (value: string) => {
         dispatch(filmsActions.changeFilters(value));
-        const data = { currentFilter, valueInputSearch };
         dispatch(fetchFilms());
     };
 

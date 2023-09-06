@@ -2,50 +2,50 @@
 
 $valueXL: 1000px;
 
-.wrapperVideo{
-    width: $XXL*0.8;
-    height: calc($XXL*0.8/1.77);
+.wrapperVideo {
+    width: $XXL * 0.8;
+    height: calc($XXL * 0.8 / 1.77);
 }
 
 @media screen and (max-width: $XL) {
-    .wrapperVideo{
-        width: $XL*0.8;
-        height: calc($XL*0.8/1.77);
+    .wrapperVideo {
+        width: $XL * 0.8;
+        height: calc($XL * 0.8 / 1.77);
     }
 }
 @media screen and (max-width: $LG) {
-    .wrapperVideo{
-        width: $LG*0.8;
-        height: calc($LG*0.8/1.77);
+    .wrapperVideo {
+        width: $LG * 0.8;
+        height: calc($LG * 0.8 / 1.77);
     }
 }
 @media screen and (max-width: $MD) {
-    .wrapperVideo{
-        width: $MD*0.8;
-        height: calc($MD*0.8/1.77);
+    .wrapperVideo {
+        width: $MD * 0.8;
+        height: calc($MD * 0.8 / 1.77);
     }
 }
 @media screen and (max-width: $SM) {
-    .wrapperVideo{
-        width: $SM*0.8;
-        height: calc($SM*0.8/1.77);
+    .wrapperVideo {
+        width: $SM * 0.8;
+        height: calc($SM * 0.8 / 1.77);
     }
 }
 @media screen and (max-width: $S) {
-    .wrapperVideo{
-        width: $S*0.8;
-        height: calc($S*0.8/1.77);
+    .wrapperVideo {
+        width: $S * 0.8;
+        height: calc($S * 0.8 / 1.77);
     }
 }
 @media screen and (max-width: $XS) {
-    .wrapperVideo{
-        width: $XS*0.8;
-        height: calc($XS*0.8/1.77);
+    .wrapperVideo {
+        width: $XS * 0.8;
+        height: calc($XS * 0.8 / 1.77);
     }
 }
 @media screen and (max-width: $XXS) {
-    .wrapperVideo{
-        width: $XXS*0.8;
-        height: calc($XXS*0.8/1.77);
+    .wrapperVideo {
+        width: $XXS * 0.8;
+        height: calc($XXS * 0.8 / 1.77);
     }
 }

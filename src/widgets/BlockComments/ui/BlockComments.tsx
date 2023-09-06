@@ -4,14 +4,14 @@ import {
     Skeleton,
     Typography,
 } from "antd";
-import Meta from "antd/es/card/Meta";
-import { memo } from "react";
+import { FC, memo } from "react";
 import { ACard } from "shared/ui/card";
 import { ADivider } from "shared/ui/divider";
+import { AMeta } from "shared/ui/meta";
 import { ASpace } from "shared/ui/space";
 
 
-export const BlockComments = memo(() => {
+export const BlockComments: FC = memo(() => {
     return (
         <>
             <ADivider orientation="left" style={{ fontSize: 24, marginTop: 30 }}>
@@ -28,7 +28,7 @@ export const BlockComments = memo(() => {
                 >
                     <ACard>
                         <Skeleton loading={false} avatar active>
-                            <Meta
+                            <AMeta
                                 avatar={
                                     <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
                                 }
@@ -48,7 +48,7 @@ export const BlockComments = memo(() => {
                     </ACard>
                     <ACard>
                         <Skeleton loading={false} avatar active>
-                            <Meta
+                            <AMeta
                                 avatar={
                                     <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
                                 }
@@ -68,7 +68,7 @@ export const BlockComments = memo(() => {
                     </ACard>
                     <ACard>
                         <Skeleton loading={true} avatar active>
-                            <Meta
+                            <AMeta
                                 avatar={
                                     <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
                                 }

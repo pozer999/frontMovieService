@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { AButton } from "shared/ui/button";
 import { ACheckbox } from "shared/ui/checkbox";
-import AModal from "shared/ui/modal/ui/AModal";
+
 import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
 import { AuthActions, auth } from "store/modalAuth";
 import {
@@ -18,6 +18,7 @@ import {
     getValueUserNameAuth,
 } from "../model/selectors/AuthSelectors";
 import { AInput } from "shared/ui/input";
+import { AModal } from "shared/ui/modal";
 
 export const AuthForm = () => {
     const dispatch = useAppDispatch();

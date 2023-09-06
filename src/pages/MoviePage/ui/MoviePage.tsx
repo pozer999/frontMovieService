@@ -5,7 +5,6 @@ import { BtnsFeedback } from "widgets/BtnsFeedback";
 import cls from "./MoviePage.module.scss";
 import { ADivider } from "shared/ui/divider";
 
-
 export const MoviePage = () => {
     return (
         <div className={cls.wrapperVideo}>

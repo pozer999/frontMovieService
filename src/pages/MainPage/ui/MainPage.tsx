@@ -1,9 +1,14 @@
-import { useSelector } from "react-redux";
+import cls from "./MainPage.module.scss";
+import { ListFilms } from "widgets/ListFilms";
+import { CarouselFilms } from "entities/CarouselFilms";
 import { memo, useEffect } from "react";
-import { MainContainer } from "widgets/MainContainer";
+import { SortedAndInput } from "features/SortedAndInput/ui/SortedAndInput";
+import { useSelector } from "react-redux";
 import { getFilters } from "../model/selectors/MainPageSelectors";
+import { ARow } from "shared/ui/row";
+import { ACol } from "shared/ui/col";
 
-const MainPage = memo(() => {
+export const MainPage = memo(() => {
     const filters = useSelector(getFilters);
 
     useEffect(() => {
@@ -11,9 +16,13 @@ const MainPage = memo(() => {
     }, [filters]);
 
     return (
-        <div>
-            <MainContainer />
-        </div>
+        <ARow justify="center" style={{ borderRadius: 40 }}>
+            <CarouselFilms />
+            <ACol span={20} className={cls.inputAndFilmsContainer}>
+                <SortedAndInput />
+                <ListFilms />
+            </ACol>
+        </ARow>
     );
 });
 
