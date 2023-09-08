@@ -19,7 +19,7 @@ import { AButton } from "shared/ui/button";
 import { ACol } from "shared/ui/col";
 import { ARow } from "shared/ui/row";
 
-export const CurrentFilm: FC = memo(() => {
+export const CurrentFilm  = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
     const countRate = 4;
     const [isLoadingCurrentPage, setIsLoadingCurrentPage] =

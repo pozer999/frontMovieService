@@ -1,4 +1,4 @@
 
-import { SpaceLazy } from '../space/SpaceLazy';
+import { ASpaceLazy } from './ASpaceLazy';
 
-export {SpaceLazy as ASpace};
+export {ASpaceLazy as ASpace};

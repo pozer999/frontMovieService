@@ -1,7 +1,8 @@
 import Select, { SelectProps } from "antd/es/select";
 
 const ASelect = (props: SelectProps) => {
-    return <Select {...props} />;
+    const { children } = props;
+    return <Select {...props}>{children}</Select>;
 };
 
 export default ASelect;

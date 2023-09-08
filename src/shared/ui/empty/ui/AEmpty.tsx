@@ -1,7 +1,8 @@
 import Empty, { EmptyProps } from "antd/es/empty";
 
 const AEmpty = (props: EmptyProps) => {
-    return <Empty {...props} />;
+    const { children } = props;
+    return <Empty {...props}>{children}</Empty>;
 };
 
 export default AEmpty;

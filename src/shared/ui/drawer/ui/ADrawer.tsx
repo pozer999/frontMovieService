@@ -1,7 +1,8 @@
 import Drawer, { DrawerProps } from "antd/es/drawer";
 
 const ADrawer = (props: DrawerProps) => {
-    return <Drawer {...props} />;
+    const { children } = props;
+    return <Drawer {...props}>{children}</Drawer>;
 };
 
 export default ADrawer;

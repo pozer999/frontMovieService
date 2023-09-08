@@ -7,7 +7,7 @@ import image3 from "../../../image/3.jpeg";
 import image4 from "../../../image/4.jpeg";
 import { NavLink } from "react-router-dom";
 
-export const CarouselFilms: FC = memo(() => {
+export const CarouselFilms  = memo(() => {
     const carouselItems: string[] = [mstiteli, image2, image3, image4];
 
     return (

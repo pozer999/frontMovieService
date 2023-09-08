@@ -18,8 +18,9 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { checkAuth } from "store/generalAuthAndRegister";
 
 import { Routing } from "pages";
-import { WithProviders } from "./providers";
+// import { WithProviders } from "./providers";
 import { ARow } from "shared/ui/row";
+// import { WithProviders } from './providers/index';
 
 axios.defaults.baseURL = "http://localhost:8080/";
 
@@ -85,4 +86,4 @@ const App = () => {
     );
 };
 
-export default WithProviders(App);
+export default App;

@@ -11,7 +11,7 @@ import { AMeta } from "shared/ui/meta";
 import { ASpace } from "shared/ui/space";
 
 
-export const BlockComments: FC = memo(() => {
+export const BlockComments  = memo(() => {
     return (
         <>
             <ADivider orientation="left" style={{ fontSize: 24, marginTop: 30 }}>

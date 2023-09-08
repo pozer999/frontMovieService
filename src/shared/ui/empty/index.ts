@@ -1,3 +1,3 @@
-import { EmptyLazy } from '../empty/EmptyLazy';
+import { AEmptyLazy } from "./AEmptyLazy";
 
-export {EmptyLazy as AEmpty};
+export { AEmptyLazy as AEmpty };

@@ -1,7 +1,8 @@
 import Card, { CardProps } from "antd/es/card";
 
 const ACard = (props: CardProps) => {
-    return <Card {...props} />;
+    const { children } = props;
+    return <Card {...props}>{children}</Card>;
 };
 
 export default ACard;

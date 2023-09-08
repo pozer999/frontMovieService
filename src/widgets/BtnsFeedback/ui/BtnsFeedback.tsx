@@ -14,7 +14,7 @@ import Compact from "antd/es/space/Compact";
 import { FC, memo } from "react";
 import { AButton } from "shared/ui/button";
 
-export const BtnsFeedback: FC = memo(() => {
+export const BtnsFeedback  = memo(() => {
     const items: MenuProps["items"] = [
         {
             key: "1",

@@ -15,7 +15,7 @@ export default [FTName];
 //    className?: string;
 // }
 
-// export const [FTName]: FC<[FTName]Props> = memo(( ) => {
+// export const [FTName] <[FTName]Props> = memo(( ) => {
 
 
 

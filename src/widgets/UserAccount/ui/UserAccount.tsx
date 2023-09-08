@@ -30,7 +30,7 @@ import {
     getThemeType,
 } from "../model/selectors/UserAccountSelectors";
 
-export const UserAccount: FC = memo(() => {
+export const UserAccount  = memo(() => {
     const isVisibleFavourites = useSelector(getIsVisibleFavourites);
     const isVisibleWatchLater = useSelector(getIsVisibleWatchLater);
     const themeType = useSelector(getThemeType);

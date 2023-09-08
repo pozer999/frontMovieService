@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import cls from "./Navbar.module.scss";
 
@@ -22,7 +22,7 @@ import {
 import { ASpace } from "shared/ui/space";
 import { AButton } from "shared/ui/button";
 
-export const Navbar: FC = memo(() => {
+export const Navbar  = memo(() => {
     const dispatch = useAppDispatch();
     const isAccess = useSelector(getIsAccess);
     const valueUserNameRegister = useSelector(getValueUserNameRegister);
@@ -47,14 +47,14 @@ export const Navbar: FC = memo(() => {
 
     return (
         <>
-            <div
+             <div
                 className="headerNavbar"
                 style={{
                     backgroundColor:
                         themeType === "dark" ? "rgb(15, 15, 15)" : "white",
                 }}
             >
-                {isAccess ? (
+                 {isAccess ? (
                     <ASpace align="center" size="small">
                         <AButton
                             onClick={handleOpenUserAccount}
@@ -83,7 +83,7 @@ export const Navbar: FC = memo(() => {
                             <LogoutOutlined className={cls.logoutOutlined} />
                         </AButton>
                     </ASpace>
-                ) : (
+                 ) : (
                     <ASpace className={cls.spaceNavbarButton}>
                         <AButton
                             type="dashed"
@@ -103,7 +103,7 @@ export const Navbar: FC = memo(() => {
                 )}
             </div>
             <AuthForm />
-            <RegisterForm />
+            {/* <RegisterForm />
             <ADrawer
                 title={<p style={{ fontSize: 25 }}>Profile</p>}
                 placement="top"
@@ -120,7 +120,7 @@ export const Navbar: FC = memo(() => {
                 }
             >
                 <UserAccount />
-            </ADrawer>
+            </ADrawer>  */}
         </>
     );
 });

@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import { FC } from "react";
 
-const Loader: FC = () => {
+const Loader  = () => {
     return (
         <Spin
             tip="Loading"

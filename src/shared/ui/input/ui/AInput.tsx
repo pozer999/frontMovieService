@@ -1,7 +1,8 @@
 import Input, { InputProps } from "antd/es/input";
 
 const AInput = (props: InputProps) => {
-    return <Input {...props} />;
+    const { children } = props;
+    return <Input {...props}>{children}</Input>;
 };
 
 export default AInput;

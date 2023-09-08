@@ -1,3 +1,4 @@
-import { DrawerLazy } from "../drawer/DrawerLazy";
 
-export { DrawerLazy as ADrawer };
+import { ADrawerLazy } from './ADrawerLazy';
+
+export { ADrawerLazy as ADrawer };
