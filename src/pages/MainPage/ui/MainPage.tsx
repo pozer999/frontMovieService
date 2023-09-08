@@ -5,8 +5,7 @@ import { memo, useEffect } from "react";
 import { SortedAndInput } from "features/SortedAndInput/ui/SortedAndInput";
 import { useSelector } from "react-redux";
 import { getFilters } from "../model/selectors/MainPageSelectors";
-import { ARow } from "shared/ui/row";
-import { ACol } from "shared/ui/col";
+import { Col, Row } from "antd";
 
 export const MainPage = memo(() => {
     const filters = useSelector(getFilters);
@@ -16,13 +15,13 @@ export const MainPage = memo(() => {
     }, [filters]);
 
     return (
-        <ARow justify="center" style={{ borderRadius: 40 }}>
+        <Row justify="center" style={{ borderRadius: 40 }}>
             <CarouselFilms />
-            <ACol span={20} className={cls.inputAndFilmsContainer}>
+            <Col span={20} className={cls.inputAndFilmsContainer}>
                 <SortedAndInput />
                 <ListFilms />
-            </ACol>
-        </ARow>
+            </Col>
+        </Row>
     );
 });
 

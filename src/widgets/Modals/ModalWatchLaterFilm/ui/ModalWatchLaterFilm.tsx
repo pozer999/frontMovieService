@@ -6,7 +6,7 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import { EyeTwoTone } from "@ant-design/icons";
 import { memo } from "react";
-import { AModal } from "shared/ui/modal";
+import Modal from "antd/es/modal/Modal";
 
 interface IModalWatchLaterFilm {
     items: string[];
@@ -18,7 +18,7 @@ interface IModalWatchLaterFilm {
 export const ModalWatchLaterFilm = memo(
     ({ items, title, isVisible, handleCloseModal }: IModalWatchLaterFilm) => {
         return (
-            <AModal
+            <Modal
                 title={title}
                 style={{ fontSize: 80 }}
                 footer={[]}
@@ -79,7 +79,7 @@ export const ModalWatchLaterFilm = memo(
                         ))}
                     </Swiper>
                 </>
-            </AModal>
+            </Modal>
         );
     }
 );

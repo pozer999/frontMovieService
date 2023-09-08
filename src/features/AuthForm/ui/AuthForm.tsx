@@ -1,15 +1,14 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Form, Input } from "antd";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { Button, Form, Input, Modal, message } from "antd";
+import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { AButton } from "shared/ui/button";
-import { ACheckbox } from "shared/ui/checkbox";
 
 import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
 import { AuthActions, auth } from "store/modalAuth";
 import {
+    getAuthorizationError,
     getIsDisabledButtonToAuth,
     getIsLoadingTheAuthButton,
     getIsRememberMe,
@@ -17,11 +16,12 @@ import {
     getValuePasswordAuth,
     getValueUserNameAuth,
 } from "../model/selectors/AuthSelectors";
-import { AInput } from "shared/ui/input";
-import { AModal } from "shared/ui/modal";
+import { messageWrapper } from "shared/lib/helpers/messages/message";
+import { ValidateRegisterError } from "features/RegisterForm/model/types/register";
 
 export const AuthForm = () => {
     const dispatch = useAppDispatch();
+    const [messageApi, contextHolder] = message.useMessage();
 
     const isVisibleAuth = useSelector(getIsVisibleAuth);
     const isLoadingTheAuthButton = useSelector(getIsLoadingTheAuthButton);
@@ -29,6 +29,7 @@ export const AuthForm = () => {
     const valuePasswordAuth = String(useSelector(getValuePasswordAuth));
     const isRememberMe = useSelector(getIsRememberMe);
     const isDisabledButtonToAuth = useSelector(getIsDisabledButtonToAuth);
+    const authorizationError = useSelector(getAuthorizationError);
 
     const handleOkAuth = useCallback(() => {
         try {
@@ -80,8 +81,14 @@ export const AuthForm = () => {
         console.log("isRememberMeAuth: ", isRememberMe);
     }, [isRememberMe, dispatch, valuePasswordAuth, valueUserNameAuth]);
 
+    useEffect(() => {
+       if(authorizationError){
+        messageWrapper(ValidateRegisterError.SERVER_ERROR, "error", messageApi)
+       }
+    }, [authorizationError, messageApi]);
+
     return (
-        <AModal
+        <Modal
             open={isVisibleAuth}
             title="Log in"
             onCancel={handleCloseModalAuth}
@@ -109,7 +116,7 @@ export const AuthForm = () => {
                     ]}
                     hasFeedback
                 >
-                    <AInput
+                    <Input
                         prefix={
                             <UserOutlined className="site-form-item-icon" />
                         }
@@ -119,6 +126,7 @@ export const AuthForm = () => {
                         onChange={(e) => handleChangeUserNameAuth(e)}
                     />
                 </Form.Item>
+                <>{contextHolder}</>
                 <Form.Item
                     name="password"
                     rules={[
@@ -142,13 +150,13 @@ export const AuthForm = () => {
                 </Form.Item>
                 <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <ACheckbox
+                        <Checkbox
                             defaultChecked={isRememberMe}
                             checked={isRememberMe}
                             onChange={handleChangeRememberMe}
                         >
                             Remember me
-                        </ACheckbox>
+                        </Checkbox>
                     </Form.Item>
 
                     <a className="login-form-forgot" href="/">
@@ -158,7 +166,7 @@ export const AuthForm = () => {
 
                 <Form.Item>
                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <AButton
+                        <Button
                             disabled={isDisabledButtonToAuth}
                             type="primary"
                             htmlType="submit"
@@ -168,16 +176,16 @@ export const AuthForm = () => {
                             onClick={handleOkAuth}
                         >
                             Log in
-                        </AButton>
-                        <AButton
+                        </Button>
+                        <Button
                             type="link"
                             onClick={handleSwitchRegistrationToAuth}
                         >
                             Or register now!
-                        </AButton>
+                        </Button>
                     </div>
                 </Form.Item>
             </Form>
-        </AModal>
+        </Modal>
     );
 };

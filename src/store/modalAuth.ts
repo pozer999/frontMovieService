@@ -1,19 +1,15 @@
-import { RootState } from "./index";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { rolesUsers } from "shared/const/rolesUsers";
 import AuthService from "../services/AuthService";
-import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
-import axios from "axios";
-import { AuthResponse } from "models/response/AuthResponse";
-import $api, { API_URL } from "shared/config/http";
 import {
     GeneralAuthAndRegisterActions,
     generalInitialState,
 } from "./generalAuthAndRegister";
-import { rolesUsers } from "shared/const/rolesUsers";
 
 interface IinitialState {
     valueUserNameAuth: string | null;
     valuePasswordAuth: string | undefined;
+    authorizationError: boolean;
     // isVisibleAuth: boolean;
     isLoadingTheAuthButton: boolean;
     isDisabledButtonToAuth: boolean;
@@ -22,6 +18,7 @@ interface IinitialState {
 const modalAuthInitialState: IinitialState = {
     valueUserNameAuth: "",
     valuePasswordAuth: "",
+    authorizationError: false,
     // isVisibleAuth: generalInitialState.isVisibleAuth,
     isLoadingTheAuthButton: generalInitialState.isLoadingTheAuthButton,
     isDisabledButtonToAuth: true,
@@ -55,11 +52,13 @@ export const modalAuthReducer = createSlice({
             })
             .addCase(auth.fulfilled, (state) => {
                 state.isLoadingTheAuthButton = false;
+                state.authorizationError = false;
                 // state.isVisibleAuth = false;
                 console.log("auth.fulfilled");
             })
             .addCase(auth.rejected, (state) => {
                 state.isLoadingTheAuthButton = false;
+                state.authorizationError = true;
                 // state.isVisibleAuth = true;
                 console.log("ошибка auth.rejected");
             });

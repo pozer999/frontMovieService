@@ -3,30 +3,27 @@ import {
     LockOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import { Form, Input, message } from "antd";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { Button, Form, Input, Modal, Select, message } from "antd";
+import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { messageWrapper } from "shared/lib/helpers/messages/message";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { AButton } from "shared/ui/button";
-import { ACheckbox } from "shared/ui/checkbox";
-import { AInput } from "shared/ui/input";
-import { AModal } from "shared/ui/modal";
-import { ASelect } from "shared/ui/select";
 import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
 import { RegisterActions, register } from "store/modalRegister";
 import {
     getConfirmPasswordRegister,
     getError,
     getIsDisabledButtonToRegister,
+    getRegisterError,
     getRegisterIsLoading,
     getRegisterIsVisible,
     getUserRegisterName,
     getUserRegisterPassword,
 } from "../model/selectors/RegisterSelectors";
 import { validateRegisterData } from "../model/services/validateRegisterData";
+import { ValidateRegisterError } from "../model/types/register";
 import cls from "./RegisterForm.module.scss";
 
 export const RegisterForm = () => {
@@ -45,6 +42,7 @@ export const RegisterForm = () => {
         getIsDisabledButtonToRegister
     );
     const isVisibleRegister = useSelector(getRegisterIsVisible);
+    const registerError = useSelector(getRegisterError);
 
     const options = [
         { value: "fanesi", label: "Fanesi" },
@@ -125,8 +123,18 @@ export const RegisterForm = () => {
         valueConfirmPasswordRegister,
     ]);
 
+    useEffect(() => {
+        if (registerError) {
+            messageWrapper(
+                ValidateRegisterError.SERVER_ERROR,
+                "error",
+                messageApi
+            );
+        }
+    }, [registerError, messageApi]);
+
     return (
-        <AModal
+        <Modal
             open={isVisibleRegister}
             title="Register"
             onCancel={handleCloseModalRegister}
@@ -147,7 +155,7 @@ export const RegisterForm = () => {
                     ]}
                     hasFeedback
                 >
-                    <AInput
+                    <Input
                         prefix={
                             <UserOutlined className="site-form-item-icon" />
                         }
@@ -213,16 +221,16 @@ export const RegisterForm = () => {
                     />
                 </Form.Item>
                 <Form.Item name="Genre" label="Favorites">
-                    <ASelect
+                    <Select
                         placeholder="Please choose your favorite genre"
                         mode="multiple"
                         showArrow
                         options={options}
-                    ></ASelect>
+                    ></Select>
                 </Form.Item>
                 <Form.Item>
                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <AButton
+                        <Button
                             type="primary"
                             htmlType="submit"
                             key="submit"
@@ -232,31 +240,31 @@ export const RegisterForm = () => {
                             className={cls.buttonToSubmitForm}
                         >
                             Register
-                        </AButton>
-                        <AButton
+                        </Button>
+                        <Button
                             type="link"
                             onClick={handleSwitchAuthToRegistration}
                             className={cls.alreadyRegistered}
                         >
                             Already registered?
-                        </AButton>
+                        </Button>
                         <Form.Item
                             name="remember"
                             valuePropName="checked"
                             noStyle
                         >
-                            <ACheckbox
+                            <Checkbox
                                 defaultChecked={isRememberMe}
                                 checked={isRememberMe}
                                 onChange={handleChangeRememberMe}
                                 className={cls.checkboxIsRemeberMe}
                             >
                                 Remember me
-                            </ACheckbox>
+                            </Checkbox>
                         </Form.Item>
                     </div>
                 </Form.Item>
             </Form>
-        </AModal>
+        </Modal>
     );
 };

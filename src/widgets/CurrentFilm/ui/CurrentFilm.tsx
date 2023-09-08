@@ -1,4 +1,14 @@
-import { Breadcrumb, Collapse, Steps, Switch } from "antd";
+import {
+    Breadcrumb,
+    Button,
+    Col,
+    Collapse,
+    Divider,
+    Row,
+    Space,
+    Steps,
+    Switch,
+} from "antd";
 import { FC, memo, useState } from "react";
 import { Typography } from "antd";
 const { Text } = Typography;
@@ -13,13 +23,8 @@ import { getTypeTheme } from "../model/selectors/CurrentFilmSelectors";
 import cls from "./CurrentFilm.module.scss";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import { ADivider } from "shared/ui/divider";
-import { ASpace } from "shared/ui/space";
-import { AButton } from "shared/ui/button";
-import { ACol } from "shared/ui/col";
-import { ARow } from "shared/ui/row";
 
-export const CurrentFilm  = memo(() => {
+export const CurrentFilm = memo(() => {
     const typeTheme = useSelector(getTypeTheme);
     const countRate = 4;
     const [isLoadingCurrentPage, setIsLoadingCurrentPage] =
@@ -36,13 +41,13 @@ export const CurrentFilm  = memo(() => {
             {isLoadingCurrentPage ? (
                 <SkeletonCurrentFilm />
             ) : (
-                <ASpace
+                <Space
                     direction="vertical"
                     size="small"
                     className={cls.spaceText}
                 >
-                    <ARow gutter={[24, 8]}>
-                        <ACol
+                    <Row gutter={[24, 8]}>
+                        <Col
                             xl={10}
                             md={8}
                             xs={8}
@@ -59,31 +64,31 @@ export const CurrentFilm  = memo(() => {
                                 className={cls.imgCurrentFilm}
                             />
                             <NavLink to="/movie">
-                                <AButton
+                                <Button
                                     type="primary"
                                     size="large"
                                     icon={<PlayCircleOutlined />}
                                     className={cls.btnWathchRightNow}
                                 >
                                     Watch right now
-                                </AButton>
+                                </Button>
                             </NavLink>
-                        </ACol>
-                        <ACol span={14} className={cls.wrapperForText}>
-                            <ASpace direction="vertical" size={"small"}>
-                                <ASpace>
+                        </Col>
+                        <Col span={14} className={cls.wrapperForText}>
+                            <Space direction="vertical" size={"small"}>
+                                <Space>
                                     <Text strong>Year of publication:</Text>
                                     <Text>2003</Text>
-                                </ASpace>
-                                <ASpace>
+                                </Space>
+                                <Space>
                                     <Text strong>Duration:</Text>
                                     <Text>2:30</Text>
-                                </ASpace>
-                                <ASpace>
+                                </Space>
+                                <Space>
                                     <Text strong>Genre:</Text>
                                     <Text>comedy</Text>
-                                </ASpace>
-                                <ASpace>
+                                </Space>
+                                <Space>
                                     <Text strong>Rating:</Text>
                                     {typeTheme === "dark" ? (
                                         <Text
@@ -101,12 +106,12 @@ export const CurrentFilm  = memo(() => {
                                     ) : (
                                         <Rate disabled defaultValue={4} />
                                     )}
-                                </ASpace>
-                                <ASpace>
+                                </Space>
+                                <Space>
                                     <Text strong>Director:</Text>
                                     <Text>Fabrice Du Welz</Text>
-                                </ASpace>
-                                <ASpace wrap>
+                                </Space>
+                                <Space wrap>
                                     <Text strong>The actors:</Text>
                                     <Text>
                                         <p className={cls.actorsText}>
@@ -117,8 +122,8 @@ export const CurrentFilm  = memo(() => {
                                             Lefebvre, Alfred David
                                         </p>
                                     </Text>
-                                </ASpace>
-                                <ASpace wrap>
+                                </Space>
+                                <Space wrap>
                                     <Collapse
                                         className={cls.collapse}
                                         ghost
@@ -138,17 +143,17 @@ export const CurrentFilm  = memo(() => {
                                             },
                                         ]}
                                     />
-                                </ASpace>
-                            </ASpace>
-                        </ACol>
-                    </ARow>
+                                </Space>
+                            </Space>
+                        </Col>
+                    </Row>
                     <>
-                        <ADivider
+                        <Divider
                             orientation="left"
                             className={cls.driverSimilar}
                         >
                             Similar
-                        </ADivider>
+                        </Divider>
                         <div className={cls.wrapperSwiper}>
                             <Swiper
                                 navigation={true}
@@ -181,7 +186,7 @@ export const CurrentFilm  = memo(() => {
                             </Swiper>
                         </div>
                     </>
-                </ASpace>
+                </Space>
             )}
         </div>
     );

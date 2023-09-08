@@ -31,6 +31,7 @@ export interface IinitialState {
     statusInputLoginAndPassword: "error" | "warning" | undefined;
     valueRegister: IvalueRegister;
     isDisabledButtonToRegister: boolean;
+    registerError: boolean;
 }
 
 export const initialState: IinitialState = {
@@ -43,6 +44,7 @@ export const initialState: IinitialState = {
     statusInputLoginAndPassword: undefined,
     valueRegister: valueRegister,
     isDisabledButtonToRegister: true,
+    registerError: false,
 };
 
 export const modalRegisterReducer = createSlice({
@@ -87,10 +89,12 @@ export const modalRegisterReducer = createSlice({
                 // state.isVisibleRegister = false;
                 state.isLoadingTheRegisterButton = false;
                 state.errorRegister = false;
+                state.registerError = false;
             })
             .addCase(register.rejected, (state) => {
                 state.isLoadingTheRegisterButton = false;
                 state.errorRegister = true;
+                state.registerError = true;
                 // state.isVisibleRegister = true;
             });
     },

@@ -8,7 +8,8 @@ import { RootState } from "store";
 import { getThemeType } from "../model/selectors/CarouselHistorySelectors";
 
 import cls from "./CarouselHisroryFilms.module.scss";
-import ADivider from "shared/ui/divider/ui/ADivider";
+import { Divider } from "antd";
+
 interface ICarouselHistoryFilms {
     title: any;
     carouselItems: string[];
@@ -27,7 +28,7 @@ export const CarouselHistoryFilms = memo(
         const themeType = useSelector(getThemeType);
         return (
             <>
-                <ADivider
+                <Divider
                     orientation="left"
                     style={{
                         color: themeType === "dark" ? "white" : "rgb(15,15,15)",
@@ -35,7 +36,7 @@ export const CarouselHistoryFilms = memo(
                     }}
                 >
                     {title}
-                </ADivider>
+                </Divider>
                 <div className={cls.wrapperSwiper}>
                     <Swiper
                         navigation={true}

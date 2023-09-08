@@ -13,11 +13,7 @@ import Compact from "antd/es/space/Compact";
 import React, { useCallback } from "react";
 import { useDebounce } from "shared/lib/hooks/useDebounce";
 import cls from "./SortedAndInput.module.scss";
-import { AInput } from "shared/ui/input";
-import { AButton } from "shared/ui/button";
-import { ASelect } from "shared/ui/select";
-import { ACol } from "shared/ui/col";
-import { ARow } from "shared/ui/row";
+import { Button, Col, Input, Row, Select } from "antd";
 
 export const SortedAndInput = () => {
     const dispatch = useAppDispatch();
@@ -48,34 +44,34 @@ export const SortedAndInput = () => {
     };
 
     return (
-        <ARow justify="space-between" align="middle" style={{ margin: 10 }}>
-            <ACol span={5} className={cls.inputSearch}>
-                <ASelect
+        <Row justify="space-between" align="middle" style={{ margin: 10 }}>
+            <Col span={5} className={cls.inputSearch}>
+                <Select
                     defaultValue={currentFilter}
                     className={cls.selectInput}
                     placement="bottomLeft"
                     options={filters}
                     onChange={handleChangeSelect}
                 />
-            </ACol>
-            <ACol xl={10} xs={14}>
+            </Col>
+            <Col xl={10} xs={14}>
                 <Compact
                     style={{ width: "100%" }}
                     className={cls.spaceInputSearch}
                 >
-                    <AInput
+                    <Input
                         placeholder="Enter the name of the movie"
                         className={cls.inputSearch}
                         onChange={(e) => handleOnChangeSearch(e)}
                     />
-                    <AButton type="primary" className={cls.spaceInputButton}>
+                    <Button type="primary" className={cls.spaceInputButton}>
                         <div className={cls.spanInputSearch_search}>Search</div>
                         <div className={cls.spanInputSearch_icon}>
                             <SearchOutlined />
                         </div>
-                    </AButton>
+                    </Button>
                 </Compact>
-            </ACol>
-        </ARow>
+            </Col>
+        </Row>
     );
 };

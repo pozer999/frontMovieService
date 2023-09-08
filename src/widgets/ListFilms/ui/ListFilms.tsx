@@ -11,8 +11,7 @@ import {
     getFilter,
     getIsLoading,
 } from "../model/selectors/ListFilmsSelectors";
-import { ARow } from "shared/ui/row";
-import { ACol } from "shared/ui/col";
+
 import { ListFilms_SkeletonItems } from "../ListFilms_SkeletonItems";
 import ListFilms_PostsFilm from "../ListFilms_PostsFilm/ui/ListFilms_PostsFilm";
 

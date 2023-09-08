@@ -1,9 +1,6 @@
-import { Skeleton } from "antd";
+import { Col, Divider, Row, Skeleton, Space } from "antd";
 import { memo } from "react";
-import ACol from "shared/ui/col/ui/ACol";
-import { ADivider } from "shared/ui/divider";
-import ARow from "shared/ui/row/ui/ARow";
-import { ASpace } from "shared/ui/space";
+
 import { Navigation, Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import mars from "../../../src/image/mars.jpg";
@@ -11,44 +8,44 @@ import mars from "../../../src/image/mars.jpg";
 export const SkeletonCurrentFilm = memo(() => {
     return (
         <>
-            <ASpace direction="vertical" size="small">
-                <ARow gutter={[24, 8]}>
-                    <ACol span={10} style={{ color: "white" }}>
+            <Space direction="vertical" size="small">
+                <Row gutter={[24, 8]}>
+                    <Col span={10} style={{ color: "white" }}>
                         <Skeleton.Image
                             style={{ height: 300, width: 250 }}
                             active
                         />
-                    </ACol>
-                    <ACol span={14} style={{ color: "white", fontSize: 25 }}>
-                        <ASpace direction="vertical" size={"small"}>
-                            <ASpace>
+                    </Col>
+                    <Col span={14} style={{ color: "white", fontSize: 25 }}>
+                        <Space direction="vertical" size={"small"}>
+                            <Space>
                                 <Skeleton.Button active size="small" />
-                            </ASpace>
-                            <ASpace>
+                            </Space>
+                            <Space>
                                 <Skeleton.Button active />
-                            </ASpace>
-                            <ASpace>
+                            </Space>
+                            <Space>
                                 <Skeleton.Input active />
-                            </ASpace>
-                            <ASpace>
+                            </Space>
+                            <Space>
                                 <Skeleton.Button active />
-                            </ASpace>
-                            <ASpace>
+                            </Space>
+                            <Space>
                                 <Skeleton.Avatar active shape="square" />
-                            </ASpace>
-                            <ASpace wrap>
+                            </Space>
+                            <Space wrap>
                                 <Skeleton.Input active size="small" />
-                            </ASpace>
-                            <ASpace wrap>
+                            </Space>
+                            <Space wrap>
                                 <Skeleton.Input active />
-                            </ASpace>
-                        </ASpace>
-                    </ACol>
-                </ARow>
+                            </Space>
+                        </Space>
+                    </Col>
+                </Row>
                 <>
-                    <ADivider orientation="left" style={{ fontSize: 20 }}>
+                    <Divider orientation="left" style={{ fontSize: 20 }}>
                         Similar
-                    </ADivider>
+                    </Divider>
                     <Swiper
                         navigation={true}
                         scrollbar={{
@@ -82,7 +79,7 @@ export const SkeletonCurrentFilm = memo(() => {
                         ))}
                     </Swiper>
                 </>
-            </ASpace>
+            </Space>
         </>
     );
 });

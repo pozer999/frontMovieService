@@ -7,7 +7,7 @@ import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
 import { UserAccount } from "widgets/UserAccount";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { ADrawer } from "shared/ui/drawer";
+
 import {
     GeneralAuthAndRegisterActions,
     logout,
@@ -19,8 +19,7 @@ import {
     getValueUserNameAuth,
     getValueUserNameRegister,
 } from "../model/selectors/NavbarSelectors";
-import { ASpace } from "shared/ui/space";
-import { AButton } from "shared/ui/button";
+import { Button, Drawer, Space } from "antd";
 
 export const Navbar  = memo(() => {
     const dispatch = useAppDispatch();
@@ -55,8 +54,8 @@ export const Navbar  = memo(() => {
                 }}
             >
                  {isAccess ? (
-                    <ASpace align="center" size="small">
-                        <AButton
+                    <Space align="center" size="small">
+                        <Button
                             onClick={handleOpenUserAccount}
                             type="link"
                             style={{
@@ -69,8 +68,8 @@ export const Navbar  = memo(() => {
                                 {localStorage.getItem("username")}
                             </div>
                             <UserOutlined className={cls.userOutlined} />
-                        </AButton>
-                        <AButton
+                        </Button>
+                        <Button
                             onClick={handleLogout}
                             type="link"
                             style={{
@@ -81,30 +80,30 @@ export const Navbar  = memo(() => {
                             }}
                         >
                             <LogoutOutlined className={cls.logoutOutlined} />
-                        </AButton>
-                    </ASpace>
+                        </Button>
+                    </Space>
                  ) : (
-                    <ASpace className={cls.spaceNavbarButton}>
-                        <AButton
+                    <Space className={cls.spaceNavbarButton}>
+                        <Button
                             type="dashed"
                             onClick={handleOpenModalRegister}
                             className={cls.buttonNavbar}
                         >
                             Register
-                        </AButton>
-                        <AButton
+                        </Button>
+                        <Button
                             type="primary"
                             onClick={handleOpenModalAuth}
                             className={cls.buttonNavbar}
                         >
                             Log in
-                        </AButton>
-                    </ASpace>
+                        </Button>
+                    </Space>
                 )}
             </div>
             <AuthForm />
-            {/* <RegisterForm />
-            <ADrawer
+            <RegisterForm />
+            <Drawer
                 title={<p style={{ fontSize: 25 }}>Profile</p>}
                 placement="top"
                 size={"default"}
@@ -120,7 +119,7 @@ export const Navbar  = memo(() => {
                 }
             >
                 <UserAccount />
-            </ADrawer>  */}
+            </Drawer> 
         </>
     );
 });

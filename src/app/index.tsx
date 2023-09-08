@@ -5,7 +5,7 @@ import logo from "../image/movie.png";
 
 import axios from "axios";
 
-import { ConfigProvider, Layout, theme } from "antd";
+import { ConfigProvider, Layout, Row, theme } from "antd";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -18,9 +18,6 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { checkAuth } from "store/generalAuthAndRegister";
 
 import { Routing } from "pages";
-// import { WithProviders } from "./providers";
-import { ARow } from "shared/ui/row";
-// import { WithProviders } from './providers/index';
 
 axios.defaults.baseURL = "http://localhost:8080/";
 
@@ -60,7 +57,7 @@ const App = () => {
                             themeType === "dark" ? "rgb(15,15,15)" : "white",
                     }}
                 >
-                    <ARow
+                    <Row
                         justify="space-between"
                         align="middle"
                         className="RowHeaderNavbar"
@@ -74,12 +71,12 @@ const App = () => {
                             />
                         </NavLink>
                         <Navbar />
-                    </ARow>
+                    </Row>
                 </Layout.Header>
                 <Layout.Content>
-                    <ARow justify="center" style={{ marginBottom: 30 }}>
+                    <Row justify="center" style={{ marginBottom: 30 }}>
                         <Routing />
-                    </ARow>
+                    </Row>
                 </Layout.Content>
             </div>
         </ConfigProvider>

@@ -1,13 +1,11 @@
 import { LikeOutlined, ShareAltOutlined } from "@ant-design/icons";
-import { Statistic } from "antd";
+import { Col, Row, Statistic } from "antd";
 import React, { FC, memo } from "react";
-import ACol from "shared/ui/col/ui/ACol";
-import ARow from "shared/ui/row/ui/ARow";
 
-export const BlockStatistic  = memo(() => {
+export const BlockStatistic = memo(() => {
     return (
-        <ARow justify="center" style={{ margin: "0 auto" }}>
-            <ACol span={5} xs={8} xl={5} sm={5}>
+        <Row justify="center" style={{ margin: "0 auto" }}>
+            <Col span={5} xs={8} xl={5} sm={5}>
                 <Statistic
                     title="Feedback"
                     value={1128}
@@ -19,8 +17,8 @@ export const BlockStatistic  = memo(() => {
                         alignItems: "center",
                     }}
                 />
-            </ACol>
-            <ACol span={5} xs={8} xl={5} sm={5}>
+            </Col>
+            <Col span={5} xs={8} xl={5} sm={5}>
                 <Statistic
                     prefix={<ShareAltOutlined />}
                     title="Share"
@@ -32,8 +30,8 @@ export const BlockStatistic  = memo(() => {
                         alignItems: "center",
                     }}
                 />
-            </ACol>
-        </ARow>
+            </Col>
+        </Row>
     );
 });
 

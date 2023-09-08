@@ -1,34 +1,35 @@
 import {
     Avatar,
+    Card,
+    Divider,
     Layout,
     Skeleton,
+    Space,
     Typography,
 } from "antd";
+import Meta from "antd/es/card/Meta";
 import { FC, memo } from "react";
-import { ACard } from "shared/ui/card";
-import { ADivider } from "shared/ui/divider";
-import { AMeta } from "shared/ui/meta";
-import { ASpace } from "shared/ui/space";
+
 
 
 export const BlockComments  = memo(() => {
     return (
         <>
-            <ADivider orientation="left" style={{ fontSize: 24, marginTop: 30 }}>
+            <Divider orientation="left" style={{ fontSize: 24, marginTop: 30 }}>
                 Comments:
                 <Typography.Text type="warning" style={{ fontSize: 24 }}>
                     4
                 </Typography.Text>
-            </ADivider>
+            </Divider>
             <Layout.Footer style={{ background: "transparent" }}>
-                <ASpace
+                <Space
                     direction="vertical"
                     size="small"
                     style={{ display: "flex" }}
                 >
-                    <ACard>
+                    <Card>
                         <Skeleton loading={false} avatar active>
-                            <AMeta
+                            <Meta
                                 avatar={
                                     <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
                                 }
@@ -45,10 +46,10 @@ export const BlockComments  = memo(() => {
                                 description="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididlorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid"
                             />
                         </Skeleton>
-                    </ACard>
-                    <ACard>
+                    </Card>
+                    <Card>
                         <Skeleton loading={false} avatar active>
-                            <AMeta
+                            <Meta
                                 avatar={
                                     <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
                                 }
@@ -65,10 +66,10 @@ export const BlockComments  = memo(() => {
                                 description="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid"
                             />
                         </Skeleton>
-                    </ACard>
-                    <ACard>
+                    </Card>
+                    <Card>
                         <Skeleton loading={true} avatar active>
-                            <AMeta
+                            <Meta
                                 avatar={
                                     <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
                                 }
@@ -85,8 +86,8 @@ export const BlockComments  = memo(() => {
                                 description="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid"
                             />
                         </Skeleton>
-                    </ACard>
-                </ASpace>
+                    </Card>
+                </Space>
             </Layout.Footer>
         </>
     );

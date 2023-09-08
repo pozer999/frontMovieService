@@ -1,7 +1,5 @@
-import {
-    CloseOutlined
-} from "@ant-design/icons";
-import { Skeleton } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
+import { Card, Col, Divider, Drawer, Empty, Row, Skeleton } from "antd";
 
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -11,14 +9,6 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
 import { getVisibleCurrentFilm } from "../model/selectors/SkeletonItemSelectors";
 import cls from "./SkeletonItem.module.scss";
-import { ADivider } from "shared/ui/divider";
-import { ACard } from "shared/ui/card";
-import { ACol } from "shared/ui/col";
-import { ARow } from "shared/ui/row";
-import { AEmpty } from "shared/ui/empty";
-import { ADrawer } from "shared/ui/drawer";
-
-
 
 const SkeletonItem = () => {
     const dispatch = useAppDispatch();
@@ -36,7 +26,7 @@ const SkeletonItem = () => {
     }, []);
 
     return (
-        <ACol
+        <Col
             className="gutter-row"
             xs={24}
             sm={12}
@@ -45,15 +35,15 @@ const SkeletonItem = () => {
             xl={6}
             style={{ position: "relative" }}
         >
-            <ACard
+            <Card
                 loading={false}
                 hoverable
                 onClick={handleOpenCurrentFilm}
                 className={cls.cardSkeletonItem}
             >
-                <ARow gutter={[1, 4]} className={cls.rowEmpty}>
-                    <AEmpty
-                     // .image={AEmpty.PRESENTED_IMAGE_SIMPLE}
+                <Row gutter={[1, 4]} className={cls.rowEmpty}>
+                    <Empty
+                        // .image={AEmpty.PRESENTED_IMAGE_SIMPLE}
                         // imageStyle={{ height: 100 }}
                         description={
                             <span className={cls.spanEmptyImage}>
@@ -83,17 +73,17 @@ const SkeletonItem = () => {
                             block
                         />
                     </>
-                </ARow>
-            </ACard>
-            <ADrawer
+                </Row>
+            </Card>
+            <Drawer
                 mask={false}
                 title={
-                    <ADivider
+                    <Divider
                         orientation="center"
                         style={{ fontSize: 26, fontWeight: "bold" }}
                     >
                         The martian
-                    </ADivider>
+                    </Divider>
                 }
                 placement="right"
                 size={"large"}
@@ -109,8 +99,8 @@ const SkeletonItem = () => {
                 }
             >
                 <CurrentFilm />
-            </ADrawer>
-        </ACol>
+            </Drawer>
+        </Col>
     );
 };
 
