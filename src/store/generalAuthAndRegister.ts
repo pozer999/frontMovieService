@@ -110,7 +110,7 @@ export const checkAuth = createAsyncThunk(
                 { withCredentials: true }
             );
             console.log("responseCheckAuth: ", response);
-            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("token", response.data.accessToken);
             if (!response.data) {
                 throw new Error();
             }

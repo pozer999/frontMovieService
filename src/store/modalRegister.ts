@@ -11,6 +11,7 @@ import {
     generalAuthAndRegisterReducer,
     generalInitialState,
 } from "./generalAuthAndRegister";
+import { rolesUsers } from "shared/const/rolesUsers";
 
 export interface IvalueRegister {
     valueUserNameRegister: string;
@@ -30,6 +31,7 @@ export interface IinitialState {
     statusInputLoginAndPassword: "error" | "warning" | undefined;
     valueRegister: IvalueRegister;
     isDisabledButtonToRegister: boolean;
+    registerError: boolean;
 }
 
 export const initialState: IinitialState = {
@@ -42,6 +44,7 @@ export const initialState: IinitialState = {
     statusInputLoginAndPassword: undefined,
     valueRegister: valueRegister,
     isDisabledButtonToRegister: true,
+    registerError: false,
 };
 
 export const modalRegisterReducer = createSlice({
@@ -86,10 +89,12 @@ export const modalRegisterReducer = createSlice({
                 // state.isVisibleRegister = false;
                 state.isLoadingTheRegisterButton = false;
                 state.errorRegister = false;
+                state.registerError = false;
             })
             .addCase(register.rejected, (state) => {
                 state.isLoadingTheRegisterButton = false;
                 state.errorRegister = true;
+                state.registerError = true;
                 // state.isVisibleRegister = true;
             });
     },
@@ -116,11 +121,19 @@ export const register = createAsyncThunk(
             );
             dispatch(GeneralAuthAndRegisterActions.setAccess(true));
             dispatch(GeneralAuthAndRegisterActions.closeModalRegister());
+            localStorage.setItem("roles", response.data.roles[0].name);
+            localStorage.setItem("username", response.data.username);
+            if (response.data.roles[0].name === rolesUsers.user) {
+                console.log("АВТОРИЗОВАН КАК ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ");
+            }
+            if (response.data.roles[0].name === rolesUsers.admin) {
+                console.log("АВТОРИЗОВАН КАК АДМИН");
+            }
             if (!response.data) {
                 throw new Error();
             }
             if (isRememberMe) {
-                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("token", response.data.accessToken);
             }
             localStorage.setItem("username", valueUserNameRegister);
             return response.data;

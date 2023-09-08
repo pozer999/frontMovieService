@@ -3,27 +3,28 @@ import {
     LockOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Modal, Select, message } from "antd";
+import { Button, Form, Input, Modal, Select, message } from "antd";
+import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
+import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { messageWrapper } from "shared/lib/helpers/messages/message";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
+import { RegisterActions, register } from "store/modalRegister";
 import {
     getConfirmPasswordRegister,
     getError,
     getIsDisabledButtonToRegister,
+    getRegisterError,
     getRegisterIsLoading,
     getRegisterIsVisible,
     getUserRegisterName,
     getUserRegisterPassword,
 } from "../model/selectors/RegisterSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { getIsRememberMe } from "features/AuthForm/model/selectors/AuthSelectors";
 import { validateRegisterData } from "../model/services/validateRegisterData";
-import { messageWrapper } from "shared/lib/helpers/messages/message";
+import { ValidateRegisterError } from "../model/types/register";
 import cls from "./RegisterForm.module.scss";
-import { RegisterActions, register } from "store/modalRegister";
-import { AuthActions } from "store/modalAuth";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
 
 export const RegisterForm = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -37,8 +38,11 @@ export const RegisterForm = () => {
     const isLoadingTheRegisterButton = useSelector(getRegisterIsLoading);
     const errorRegisterValue = useSelector(getError);
     const isRememberMe = useSelector(getIsRememberMe);
-    const isDisabledButtonToRegister = useSelector(getIsDisabledButtonToRegister);
+    const isDisabledButtonToRegister = useSelector(
+        getIsDisabledButtonToRegister
+    );
     const isVisibleRegister = useSelector(getRegisterIsVisible);
+    const registerError = useSelector(getRegisterError);
 
     const options = [
         { value: "fanesi", label: "Fanesi" },
@@ -92,7 +96,9 @@ export const RegisterForm = () => {
     };
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
-            dispatch(GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked));
+            dispatch(
+                GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked)
+            );
             console.log("remember me register: ", e.target.checked);
         },
         [dispatch]
@@ -116,6 +122,16 @@ export const RegisterForm = () => {
         valuePasswordRegister,
         valueConfirmPasswordRegister,
     ]);
+
+    useEffect(() => {
+        if (registerError) {
+            messageWrapper(
+                ValidateRegisterError.SERVER_ERROR,
+                "error",
+                messageApi
+            );
+        }
+    }, [registerError, messageApi]);
 
     return (
         <Modal

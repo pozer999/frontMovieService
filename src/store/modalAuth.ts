@@ -1,29 +1,28 @@
-import { RootState } from "./index";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { rolesUsers } from "shared/const/rolesUsers";
 import AuthService from "../services/AuthService";
-import { validateRegisterData } from "features/RegisterForm/model/services/validateRegisterData";
-import axios from "axios";
-import { AuthResponse } from "models/response/AuthResponse";
-import $api, { API_URL } from "shared/config/http";
-import { GeneralAuthAndRegisterActions, generalInitialState } from "./generalAuthAndRegister";
+import {
+    GeneralAuthAndRegisterActions,
+    generalInitialState,
+} from "./generalAuthAndRegister";
 
-
-interface IinitialState{
+interface IinitialState {
     valueUserNameAuth: string | null;
     valuePasswordAuth: string | undefined;
+    authorizationError: boolean;
     // isVisibleAuth: boolean;
     isLoadingTheAuthButton: boolean;
     isDisabledButtonToAuth: boolean;
 }
 
-const modalAuthInitialState: IinitialState  = {
+const modalAuthInitialState: IinitialState = {
     valueUserNameAuth: "",
     valuePasswordAuth: "",
+    authorizationError: false,
     // isVisibleAuth: generalInitialState.isVisibleAuth,
     isLoadingTheAuthButton: generalInitialState.isLoadingTheAuthButton,
     isDisabledButtonToAuth: true,
 };
-
 
 export const modalAuthReducer = createSlice({
     name: "modalAuthReducer",
@@ -53,14 +52,16 @@ export const modalAuthReducer = createSlice({
             })
             .addCase(auth.fulfilled, (state) => {
                 state.isLoadingTheAuthButton = false;
+                state.authorizationError = false;
                 // state.isVisibleAuth = false;
                 console.log("auth.fulfilled");
             })
             .addCase(auth.rejected, (state) => {
                 state.isLoadingTheAuthButton = false;
+                state.authorizationError = true;
                 // state.isVisibleAuth = true;
                 console.log("ошибка auth.rejected");
-            })
+            });
     },
 });
 
@@ -70,35 +71,47 @@ interface IAuth {
     isRememberMe: boolean;
 }
 
-export const auth = createAsyncThunk("auth/auth", async (valueAuth: IAuth, thunkApi) => {
-    console.log("valueAuth: ", valueAuth);
-    const { valueUserNameAuth, valuePasswordAuth, isRememberMe } = valueAuth;
-    const { rejectWithValue, dispatch } = thunkApi;
+export const auth = createAsyncThunk(
+    "auth/auth",
+    async (valueAuth: IAuth, thunkApi) => {
+        console.log("valueAuth: ", valueAuth);
+        const { valueUserNameAuth, valuePasswordAuth, isRememberMe } =
+            valueAuth;
+        const { rejectWithValue, dispatch } = thunkApi;
 
-    try {
-        const response = await AuthService.login(
-            valueUserNameAuth,
-            valuePasswordAuth
-        );
-        dispatch(GeneralAuthAndRegisterActions.setAccess(true))
-        dispatch(GeneralAuthAndRegisterActions.openModalAuth(false))
-        if (!response.data) {
-            throw new Error();
+        try {
+            const response = await AuthService.login(
+                valueUserNameAuth,
+                valuePasswordAuth
+            );
+            dispatch(GeneralAuthAndRegisterActions.setAccess(true));
+            dispatch(GeneralAuthAndRegisterActions.openModalAuth(false));
+            localStorage.setItem("roles", response.data.roles[0].name);
+            localStorage.setItem("username", response.data.username);
+            if (!response.data) {
+                throw new Error();
+            }
+            if (isRememberMe) {
+                localStorage.setItem("token", response.data.accessToken);
+            }
+            if (response.data.roles[0].name === rolesUsers.user) {
+                console.log("АВТОРИЗОВАН КАК ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ");
+            }
+            if (response.data.roles[0].name === rolesUsers.admin) {
+                console.log("АВТОРИЗОВАН КАК АДМИН");
+            }
+
+            return response.data;
+        } catch (e) {
+            console.log("ошибка авторизации", e);
+            dispatch(GeneralAuthAndRegisterActions.setAccess(false));
+            dispatch(GeneralAuthAndRegisterActions.openModalAuth(true));
+
+            rejectWithValue(`ошибка регистрации:${e} `);
+            throw e;
         }
-        if (isRememberMe) {
-            localStorage.setItem("token", response.data.token);
-        }
-
-        return response.data;
-    } catch (e) {
-        console.log("ошибка авторизации", e);
-        dispatch(GeneralAuthAndRegisterActions.setAccess(false))
-        dispatch(GeneralAuthAndRegisterActions.openModalAuth(true))
-
-        rejectWithValue(`ошибка регистрации:${e} `);
-        throw e;
     }
-});
+);
 
 export const { actions: AuthActions } = modalAuthReducer;
 export const { reducer: AuthReducer } = modalAuthReducer;

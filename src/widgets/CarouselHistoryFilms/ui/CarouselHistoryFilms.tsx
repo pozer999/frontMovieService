@@ -1,5 +1,4 @@
-import { Divider } from "antd";
-import { memo } from "react";
+import { FC, memo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar } from "swiper/modules";
 import "./CarouselHisroryFilms.module.scss";
@@ -9,6 +8,8 @@ import { RootState } from "store";
 import { getThemeType } from "../model/selectors/CarouselHistorySelectors";
 
 import cls from "./CarouselHisroryFilms.module.scss";
+import { Divider } from "antd";
+
 interface ICarouselHistoryFilms {
     title: any;
     carouselItems: string[];

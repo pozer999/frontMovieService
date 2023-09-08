@@ -1,7 +1,9 @@
-import cls from "./PostFilm.module.scss";
-import { Badge, Card } from "antd";
 import Meta from "antd/es/card/Meta";
-import { memo } from "react";
+import cls from "./PostFilm.module.scss";
+import {  memo } from "react";
+import { Badge, Card } from "antd";
+
+
 interface IPostFilm {
     film: any;
 }

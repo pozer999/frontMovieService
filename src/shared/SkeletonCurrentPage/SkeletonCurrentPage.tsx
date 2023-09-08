@@ -1,23 +1,9 @@
-import {
-    Breadcrumb,
-    Col,
-    Collapse,
-    Divider,
-    Row,
-    Skeleton,
-    Space,
-    Steps,
-} from "antd";
+import { Col, Divider, Row, Skeleton, Space } from "antd";
 import { memo } from "react";
-import { Typography } from "antd";
-const { Text } = Typography;
-import mars from "../../../src/image/mars.jpg";
-import { Swiper, SwiperSlide } from "swiper/react";
+
 import { Navigation, Scrollbar } from "swiper/modules";
-import Lorem from "shared/Lorem";
-import { Rate } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
+import { Swiper, SwiperSlide } from "swiper/react";
+import mars from "../../../src/image/mars.jpg";
 
 export const SkeletonCurrentFilm = memo(() => {
     return (

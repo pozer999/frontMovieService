@@ -1,0 +1,114 @@
+@import '../../../shared/const/mediaQueriesDigital.scss';
+$heightSwiperSimilar_item: 200px;
+
+::-webkit-scrollbar{
+    display: none
+}
+.ant-drawer-content-wrapper{
+    width: 300px;
+}
+.wrapperCurrentFilm{
+    width: 700px;
+}
+.imgCurrentFilm{
+    max-width: 100%;
+}
+.wrapperForText{
+    font-size: 25px;
+    color: white;
+}
+.actorsText{
+    max-width: 90%;
+}
+.collapse{
+    margin: -16px;
+    margin-top: -25px;
+}
+.driverSimilar{
+    font-size: 20px;
+}
+.swiperSimilar{
+    border-radius: 5px;
+    height: $heightSwiperSimilar_item;
+    width: 700px;
+}
+.swiperSimilar_item{
+    height: $heightSwiperSimilar_item;
+}
+.btnWathchRightNow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+@media screen and (max-width: $MD){
+    .imgCurrentFilm{
+        max-width: 100%;
+    }
+    .swiperSimilar{
+        width: 600px;
+        height: calc($heightSwiperSimilar_item * 0.8);
+    }
+    .swiperSimilar_item{
+        height: $heightSwiperSimilar_item * 0.8;
+    }
+    .ant-col-xs-8{
+        max-width: 10%;
+    }
+    .spaceText{
+        width: 600px;
+    }
+    .swiper{
+        margin-left: 5px;
+    }
+    .wrapperSwiper {
+        margin-left: -20px;
+    }
+
+}
+@media screen and (max-width: $SM){
+    .spaceText{
+        width: 500px;
+    }
+    .wrapperSwiper {
+        margin-left: -60px;
+    }
+    .swiperSimilar{
+        width: 450px;
+        height: calc($heightSwiperSimilar_item * 0.7);
+    }
+    .swiperSimilar_item{
+        height: $heightSwiperSimilar_item * 0.7;
+    }
+}
+@media screen and (max-width: $S){
+    .spaceText{
+        width: 400px;
+    }
+    .swiperSimilar{
+        width: 350px;
+        height: calc($heightSwiperSimilar_item * 0.6);
+    }
+    .swiperSimilar_item{
+        height: $heightSwiperSimilar_item * 0.6;
+    }
+    .btnWathchRightNow{
+        width: 90%;
+        height: 90%;
+        span{
+            font-size: 12px;
+        }
+    }
+}
+@media screen and (max-width: $XS){
+    .spaceText{
+        width: 350px;
+    }
+    .swiperSimilar{
+        width: 300px;
+        height: calc($heightSwiperSimilar_item * 0.5);
+    }
+    .swiperSimilar_item{
+        height: $heightSwiperSimilar_item * 0.5;
+    }
+}

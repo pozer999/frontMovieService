@@ -1,16 +1,17 @@
-import { Button, Drawer, Space, Tooltip } from "antd";
-import cls from "./Navbar.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
+import { useSelector } from "react-redux";
+import cls from "./Navbar.module.scss";
 
+import { CloseOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { AuthForm } from "features/AuthForm";
 import { RegisterForm } from "features/RegisterForm";
-import { RootState } from "store";
-import { NavLink } from "react-router-dom";
-import { CloseOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { RoutePath } from "shared/config/routeConfig";
-import { UserAccount } from "pages/UserAccount";
+import { UserAccount } from "widgets/UserAccount";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+
+import {
+    GeneralAuthAndRegisterActions,
+    logout,
+} from "store/generalAuthAndRegister";
 import {
     getIsAccess,
     getOpenUserAccount,
@@ -18,11 +19,9 @@ import {
     getValueUserNameAuth,
     getValueUserNameRegister,
 } from "../model/selectors/NavbarSelectors";
-import { RegisterActions } from "store/modalRegister";
-import { AuthActions } from "store/modalAuth";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer, logout } from "store/generalAuthAndRegister";
+import { Button, Drawer, Space } from "antd";
 
-export const Navbar = memo(() => {
+export const Navbar  = memo(() => {
     const dispatch = useAppDispatch();
     const isAccess = useSelector(getIsAccess);
     const valueUserNameRegister = useSelector(getValueUserNameRegister);
@@ -47,14 +46,14 @@ export const Navbar = memo(() => {
 
     return (
         <>
-            <div
+             <div
                 className="headerNavbar"
                 style={{
                     backgroundColor:
                         themeType === "dark" ? "rgb(15, 15, 15)" : "white",
                 }}
             >
-                {isAccess ? (
+                 {isAccess ? (
                     <Space align="center" size="small">
                         <Button
                             onClick={handleOpenUserAccount}
@@ -83,7 +82,7 @@ export const Navbar = memo(() => {
                             <LogoutOutlined className={cls.logoutOutlined} />
                         </Button>
                     </Space>
-                ) : (
+                 ) : (
                     <Space className={cls.spaceNavbarButton}>
                         <Button
                             type="dashed"
@@ -120,7 +119,7 @@ export const Navbar = memo(() => {
                 }
             >
                 <UserAccount />
-            </Drawer>
+            </Drawer> 
         </>
     );
 });

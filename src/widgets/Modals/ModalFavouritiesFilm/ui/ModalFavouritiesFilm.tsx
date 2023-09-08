@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import { Grid, Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -7,6 +6,7 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import { HeartTwoTone } from "@ant-design/icons";
 import { memo } from "react";
+import { Modal } from "antd";
 
 interface IModalFavouritiesFilm {
     items: string[];
@@ -15,7 +15,7 @@ interface IModalFavouritiesFilm {
     handleCloseModal: any;
 }
 
-export const ModalFavouritiesFilm = memo(
+export const ModalFavouritiesFilm= memo(
     ({ items, title, isVisible, handleCloseModal }: IModalFavouritiesFilm) => {
         return (
             <Modal

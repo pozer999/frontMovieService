@@ -1,14 +1,14 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, message } from "antd";
+import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
+import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+
+import { GeneralAuthAndRegisterActions } from "store/generalAuthAndRegister";
+import { AuthActions, auth } from "store/modalAuth";
 import {
-    useCallback,
-    memo,
-    useEffect,
-    ChangeEvent,
-    HtmlHTMLAttributes,
-} from "react";
-import {
+    getAuthorizationError,
     getIsDisabledButtonToAuth,
     getIsLoadingTheAuthButton,
     getIsRememberMe,
@@ -16,13 +16,12 @@ import {
     getValuePasswordAuth,
     getValueUserNameAuth,
 } from "../model/selectors/AuthSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { AuthActions, auth } from "store/modalAuth";
-import { GeneralAuthAndRegisterActions, generalAuthAndRegisterReducer } from "store/generalAuthAndRegister";
+import { messageWrapper } from "shared/lib/helpers/messages/message";
+import { ValidateRegisterError } from "features/RegisterForm/model/types/register";
 
 export const AuthForm = () => {
     const dispatch = useAppDispatch();
+    const [messageApi, contextHolder] = message.useMessage();
 
     const isVisibleAuth = useSelector(getIsVisibleAuth);
     const isLoadingTheAuthButton = useSelector(getIsLoadingTheAuthButton);
@@ -30,6 +29,7 @@ export const AuthForm = () => {
     const valuePasswordAuth = String(useSelector(getValuePasswordAuth));
     const isRememberMe = useSelector(getIsRememberMe);
     const isDisabledButtonToAuth = useSelector(getIsDisabledButtonToAuth);
+    const authorizationError = useSelector(getAuthorizationError);
 
     const handleOkAuth = useCallback(() => {
         try {
@@ -40,11 +40,10 @@ export const AuthForm = () => {
             };
             dispatch(auth(valueAuth));
             localStorage.setItem("username", valueUserNameAuth);
-            
         } catch (e) {
             console.error("handleOkAuth error: ", e);
         }
-    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe,]);
+    }, [dispatch, valueUserNameAuth, valuePasswordAuth, isRememberMe]);
     const handleCloseModalAuth = useCallback(() => {
         dispatch(GeneralAuthAndRegisterActions.closeModalAuth());
     }, [dispatch]);
@@ -53,7 +52,9 @@ export const AuthForm = () => {
     }, [dispatch]);
     const handleChangeRememberMe = useCallback(
         (e: CheckboxChangeEvent) => {
-            dispatch(GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked));
+            dispatch(
+                GeneralAuthAndRegisterActions.changeRememberMe(e.target.checked)
+            );
             console.log("remember me auth: ", e.target.checked);
         },
         [dispatch]
@@ -72,13 +73,19 @@ export const AuthForm = () => {
     );
 
     useEffect(() => {
-        if(valueUserNameAuth === '' || valuePasswordAuth === ''){
-            dispatch(AuthActions.toggleDisabledButtonToAuth(true))        
-        }else{
-            dispatch(AuthActions.toggleDisabledButtonToAuth(false))
+        if (valueUserNameAuth === "" || valuePasswordAuth === "") {
+            dispatch(AuthActions.toggleDisabledButtonToAuth(true));
+        } else {
+            dispatch(AuthActions.toggleDisabledButtonToAuth(false));
         }
         console.log("isRememberMeAuth: ", isRememberMe);
     }, [isRememberMe, dispatch, valuePasswordAuth, valueUserNameAuth]);
+
+    useEffect(() => {
+       if(authorizationError){
+        messageWrapper(ValidateRegisterError.SERVER_ERROR, "error", messageApi)
+       }
+    }, [authorizationError, messageApi]);
 
     return (
         <Modal
@@ -119,6 +126,7 @@ export const AuthForm = () => {
                         onChange={(e) => handleChangeUserNameAuth(e)}
                     />
                 </Form.Item>
+                <>{contextHolder}</>
                 <Form.Item
                     name="password"
                     rules={[

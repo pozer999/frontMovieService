@@ -12,3 +12,5 @@ export const getIsRememberMe = (state: RootState) =>
     state.generalAuthAndRegisterReducer.isRememberMe;
 export const getIsDisabledButtonToAuth = (state: RootState) =>
     state.modalAuthReducer.isDisabledButtonToAuth;
+export const getAuthorizationError = (state: RootState) =>
+    state.modalAuthReducer.authorizationError;

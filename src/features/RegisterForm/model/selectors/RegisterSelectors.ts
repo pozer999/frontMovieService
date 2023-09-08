@@ -14,3 +14,5 @@ export const getError = (state: RootState) =>
     state.modalRegisterReducer.errorRegister || false;
 export const getIsDisabledButtonToRegister = (state: RootState) =>
     state.modalRegisterReducer.isDisabledButtonToRegister;
+export const getRegisterError = (state: RootState) =>
+    state.modalRegisterReducer.registerError;

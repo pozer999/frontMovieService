@@ -1,3 +1,3 @@
-import { MainPageLazy } from './MainPageLazy';
+import { MainPageLazy } from "./MainPageLazy";
 
 export { MainPageLazy as MainPage };

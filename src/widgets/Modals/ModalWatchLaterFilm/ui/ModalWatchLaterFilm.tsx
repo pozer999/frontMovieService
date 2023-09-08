@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import { Grid, Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -7,6 +6,7 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import { EyeTwoTone } from "@ant-design/icons";
 import { memo } from "react";
+import Modal from "antd/es/modal/Modal";
 
 interface IModalWatchLaterFilm {
     items: string[];

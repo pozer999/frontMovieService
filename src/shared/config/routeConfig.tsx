@@ -1,30 +1,21 @@
-import { UserAccount } from "pages/UserAccount";
-import { CurrentFilm } from "pages/CurrentFilm";
 import { MainPageLazy } from "pages/MainPage/MainPageLazy";
+import { MoviePageLazy } from "pages/MoviePage/MoviePageLazy";
 
 export const RoutePath = {
-	MAIN: "/",
-	// CURRENTFILM: "/film",
-	// USERACCOUNT: '/user'
+    MAIN: "/",
+    MOVIEPAGE: "/movie",
 };
 
 export const routeConfig = [
+    {
+        name: "MainPageLazy",
+        path: RoutePath.MAIN,
+        elem: <MainPageLazy />,
+    },
 
-	{
-		name: "MainPageLazy",
-		path: RoutePath.MAIN,
-		elem: <MainPageLazy />,
-	},
-
-	// {
-	// 	name: "CurrentFilm",
-	// 	path: RoutePath.CURRENTFILM,
-	// 	elem: <CurrentFilm />,
-	// },
-
-	// {
-	// 	name: "UserAccount",
-	// 	path: RoutePath.USERACCOUNT,
-	// 	elem: <UserAccount />,
-	// },
+    {
+        name: "MoviePage",
+        path: RoutePath.MOVIEPAGE,
+        elem: <MoviePageLazy />,
+    },
 ];

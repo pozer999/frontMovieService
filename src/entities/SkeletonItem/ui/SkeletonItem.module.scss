@@ -1,0 +1,91 @@
+@import "../../../shared/const/mediaQueriesDigital.scss";
+
+.divSkeletonImage {
+    // font-size: 40px;
+    width: 250px;
+    height: 200px;
+    margin-top: 20px;
+}
+.skeletonImage {
+    // font-size: 40px;
+    width: 250px;
+    height: 200px;
+    margin-top: 20px;
+}
+.rowEmpty {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+.cardSkeletonItem {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.spanEmptyImage {
+    font-size: 18;
+}
+
+
+@media screen and (max-width: $XXL) {
+    .rowEmpty {
+        width: 220px;
+    }
+}
+@media screen and (max-width: $XL) {
+    .rowEmpty {
+        width: 240px;
+    }
+}
+@media screen and (max-width: $LG) {
+    .rowEmpty {
+        width: 170px;
+    }
+}
+@media screen and (max-width: $MD) {
+    .rowEmpty {
+        width: 205px;
+    }
+    .spanEmptyImage {
+        white-space: nowrap;
+    }
+}
+@media screen and (max-width: $SM) {
+    .rowEmpty {
+        width: 300px;
+    }
+    .cardSkeletonItem {
+        width: 330px;
+        margin: 0 auto;
+    }
+}
+@media screen and (max-width: $S) {
+    .rowEmpty {
+        width: 250px;
+    }
+    .cardSkeletonItem {
+        width: 280px;
+        margin: 0 auto;
+    }
+}
+@media screen and (max-width: $XS) {
+    .rowEmpty {
+        width: 180px;
+    }
+    .cardSkeletonItem {
+        width: 210px;
+        margin: 0 auto;
+    }
+}
+@media screen and (max-width: $XXS) {
+    .rowEmpty {
+        width: 140px;
+    }
+    .cardSkeletonItem {
+        width: 180px;
+        margin: 0 auto;
+    }
+}

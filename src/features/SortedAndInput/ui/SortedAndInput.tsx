@@ -1,19 +1,19 @@
-import { Button, Col, Input, Row, Select, Space, Tooltip } from "antd";
+import { useSelector } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
-
-import { fetchFilms, filmsActions } from "../../../store/FilmsSlice";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { filters } from "../../../shared/const/filters";
+import { fetchFilms, filmsActions } from "../../../store/FilmsSlice";
 import {
     getCurrentFilter,
     getValueInputSearch,
 } from "../model/selectors/SortedAndInputSelectors";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 
-import cls from "./SortedAndInput.module.scss";
 import { SearchOutlined } from "@ant-design/icons";
+import Compact from "antd/es/space/Compact";
 import React, { useCallback } from "react";
 import { useDebounce } from "shared/lib/hooks/useDebounce";
+import cls from "./SortedAndInput.module.scss";
+import { Button, Col, Input, Row, Select } from "antd";
 
 export const SortedAndInput = () => {
     const dispatch = useAppDispatch();
@@ -21,14 +21,13 @@ export const SortedAndInput = () => {
     const valueInputSearch = useSelector(getValueInputSearch);
     const fetchData = useCallback(() => {
         try {
-            const data = { currentFilter, valueInputSearch };
             dispatch(fetchFilms());
         } catch (e) {
             console.error(e);
         } finally {
             console.log("сработал дебаунс через 3 сек");
         }
-    }, [dispatch, currentFilter, valueInputSearch]);
+    }, [dispatch]);
 
     const fetchInputSearch = useDebounce(fetchData, 3000);
 
@@ -41,7 +40,6 @@ export const SortedAndInput = () => {
     );
     const handleChangeSelect = (value: string) => {
         dispatch(filmsActions.changeFilters(value));
-        const data = { currentFilter, valueInputSearch };
         dispatch(fetchFilms());
     };
 
@@ -57,7 +55,7 @@ export const SortedAndInput = () => {
                 />
             </Col>
             <Col xl={10} xs={14}>
-                <Space.Compact
+                <Compact
                     style={{ width: "100%" }}
                     className={cls.spaceInputSearch}
                 >
@@ -72,7 +70,7 @@ export const SortedAndInput = () => {
                             <SearchOutlined />
                         </div>
                     </Button>
-                </Space.Compact>
+                </Compact>
             </Col>
         </Row>
     );
