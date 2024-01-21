@@ -7,13 +7,34 @@
     z-index: 2;
     border-radius: 5px;
     border: 2px solid darkgrey;
+    position: relative;
 }
 
 .imageCarousel {
     height: 300px;
     width: 100%;
+    filter: brightness(50%);
 }
-
+.titleAndDescriptionFilms{
+    height: 300px;
+    position: relative;
+    top: -160px;
+    left: 30px;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    font-weight: 800;
+    z-index: 6;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+.descriptionFilms{
+    font-size: 14px;
+}
+.titleFilms{
+    font-size: 30px;
+}
 li {
     background-color: white;
 }
@@ -26,6 +47,17 @@ li {
     .imageCarousel {
         height: 250px;
     }
+    .titleAndDescriptionFilms{
+        font-size: 18px;
+        top: -130px;
+    }
+    .descriptionFilms{
+        font-size: 12px;
+    }
+    .titleFilms{
+        font-size: 30px;
+    }
+    
 }
 @media screen and (max-width: $LG) {
     .carousel {
@@ -33,6 +65,16 @@ li {
     }
     .imageCarousel {
         height: 200px;
+    }
+    .titleAndDescriptionFilms{
+        font-size: 16px;
+        top: -150px;
+    }
+    .descriptionFilms{
+        font-size: 10px;
+    }
+    .titleFilms{
+        font-size: 30px;
     }
 }
 @media screen and (max-width: $MD) {
@@ -43,6 +85,17 @@ li {
     .imageCarousel {
         height: 150px;
     }
+    .titleAndDescriptionFilms{
+        font-size: 10px;
+        top: -80px;
+        left: 20px;
+    }
+    .descriptionFilms{
+        font-size: 8px;
+    }
+    .titleFilms{
+        font-size: 15px;
+    }
 }
 @media screen and (max-width: $SM) {
     .carousel {
@@ -52,6 +105,14 @@ li {
     .imageCarousel {
         height: 130px;
     }
+    .titleAndDescriptionFilms{
+        font-size: 8px;
+        top: -80px;
+        left: 20px;
+    }
+    .titleFilms{
+        font-size: 12px;
+    }
 }
 @media screen and (max-width: $XS) {
     .carousel {
@@ -59,5 +120,11 @@ li {
     }
     .imageCarousel {
         height: 80px;
+    }
+    .titleAndDescriptionFilms{
+        font-size: 10px;
+    }
+    .titleFilms{
+        font-size: 12px;
     }
 }
